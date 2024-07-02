@@ -15,10 +15,13 @@ class Lizard extends Enemy{
     super().loadImage('assets/img/enemies/lizard/Walk1.png');
     this.x = 200 + Math.random() * 500;
     this.loadImages(this.walkingImgs);
+    this.speed = 0.15 + Math.random() * 0.5;
     this.animate()
   }
 
   animate(){
+    this.moveLeft();
+
     setInterval(() => {
       let i = this.currentImageWalking % this.walkingImgs.length;
       let path = this.walkingImgs[i];

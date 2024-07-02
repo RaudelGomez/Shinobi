@@ -6,6 +6,7 @@ class MovableObject {
   width = 100;
   currentImageWalking = 0;
   imageCache = {};
+  speed = 0.15;
 
   loadImage(path){
     this.img = new Image(); //this.img = document.getElementById('image') <img id="image" src="">
@@ -24,8 +25,10 @@ class MovableObject {
     console.log('Move right');
   }
 
-  walkLeft(){
-    
+  moveLeft(){
+    setInterval(() => {
+      this.x -= this.speed;
+    }, 1000 / 60);
   }
 
   runRight(){

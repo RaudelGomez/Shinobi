@@ -9,11 +9,20 @@ class World {
   ];
   context;
   canvas;
+  keyboard;
 
-  constructor(canvas){
+  constructor(canvas, keyboard){
     this.context = canvas.getContext('2d');
     this.canvas = canvas;
+    this.keyboard = keyboard;
     this.draw();
+    this.setWorld();
+  }
+
+  //This function set the world in the character, like this this one has a referenz about what happen in the world and also from the variable keyboard.
+  //This here the complete class world
+  setWorld(){
+    this.character.world = this;
   }
 
 	draw() {
