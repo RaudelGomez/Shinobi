@@ -1,5 +1,5 @@
 class Character extends MovableObject{
-  characterWalkingImgs = [
+  walkingImgs = [
     'assets/img/characters/Samurai/walk/walk-1.png',
     'assets/img/characters/Samurai/walk/walk-2.png',
     'assets/img/characters/Samurai/walk/walk-3.png',
@@ -13,14 +13,14 @@ class Character extends MovableObject{
 
   constructor(){
     super().loadImage('assets/img/characters/Samurai/walk/walk-1.png');
-    this.loadImages(this.characterWalkingImgs);
+    this.loadImages(this.walkingImgs);
     this.animate();
   }
 
   animate(){
     setInterval(() => {
-      let i = this.currentImageWalking % this.characterWalkingImgs.length;
-      let path = this.characterWalkingImgs[i];
+      let i = this.currentImageWalking % this.walkingImgs.length;
+      let path = this.walkingImgs[i];
       this.img = this.imageCache[path];
       this.currentImageWalking++;
     }, 150);
