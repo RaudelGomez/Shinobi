@@ -51,6 +51,16 @@ class World {
   //That function drawImage is a method of getContext that allow to paint something in the canvas element. It required img path, x and y.
   //drawImage(image, dx, dy, dWidth, dHeight)
   addToMap(mo){
+    if(mo.otherDirection){
+      this.context.save();
+      this.context.translate(mo.width, 0);
+      this.context.scale(-1, 1);
+      mo.x = mo.x *-1;
+    }
     this.context.drawImage(mo.img, mo.x, mo.y, mo.width, mo.height);
+    if(mo.otherDirection){
+      mo.x = mo.x *-1;
+      this.context.restore();
+    }
   }
 }
