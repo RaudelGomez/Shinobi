@@ -2,17 +2,20 @@
  * That is the class World that load the game
  */
 class World {
-	clouds = [new Cloud(), new Cloud()];
+	clouds = [new Cloud(), new Cloud(), new Cloud()];
 	character = new Character();
 	enemies = [new Lizard(), new Lizard(), new Lizard()];
 	backgroundObjects = [
 		new BackgroundObject("assets/img/stages/1/bridge.png", 0, 80, 370),
 		new BackgroundObject("assets/img/stages/1/sea.png", 0, 0, 480),
 		new BackgroundObject("assets/img/stages/1/bamboo.png", 0, 80, 370),
+    new BackgroundObject("assets/img/stages/1/sea.png", 720, 0, 480),
+    
 	];
 	context;
 	canvas;
 	keyboard;
+  camera_x = 0;
 
   /**
    * That is the constructor that bring all elements from game.js
@@ -43,11 +46,17 @@ class World {
 		//Clear canvas
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    //moving the context(camera) where the elements in canvas are painted to left, when the canvas is painted
+    this.context.translate(this.camera_x, 0);
+
 		this.addObjectsToMap(this.backgroundObjects);
 		this.addObjectsToMap(this.clouds);
-		this.addToMap(this.clouds[1]);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.enemies);
+    
+
+    //setting again the context(camera in the before position)
+    this.context.translate(-this.camera_x, 0);
 
 		//Draw will be alwys loaded
 		let self = this;

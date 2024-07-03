@@ -46,6 +46,7 @@ class Character extends MovableObject {
 				this.x -= this.walk;
 				this.otherDirection = true;
 			}
+      this.world.camera_x = -this.x;
 		}, 100);
 
 		setInterval(() => {
@@ -72,7 +73,8 @@ class Character extends MovableObject {
 				this.x -= this.run;
 				this.otherDirection = true;
 			}
-		}, 1000 / 50);
+      this.world.camera_x = -this.x;
+		}, 1000 / 60);
 
 		setInterval(() => {
 			//Condition inside if to move
@@ -86,7 +88,7 @@ class Character extends MovableObject {
 				this.img = this.imageCache[path];
 				this.currentImageRun++;
 			}
-		}, 50);
+		}, 40);
 	}
 
 	jump() {}
