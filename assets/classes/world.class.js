@@ -2,21 +2,14 @@
  * That is the class World that load the game
  */
 class World {
-	clouds = [new Cloud(), new Cloud(), new Cloud()];
 	character = new Character();
-	enemies = [new Lizard(), new Lizard(), new Lizard()];
-  countStage = 3;
-  mirrowEffectBoxEnemy = false;
-	backgroundObjects = [
-		new BackgroundObject("assets/img/stages/2/bridge.png", this.countStage*720, 80, 370, this.lastStage ),
-		new BackgroundObject("assets/img/stages/1/sea.png", this.countStage*720, 0, 480, this.lastStage),
-		new BackgroundObject("assets/img/stages/1/bamboo.png", this.countStage*720, 80, 370, this.lastStage),    
-	];
+	clouds = level1.clouds;
+	enemies = level1.enemies;
+	backgroundObjects = level1.backgroundObjects;
 	context;
 	canvas;
 	keyboard;
   camera_x = 0;
-  lastStage;
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -27,62 +20,9 @@ class World {
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
-    this.settingBackground();
-    this.lastStage = this.lastStageMirrowPosition();
 		this.draw();
 		this.setWorld();
 	}
-
-  /**
-   * This function changes the position mirrow of the last stage
-   * @returns boolean
-   */
-  lastStageMirrowPosition(){
-    let lenghtbackgroundObjects = this.backgroundObjects.length - 1;
-    let lastStage = this.backgroundObjects[lenghtbackgroundObjects];
-    let mirrowEffect = !lastStage.otherDirection;
-    return mirrowEffect;
-  }
-
-  /**
-   * This function set many times the background
-   */
-  settingBackground(){
-    let self = this;
-    for (let i = -1; i < this.countStage; i++) {
-      let mirrowEffect = false;
-      let setMirrow = self.isEven(i);
-      let resultMirrowEffect = self.setMirrowEffect(setMirrow, mirrowEffect);
-      // console.log(i);
-      // console.log(resultMirrowEffect);
-      const bridge = new BackgroundObject("assets/img/stages/1/bridge.png", i*720, 80, 370, resultMirrowEffect);
-      const sea = new BackgroundObject("assets/img/stages/1/sea.png", i*720, 0, 480, resultMirrowEffect);
-      const bamboo = new BackgroundObject("assets/img/stages/1/bamboo.png", i*720, 80, 370, resultMirrowEffect);
-      this.backgroundObjects.push(bridge);
-      this.backgroundObjects.push(sea);
-      this.backgroundObjects.push(bamboo);
-    }
-  }
-
-  /**
-   * This function return a boolean if the last landscape on the stage is false or true
-   * @param {number} variableMirrow - number to control if this is even or odd
-   * @param {boolean} result - That is the variable that turn in mirrow or not the landscape on * * the stage
-   * @returns boolean
-   */
-  setMirrowEffect(variableMirrow, result){
-    variableMirrow ? result = true : result = false;
-    return result;
-  }
-
-  /**
-   * This function control if the number is even or odd
-   * @param {number} num - Number to control if a even or odd
-   * @returns 
-   */
-  isEven(num){
-    return num % 2 == 0;
-  }
 
   /**
    * This function set the world in the character, like this this one has a referenz about what
