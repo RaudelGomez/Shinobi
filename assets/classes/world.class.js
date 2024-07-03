@@ -5,13 +5,7 @@ class World {
 	clouds = [new Cloud(), new Cloud(), new Cloud()];
 	character = new Character();
 	enemies = [new Lizard(), new Lizard(), new Lizard()];
-	backgroundObjects = [
-		new BackgroundObject("assets/img/stages/1/bridge.png", 0, 80, 370),
-		new BackgroundObject("assets/img/stages/1/sea.png", 0, 0, 480),
-		new BackgroundObject("assets/img/stages/1/bamboo.png", 0, 80, 370),
-    new BackgroundObject("assets/img/stages/1/sea.png", 720, 0, 480),
-    
-	];
+	backgroundObjects = [];
 	context;
 	canvas;
 	keyboard;
@@ -26,9 +20,38 @@ class World {
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
+    this.settingBackground();
 		this.draw();
 		this.setWorld();
 	}
+
+  /**
+   * This function set many times the background
+   */
+  settingBackground(){
+    let countStage = 5;
+    let self = this;
+    for (let i = -1; i < countStage; i++) {
+      let mirrowEffect = false;
+      let setMirrow = self.isEven(i);
+      setMirrow ? mirrowEffect = true : mirrowEffect = false;
+      const bridge = new BackgroundObject("assets/img/stages/1/bridge.png", i*720, 80, 370, mirrowEffect);
+      const sea = new BackgroundObject("assets/img/stages/1/sea.png", i*720, 0, 480, mirrowEffect);
+      const bamboo = new BackgroundObject("assets/img/stages/1/bamboo.png", i*720, 80, 370, mirrowEffect);
+      this.backgroundObjects.push(bridge);
+      this.backgroundObjects.push(sea);
+      this.backgroundObjects.push(bamboo);
+    }
+  }
+
+  /**
+   * This function control if the number is even or odd
+   * @param {number} num - Number to control if a even or odd
+   * @returns 
+   */
+  isEven(num){
+    return num % 2 == 0;
+  }
 
   /**
    * This function set the world in the character, like this this one has a referenz about what
