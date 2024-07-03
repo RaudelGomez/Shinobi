@@ -3,9 +3,7 @@
  */
 class World {
 	character = new Character();
-	clouds = level1.clouds;
-	enemies = level1.enemies;
-	backgroundObjects = level1.backgroundObjects;
+	level = level1;
 	context;
 	canvas;
 	keyboard;
@@ -43,10 +41,10 @@ class World {
     //moving the context(camera) where the elements in canvas are painted to left, when the canvas is painted
     this.context.translate(this.camera_x, 0);
 
-		this.addObjectsToMap(this.backgroundObjects);
-		this.addObjectsToMap(this.clouds);
+		this.addObjectsToMap(this.level.backgroundObjects);
+		this.addObjectsToMap(this.level.clouds);
 		this.addToMap(this.character);
-		this.addObjectsToMap(this.enemies);
+		this.addObjectsToMap(this.level.enemies);
     
 
     //setting again the context(camera in the before position)

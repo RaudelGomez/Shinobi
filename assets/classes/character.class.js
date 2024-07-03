@@ -35,18 +35,18 @@ class Character extends MovableObject {
 	animate() {
 		//Condition inside if to move
 		setInterval(() => {
-			if (this.world.keyboard.right) {
+			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
 				//Move right
 				this.x += this.walk;
 				this.otherDirection = false;
 			}
 
-			if (this.world.keyboard.left) {
+			if (this.world.keyboard.left && this.x > -600) {
 				//Move left
 				this.x -= this.walk;
 				this.otherDirection = true;
 			}
-      this.world.camera_x = -this.x;
+      this.world.camera_x = -this.x + 100;
 		}, 100);
 
 		setInterval(() => {
@@ -62,18 +62,18 @@ class Character extends MovableObject {
 
 	animationRun() {
 		setInterval(() => {
-			if (this.world.keyboard.right && this.world.keyboard.run) {
+			if (this.world.keyboard.right && this.world.keyboard.run && this.x < this.world.level.level_end_x) {
 				//Run animation
 				this.x += this.run;
 				this.otherDirection = false;
 			}
 
-			if (this.world.keyboard.left && this.world.keyboard.run) {
+			if (this.world.keyboard.left && this.world.keyboard.run && this.x > -600) {
 				//Run animation
 				this.x -= this.run;
 				this.otherDirection = true;
 			}
-      this.world.camera_x = -this.x;
+      this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 
 		setInterval(() => {
