@@ -3,7 +3,7 @@ class Level {
   enemies;
   backgroundObjects = [];
   countStage = 3;
-  level_end_x = (this.countStage * 720) + 95;
+  level_end_x = (this.countStage * 720) + 90;
 
   constructor(clouds, enemies, backgroundObjects){
     this.clouds = clouds;

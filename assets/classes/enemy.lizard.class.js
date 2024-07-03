@@ -23,10 +23,7 @@ class Lizard extends Enemy{
     this.moveLeft();
 
     setInterval(() => {
-      let i = this.currentImageWalking % this.walkingImgs.length;
-      let path = this.walkingImgs[i];
-      this.img = this.imageCache[path];
-      this.currentImageWalking++;
+      this.playAnimation(this.walkingImgs);
     }, 200);
   }
 }

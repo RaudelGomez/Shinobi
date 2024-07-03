@@ -58,10 +58,7 @@ class Character extends MovableObject {
 		setInterval(() => {
 			if (this.world.keyboard.right || this.world.keyboard.left) {
 				//Walk animation
-				let i = this.currentImageWalking % this.walkingImgs.length;
-				let path = this.walkingImgs[i];
-				this.img = this.imageCache[path];
-				this.currentImageWalking++;
+				this.playAnimation(this.walkingImgs);
 			}
 		}, 150);
 	}
@@ -87,17 +84,13 @@ class Character extends MovableObject {
 		}, 1000 / 60);
 
 		setInterval(() => {
-      
 			//Condition inside if to move
 			if (
 				(this.world.keyboard.right && this.world.keyboard.run) ||
 				(this.world.keyboard.left && this.world.keyboard.run)
 			) {
 				//run animation
-				let i = this.currentImageRun % this.runImgs.length;
-				let path = this.runImgs[i];
-				this.img = this.imageCache[path];
-				this.currentImageRun++;
+				this.playAnimation(this.runImgs);
 			}
 		}, 40);
 	}
