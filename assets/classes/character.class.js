@@ -23,6 +23,8 @@ class Character extends MovableObject {
 	walk = 10;
 	run = 15;
 	currentImageRun = 0;
+  walk_sound = new Audio('assets/audio/walking.mp3');
+  run_sound = new Audio('assets/audio/running.mp3');
 
 	constructor() {
 		super().loadImage("assets/img/characters/Samurai/walk/walk-1.png");
@@ -35,16 +37,20 @@ class Character extends MovableObject {
 	animate() {
 		//Condition inside if to move
 		setInterval(() => {
+      this.run_sound.pause();
+      this.walk_sound.pause();
 			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
 				//Move right
 				this.x += this.walk;
 				this.otherDirection = false;
+        this.walk_sound.play();
 			}
 
 			if (this.world.keyboard.left && this.x > -600) {
 				//Move left
 				this.x -= this.walk;
 				this.otherDirection = true;
+        this.walk_sound.play();
 			}
       this.world.camera_x = -this.x + 100;
 		}, 100);
@@ -61,22 +67,27 @@ class Character extends MovableObject {
 	}
 
 	animationRun() {
+    this.walk_sound.pause();
+    this.run_sound.pause();
 		setInterval(() => {
 			if (this.world.keyboard.right && this.world.keyboard.run && this.x < this.world.level.level_end_x) {
 				//Run animation
 				this.x += this.run;
 				this.otherDirection = false;
+        this.run_sound.play();
 			}
 
 			if (this.world.keyboard.left && this.world.keyboard.run && this.x > -600) {
 				//Run animation
 				this.x -= this.run;
 				this.otherDirection = true;
+        this.run_sound.play();
 			}
       this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 
 		setInterval(() => {
+      
 			//Condition inside if to move
 			if (
 				(this.world.keyboard.right && this.world.keyboard.run) ||

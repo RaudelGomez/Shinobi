@@ -51,10 +51,11 @@ class World {
     this.context.translate(-this.camera_x, 0);
 
 		//Draw will be alwys loaded
-		let self = this;
-		requestAnimationFrame(function () {
-			self.draw();
-		});
+    requestAnimationFrame(()=> this.draw());
+		// let self = this;
+		// requestAnimationFrame(function () {
+		// 	self.draw();
+		// });
 	}
 
   /**

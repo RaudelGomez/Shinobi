@@ -16,11 +16,10 @@ class Level {
    * This function set many times the background
    */
   settingBackground(){
-    let self = this;
     for (let i = -1; i < this.countStage; i++) {
       let mirrowEffect = false;
-      let setMirrow = self.isEven(i);
-      let resultMirrowEffect = self.setMirrowEffect(setMirrow, mirrowEffect);
+      let setMirrow = this.isEven(i);
+      let resultMirrowEffect = this.setMirrowEffect(setMirrow, mirrowEffect);
       const bridge = new BackgroundObject("assets/img/stages/1/bridge.png", i*720, 80, 370, resultMirrowEffect);
       const sea = new BackgroundObject("assets/img/stages/1/sea.png", i*720, 0, 480, resultMirrowEffect);
       const bamboo = new BackgroundObject("assets/img/stages/1/bamboo.png", i*720, 80, 370, resultMirrowEffect);
