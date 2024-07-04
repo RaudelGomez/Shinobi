@@ -1,4 +1,4 @@
-class Level extends VariableUtil{
+class Level extends DrawableObject{
   clouds;
   enemies;
   backgroundObjects = [];

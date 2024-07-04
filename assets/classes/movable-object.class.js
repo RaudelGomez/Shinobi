@@ -1,12 +1,5 @@
-class MovableObject extends VariableUtil {
-  x = 100;
-  y = 150;
+class MovableObject extends DrawableObject {
   yAfterJump = 150;
-  img;
-  height = 200;
-  width = 100;
-  currentImageWalking = 0;
-  imageCache = {};
   otherDirection = false;
   speed = 0.15;
   //Gravity
@@ -21,35 +14,6 @@ class MovableObject extends VariableUtil {
   } 
   life = 100;
   lastHit = 0;
-
-  /**
-   * This function load one images
-   * @param {string} path - path of the image to load 
-   */
-  loadInitialPositionImage(path){
-    this.img = new Image(); //this.img = document.getElementById('image') <img id="image" src="">
-    this.img.src = path;
-  }
-
-  /**
-   * This function load every Photos of the array.
-   * @param {Array} imgArray - that is the Array of Photos to animate
-   */
-  loadImages(imgArray){
-    imgArray.forEach(path => {
-      let img = new Image();
-      img.src = path;
-      this.imageCache[path] = img;
-    });
-  }
-
-  /**
-   * This function draw every image
-   * @param {ctx} context - context of Canvas
-   */
-  draw(context){
-    context.drawImage(this.img, this.x, this.y, this.width, this.height);
-  };
 
   /**
    * This function draw the frame of every images

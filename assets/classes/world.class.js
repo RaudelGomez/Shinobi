@@ -8,6 +8,7 @@ class World {
 	canvas;
 	keyboard;
   camera_x = 0;
+	statusBar = new StatusBar();
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -37,6 +38,7 @@ class World {
 			this.level.enemies.forEach((enemy)=>{
 				if(this.character.isColliding(enemy)){
 					this.character.hit();
+					this.statusBar.setPercentage(this.character.life);
 				}
 			})
 		}, 200);
@@ -54,8 +56,15 @@ class World {
 
 		this.addObjectsToMap(this.level.backgroundObjects);
 		this.addObjectsToMap(this.level.clouds);
+
+		this.context.translate(-this.camera_x, 0); //Camara back
+		//----space for fixing object-------------
+		this.addToMap(this.statusBar);
+		this.context.translate(this.camera_x, 0); //Camara foward
+
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);
+
     
     //setting again the context(camera in the before position)
     this.context.translate(-this.camera_x, 0);
