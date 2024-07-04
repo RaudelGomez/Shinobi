@@ -18,8 +18,8 @@ class World {
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
-		this.draw();
 		this.setWorld();
+		this.draw();
 	}
 
   /**
@@ -60,7 +60,7 @@ class World {
 
   /**
    * This function add all elements in the array a method to be add in the canvas
-   * @param {*} objects - object array to add in the canvas
+   * @param {object} objects - object array to add in the canvas
    */
 	addObjectsToMap(objects) {
 		objects.forEach((ob) => {

@@ -1,5 +1,5 @@
 class Lizard extends Enemy{
-  y = 100;
+  y = 90;
   height = 400;
   width = 400;
   walkingImgs = [
@@ -13,7 +13,7 @@ class Lizard extends Enemy{
 
   constructor(){
     super().loadImage('assets/img/enemies/lizard/Walk1.png');
-    this.x = 200 + Math.random() * 500;
+    this.x = 200 + Math.random() * 500 * this.countStage;
     this.loadImages(this.walkingImgs);
     this.speed = 0.15 + Math.random() * 0.5;
     this.animate()

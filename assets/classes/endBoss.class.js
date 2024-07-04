@@ -1,7 +1,7 @@
 class Endboss extends Enemy{
-  y = -230;
-  height = 800;
-  width = 800;
+  y = -240;
+  height = 790;
+  width = 790;
   walkingImgs = [
     'assets/img/enemies/dragon/Walk1.png',
     'assets/img/enemies/dragon/Walk1.png',
@@ -17,9 +17,9 @@ class Endboss extends Enemy{
 
   constructor(){
     super().loadImage(this.walkingImgs[0]);
-    this.x = (3 * 720) + 80;
+    this.x = (this.countStage * 720) + 80;
     this.loadImages(this.walkingImgs);
-    this.animate()
+    this.animate();
   }
 
   animate(){

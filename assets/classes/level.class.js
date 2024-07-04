@@ -1,11 +1,12 @@
-class Level {
+class Level extends VariableUtil{
   clouds;
   enemies;
   backgroundObjects = [];
-  countStage = 3;
   level_end_x = (this.countStage * 720) + 90;
+  
 
   constructor(clouds, enemies, backgroundObjects){
+    super();
     this.clouds = clouds;
     this.enemies = enemies;
     this.backgroundObjects = backgroundObjects;

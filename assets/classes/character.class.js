@@ -19,6 +19,25 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/run/run-7.png",
 		"assets/img/characters/Samurai/run/run-8.png",
 	];
+	jumpImgs = [
+		"assets/img/characters/Samurai/jump/jump-1.png",
+		"assets/img/characters/Samurai/jump/jump-2.png",
+		"assets/img/characters/Samurai/jump/jump-3.png",
+		"assets/img/characters/Samurai/jump/jump-4.png",
+		"assets/img/characters/Samurai/jump/jump-5.png",
+		"assets/img/characters/Samurai/jump/jump-6.png",
+		"assets/img/characters/Samurai/jump/jump-7.png",
+		"assets/img/characters/Samurai/jump/jump-8.png",
+		"assets/img/characters/Samurai/jump/jump-9.png",
+		"assets/img/characters/Samurai/jump/jump-10.png",
+		"assets/img/characters/Samurai/jump/jump-11.png",
+		"assets/img/characters/Samurai/jump/jump-12.png"
+	]
+	x = 100;
+	y = 190;
+	yAfterJump = 190;
+	height = 150;
+  width = 90;
 	world;
 	walk = 10;
 	run = 15;
@@ -30,8 +49,10 @@ class Character extends MovableObject {
 		super().loadImage("assets/img/characters/Samurai/walk/walk-1.png");
 		this.loadImages(this.walkingImgs);
 		this.loadImages(this.runImgs);
+		this.loadImages(this.jumpImgs);
 		this.animate();
 		this.animationRun();
+		this.applyGravity();
 	}
 
 	animate() {
@@ -40,10 +61,7 @@ class Character extends MovableObject {
       this.run_sound.pause();
       this.walk_sound.pause();
 			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
-				//Move right
-				this.x += this.walk;
-				this.otherDirection = false;
-        this.walk_sound.play();
+				this.moveRight();
 			}
 
 			if (this.world.keyboard.left && this.x > -600) {
@@ -52,13 +70,23 @@ class Character extends MovableObject {
 				this.otherDirection = true;
         this.walk_sound.play();
 			}
+
+			if(this.world.keyboard.up && !this.isInTheAir()){
+				this.jump();
+			}
+			
       this.world.camera_x = -this.x + 100;
 		}, 100);
 
 		setInterval(() => {
-			if (this.world.keyboard.right || this.world.keyboard.left) {
-				//Walk animation
-				this.playAnimation(this.walkingImgs);
+			//Falling when he is in the air
+			if(this.isInTheAir()){
+				this.playAnimation(this.jumpImgs);
+			}else{
+				if (this.world.keyboard.right || this.world.keyboard.left) {
+					//Walk animation
+					this.playAnimation(this.walkingImgs);
+				}
 			}
 		}, 150);
 	}
@@ -67,33 +95,37 @@ class Character extends MovableObject {
     this.walk_sound.pause();
     this.run_sound.pause();
 		setInterval(() => {
-			if (this.world.keyboard.right && this.world.keyboard.run && this.x < this.world.level.level_end_x) {
-				//Run animation
-				this.x += this.run;
-				this.otherDirection = false;
-        this.run_sound.play();
-			}
+			if (this.world.keyboard.right && this.world.keyboard.run && (this.x < this.world.level.level_end_x)) {
+				this.runRight();
+			};
 
 			if (this.world.keyboard.left && this.world.keyboard.run && this.x > -600) {
-				//Run animation
-				this.x -= this.run;
-				this.otherDirection = true;
-        this.run_sound.play();
+				this.runLeft();
 			}
+
+			if(this.world.keyboard.up && !this.isInTheAir()){
+				this.jump();
+			}
+
       this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 
 		setInterval(() => {
-			//Condition inside if to move
-			if (
-				(this.world.keyboard.right && this.world.keyboard.run) ||
-				(this.world.keyboard.left && this.world.keyboard.run)
-			) {
-				//run animation
-				this.playAnimation(this.runImgs);
-			}
+			//Falling when he is in the air
+			if(this.isInTheAir()){
+				this.playAnimation(this.jumpImgs);
+			}else{
+				if ((this.world.keyboard.right && this.world.keyboard.run) || (this.world.keyboard.left && this.world.keyboard.run)) 
+					{
+					//run animation
+					this.playAnimation(this.runImgs);
+					}
+			}			
 		}, 40);
 	}
-
-	jump() {}
+	
+	jump() {
+		this.speedY = 25;
+		this.y = this.yAfterJump;
+	}
 }
