@@ -3,7 +3,7 @@ class BackgroundObject extends MovableObject{
   otherDirection;
 
   constructor(img, x, y, height, otherDirection){
-    super().loadImage(img);
+    super().loadInitialPositionImage(img);
     this.x = x;
     this.y = y;
     this.height = height;

@@ -19,12 +19,14 @@ class MovableObject extends VariableUtil {
     bottom: 0,
     left: 0
   } 
+  life = 100;
+  lastHit = 0;
 
   /**
    * This function load one images
    * @param {string} path - path of the image to load 
    */
-  loadImage(path){
+  loadInitialPositionImage(path){
     this.img = new Image(); //this.img = document.getElementById('image') <img id="image" src="">
     this.img.src = path;
   }
@@ -121,6 +123,25 @@ class MovableObject extends VariableUtil {
 
   isInTheAir(){
     return this.y < this.yAfterJump;
+  }
+
+  hit(){
+    this.life -= 2;
+    if(this.life < 0){
+      this.life = 0;
+    }else{
+      this.lastHit = new Date().getTime();
+    }
+  }
+
+  isDead(){
+    return this.life == 0;
+  }
+
+  isHurt(){
+    let timePassed = new Date().getTime() - this.lastHit;//Difference in ms
+    timePassed = timePassed / 1000; //Difference in s
+    return timePassed < 1;
   }
 
   attackNormal(){

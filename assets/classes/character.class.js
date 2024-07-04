@@ -33,6 +33,16 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/jump/jump-11.png",
 		"assets/img/characters/Samurai/jump/jump-12.png"
 	]
+	deadImgs = [
+		"assets/img/characters/Samurai/dead/dead-1.png",
+		"assets/img/characters/Samurai/dead/dead-2.png",
+		"assets/img/characters/Samurai/dead/dead-3.png",
+	]
+	hurtImgs = [
+		"assets/img/characters/Samurai/hurt/hurt-1.png",
+		"assets/img/characters/Samurai/hurt/hurt-2.png",
+		"assets/img/characters/Samurai/hurt/hurt-3.png",
+	]
 	x = 100;
 	y = 190;
 	yAfterJump = 190;
@@ -52,10 +62,12 @@ class Character extends MovableObject {
   } 
 
 	constructor() {
-		super().loadImage("assets/img/characters/Samurai/walk/walk-1.png");
+		super().loadInitialPositionImage(this.walkingImgs[0]);
 		this.loadImages(this.walkingImgs);
 		this.loadImages(this.runImgs);
 		this.loadImages(this.jumpImgs);
+		this.loadImages(this.deadImgs);
+		this.loadImages(this.hurtImgs);
 		this.animate();
 		this.animationRun();
 		this.applyGravity();
@@ -85,6 +97,14 @@ class Character extends MovableObject {
 		}, 100);
 
 		setInterval(() => {
+			if(this.isDead()){
+				this.playAnimation(this.deadImgs);
+				return
+			}
+			this.loadInitialPositionImage(this.walkingImgs[0]);
+			if(this.isHurt()){
+				this.playAnimation(this.hurtImgs);
+			}
 			//Falling when he is in the air
 			if(this.isInTheAir()){
 				this.playAnimation(this.jumpImgs);
@@ -120,6 +140,14 @@ class Character extends MovableObject {
 		}, 1000 / 60);
 
 		setInterval(() => {
+			if(this.isDead()){
+				this.playAnimation(this.deadImgs);
+				return
+			}
+			if(this.isHurt()){
+				this.playAnimation(this.hurtImgs);
+			}
+		
 			//Falling when he is in the air
 			if(this.isInTheAir()){
 				this.playAnimation(this.jumpImgs);

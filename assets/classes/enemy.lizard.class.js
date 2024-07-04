@@ -18,7 +18,7 @@ class Lizard extends Enemy{
   } 
 
   constructor(){
-    super().loadImage('assets/img/enemies/lizard/Walk1.png');
+    super().loadInitialPositionImage(this.walkingImgs[0]);
     this.x = 200 + Math.random() * 500 * this.countStage;
     this.loadImages(this.walkingImgs);
     this.speed = 0.15 + Math.random() * 0.5;
