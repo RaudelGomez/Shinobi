@@ -62,11 +62,11 @@ class Character extends MovableObject {
       this.walk_sound.pause();
 			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
 				this.moveRight();
+				this.walk_sound.play();
 			}
 
 			if (this.world.keyboard.left && this.x > -600) {
-				//Move left
-				this.x -= this.walk;
+				this.moveLeft(this.walk);
 				this.otherDirection = true;
         this.walk_sound.play();
 			}
@@ -88,23 +88,26 @@ class Character extends MovableObject {
 					this.playAnimation(this.walkingImgs);
 				}
 			}
-		}, 150);
+		}, 400);
 	}
 
 	animationRun() {
     this.walk_sound.pause();
     this.run_sound.pause();
 		setInterval(() => {
-			if (this.world.keyboard.right && this.world.keyboard.run && (this.x < this.world.level.level_end_x)) {
+			if (this.world.keyboard.right && this.world.keyboard.space && (this.x < this.world.level.level_end_x)) {
 				this.runRight();
+				this.run_sound.play();
 			};
 
-			if (this.world.keyboard.left && this.world.keyboard.run && this.x > -600) {
-				this.runLeft();
+			if (this.world.keyboard.left && this.world.keyboard.space && this.x > -600) {
+				this.runLeft(this.run);
+				this.run_sound.play();
 			}
 
 			if(this.world.keyboard.up && !this.isInTheAir()){
 				this.jump();
+				this.run_sound.play();
 			}
 
       this.world.camera_x = -this.x + 100;
@@ -115,7 +118,7 @@ class Character extends MovableObject {
 			if(this.isInTheAir()){
 				this.playAnimation(this.jumpImgs);
 			}else{
-				if ((this.world.keyboard.right && this.world.keyboard.run) || (this.world.keyboard.left && this.world.keyboard.run)) 
+				if ((this.world.keyboard.right && this.world.keyboard.space) || (this.world.keyboard.left && this.world.keyboard.space)) 
 					{
 					//run animation
 					this.playAnimation(this.runImgs);

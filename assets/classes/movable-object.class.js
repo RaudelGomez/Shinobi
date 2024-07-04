@@ -48,28 +48,23 @@ class MovableObject extends VariableUtil {
   /**
    * Move to the right of the images
    */
-  moveLeft(){
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60);
+  moveLeft(speed){
+      this.x -= speed;
   }
 
   moveRight(){
     this.x += this.walk;
     this.otherDirection = false;
-    this.walk_sound.play();
   }
 
-  runLeft(){
-    this.x -= this.run;
+  runLeft(run){
+    this.x -= run;
     this.otherDirection = true;
-    this.run_sound.play();
   }
 
   runRight(){
     this.x += this.run;
     this.otherDirection = false;
-    this.run_sound.play();
   }
 
   applyGravity(){
