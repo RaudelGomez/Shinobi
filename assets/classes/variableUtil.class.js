@@ -1,4 +1,4 @@
 class VariableUtil {
-  countStage = 3;
+  countStage = 2;
 
 }

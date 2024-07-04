@@ -44,6 +44,12 @@ class Character extends MovableObject {
 	currentImageRun = 0;
   walk_sound = new Audio('assets/audio/walking.mp3');
   run_sound = new Audio('assets/audio/running.mp3');
+	offset = {
+    top:0,
+    right:0,
+    bottom: 0,
+    left: 0
+  } 
 
 	constructor() {
 		super().loadImage("assets/img/characters/Samurai/walk/walk-1.png");
@@ -88,7 +94,7 @@ class Character extends MovableObject {
 					this.playAnimation(this.walkingImgs);
 				}
 			}
-		}, 400);
+		}, 90);
 	}
 
 	animationRun() {
@@ -128,7 +134,7 @@ class Character extends MovableObject {
 	}
 	
 	jump() {
-		this.speedY = 25;
+		this.speedY = 30;
 		this.y = this.yAfterJump;
 	}
 }

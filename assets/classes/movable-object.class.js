@@ -11,7 +11,14 @@ class MovableObject extends VariableUtil {
   speed = 0.15;
   //Gravity
   speedY = 0;
-  acceleration = 2.5;  
+  acceleration = 2.5; 
+  //Frame Objects
+  offset = {
+    top:0,
+    right:0,
+    bottom: 0,
+    left: 0
+  } 
 
   /**
    * This function load one images
@@ -35,6 +42,35 @@ class MovableObject extends VariableUtil {
   }
 
   /**
+   * This function draw every image
+   * @param {ctx} context - context of Canvas
+   */
+  draw(context){
+    context.drawImage(this.img, this.x, this.y, this.width, this.height);
+  };
+
+  /**
+   * This function draw the frame of every images
+   * @param {*} context - context of Canvas
+   */
+  drawFrame(context){
+    //Drawing only instance of Character or Enemy
+    if(this instanceof Character || this instanceof Enemy ){
+      // context.beginPath();
+      // context.lineWidth = "4";
+      // context.strokeStyle = "blue";
+      // context.rect(this.x, this.y, this.width, this.height);
+      // context.stroke();
+
+      context.beginPath();
+      context.lineWidth = "4";
+      context.strokeStyle = "red";
+      context.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right- this.offset.left, this.height - this.offset.bottom - this.offset.top);
+      context.stroke();
+    }
+  }
+
+  /**
    * This function play all Photos in the array and makes animation.
    * @param {string} images - path of the images
    */
@@ -43,6 +79,13 @@ class MovableObject extends VariableUtil {
     let path = images[i];
     this.img = this.imageCache[path];
     this.currentImageWalking++;
+  }
+
+  isColliding(mo){
+    return this.x + this.width - this.offset.right > mo.x + mo.offset.left && 
+          this.y + this.height - this.offset.bottom > mo.y +mo.offset.top && 
+          this.x + this.offset.left < mo.x + mo.width -mo.offset.right && 
+          this.y + this.offset.top < mo.y + mo.height -mo.offset.bottom;
   }
 
   /**

@@ -10,6 +10,12 @@ class Lizard extends Enemy{
     'assets/img/enemies/lizard/Walk5.png',
     'assets/img/enemies/lizard/Walk6.png',
   ];
+  offset = {
+    top:160,
+    right:140,
+    bottom: 150,
+    left: 135
+  } 
 
   constructor(){
     super().loadImage('assets/img/enemies/lizard/Walk1.png');
