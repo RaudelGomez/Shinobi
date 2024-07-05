@@ -9,8 +9,9 @@ class World {
 	keyboard;
   camera_x = 0;
 	healthbar = new HealthBar();
+	objetbar = new ObjectBar();
 	spellbar = new SpellBar();
-	knifebar = new ObjectBar();
+	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -25,6 +26,8 @@ class World {
 		this.draw();
 		this.checkCollisions();
 		this.takeObject(this.level.lifeBottles);
+		this.takeObject(this.level.throwableObjects);
+		this.takeObject(this.level.spellObjects);
 	}
 
   /**
@@ -51,16 +54,60 @@ class World {
 		setInterval(() => {
 			for (let i = 0; i < objs.length; i++) {
 				const obj = objs[i];
+				const valueObj = obj.valueTreasure;
 				if(this.character.isColliding(obj)){
+					this.objectTakedAudio.pause();
 					objs.splice(i, 1);
-					if(this.character.life <= 90){
-						this.character.life += 10;
-						this.healthbar.setPercentage(this.character.life);
-						console.log(this.character.life);
+					if(this.isLifeBottle(obj)){
+						this.collectBottle(valueObj);
 					}
+					if(this.isSomethingThrow(obj)){
+						this.collectObjet(valueObj);
+					}
+					if(this.isSpellObject(obj)){
+						this.collectSpell(valueObj);
+					}
+				this.objectTakedAudio.play();
+				this.objectTakedAudio.volume = 0.2;
 				}
 			}
 		}, 200);
+	}
+
+	isLifeBottle(obj){
+		return obj instanceof LifeBottle;
+	}
+
+	collectBottle(valueObj){
+			this.character.life += valueObj;
+			if(this.character.life >= 100){
+				this.character.life = 100;
+			}
+			this.healthbar.setPercentage(this.character.life);
+	}
+
+	isSomethingThrow(obj){
+		return obj instanceof ThrowableObject;
+	}
+
+	collectObjet(valueObj){
+			this.character.throwableObj += valueObj;
+			if(this.character.throwableObj >= 100){
+				this.character.throwableObj = 100;
+			}
+			this.objetbar.setPercentage(this.character.throwableObj);
+	}
+
+	isSpellObject(obj){
+		return obj instanceof SpellObject;
+	}
+
+	collectSpell(valueObj){
+		this.character.spellObject += valueObj;
+		if(this.character.spellObject >= 100){
+			this.character.spellObject = 100;
+		}
+		this.spellbar.setPercentage(this.character.spellObject);
 	}
 
   /**
@@ -80,11 +127,12 @@ class World {
 		//----space for fixing object-------------
 		this.addToMap(this.healthbar);
 		this.addToMap(this.spellbar);
-		this.addToMap(this.knifebar);
+		this.addToMap(this.objetbar);
 		this.context.translate(this.camera_x, 0); //Camara foward
 
 		this.addObjectsToMap(this.level.lifeBottles);
 		this.addObjectsToMap(this.level.throwableObjects);
+		this.addObjectsToMap(this.level.spellObjects);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);
 

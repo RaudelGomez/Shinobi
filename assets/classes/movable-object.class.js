@@ -7,10 +7,12 @@ class MovableObject extends DrawableObject {
   acceleration = 2.5; 
  
   //Life
-  life = 20;
   lastHit = 0;
+  life = 20;
   //Treasures
-  lifePotion = 0;
+  throwableObj = 0;
+  spellObject = 0;
+  
 
 
    /**

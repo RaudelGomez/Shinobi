@@ -1,5 +1,5 @@
 class ObjectBar extends StatusBar{
-  SpellImages = [
+  arrayImages = [
     'assets/img/object-bar/0.png',
     'assets/img/object-bar/20.png',
     'assets/img/object-bar/40.png',
@@ -13,7 +13,6 @@ class ObjectBar extends StatusBar{
  
   constructor(){
     super();
-    this.arrayImages = this.SpellImages;
     this.loadImages(this.arrayImages);
     this.setPercentage(this.percentage, this.arrayImages);
   }
