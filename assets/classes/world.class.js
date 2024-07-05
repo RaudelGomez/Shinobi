@@ -86,7 +86,7 @@ class World {
   /**
    * That function drawImage is a method of getContext that allow to paint something in the canvas *element. It required img path, x and y.
    * drawImage(image, dx, dy, dWidth, dHeight)
-   * @param {*} mo - That is the object that it will be change of posotion/Mirrow effet
+   * @param {object} mo - That is the object that it will be change of posotion/Mirrow effet
    */
 	addToMap(mo) {
 		if (mo.otherDirection) {

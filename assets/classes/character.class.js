@@ -56,26 +56,33 @@ class Character extends MovableObject {
   run_sound = new Audio('assets/audio/running.mp3');
 	offset = {
     top:0,
-    right:0,
+    right:10,
     bottom: 0,
-    left: 0
-  } 
+    left: 40
+  }
+	allIntervalCharacter = [];
+	
+	gameOverAudio = new Audio('assets/audio/gameOver.mp3');
+	hurtAudio = new Audio('assets/audio/hurt.mp3');
+	actionAudio = new Audio('assets/audio/actionSound.mp3');
+	
 
 	constructor() {
-		super().loadInitialPositionImage(this.walkingImgs[0]);
+		super().loadInitialPositionImage('assets/img/characters/Samurai/idle/idle.png');
 		this.loadImages(this.walkingImgs);
 		this.loadImages(this.runImgs);
 		this.loadImages(this.jumpImgs);
-		this.loadImages(this.deadImgs);
 		this.loadImages(this.hurtImgs);
+		this.loadImages(this.deadImgs);
 		this.animate();
 		this.animationRun();
 		this.applyGravity();
+		this.collectingAllIdIntervalCharacter();
 	}
 
 	animate() {
 		//Condition inside if to move
-		setInterval(() => {
+		this.intervalMoveCharacter = setInterval(() => {
       this.run_sound.pause();
       this.walk_sound.pause();
 			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
@@ -90,19 +97,27 @@ class Character extends MovableObject {
 			}
 
 			if(this.world.keyboard.up && !this.isInTheAir()){
+				this.actionAudio.play();
 				this.jump();
 			}
 			
       this.world.camera_x = -this.x + 100;
 		}, 100);
 
-		setInterval(() => {
+		
+
+		this.intervalPlayCharacter = setInterval(() => {
 			if(this.isDead()){
+				this.stopintervalCharacter();
+				this.gameOverAudio.volume = 0.3;
+				this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
 				return
 			}
-			this.loadInitialPositionImage(this.walkingImgs[0]);
+			this.loadInitialPositionImage('assets/img/characters/Samurai/idle/idle.png');
 			if(this.isHurt()){
+				this.hurtAudio.volume = 0.1; 
+				this.hurtAudio.play();
 				this.playAnimation(this.hurtImgs);
 			}
 			//Falling when he is in the air
@@ -115,12 +130,13 @@ class Character extends MovableObject {
 				}
 			}
 		}, 90);
+
 	}
 
 	animationRun() {
     this.walk_sound.pause();
     this.run_sound.pause();
-		setInterval(() => {
+		this.intervalRunCharacter = setInterval(() => {
 			if (this.world.keyboard.right && this.world.keyboard.space && (this.x < this.world.level.level_end_x)) {
 				this.runRight();
 				this.run_sound.play();
@@ -132,6 +148,7 @@ class Character extends MovableObject {
 			}
 
 			if(this.world.keyboard.up && !this.isInTheAir()){
+				this.actionAudio.play();
 				this.jump();
 				this.run_sound.play();
 			}
@@ -139,12 +156,16 @@ class Character extends MovableObject {
       this.world.camera_x = -this.x + 100;
 		}, 1000 / 60);
 
-		setInterval(() => {
+		this.intervalPlayRunCharacter = setInterval(() => {
 			if(this.isDead()){
+				this.gameOverAudio.volume = 0.3;
+				this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
 				return
 			}
 			if(this.isHurt()){
+				this.hurtAudio.volume = 0.1; 
+				this.hurtAudio.play();
 				this.playAnimation(this.hurtImgs);
 			}
 		
@@ -164,5 +185,18 @@ class Character extends MovableObject {
 	jump() {
 		this.speedY = 30;
 		this.y = this.yAfterJump;
+	}
+
+	stopintervalCharacter(){
+    this.allIntervalCharacter.forEach(id => {
+      clearInterval(id);
+    });
+  }
+
+	collectingAllIdIntervalCharacter(){
+		this.allIntervalCharacter.push(this.intervalMoveCharacter);
+		this.allIntervalCharacter.push(this.intervalPlayCharacter);
+		this.allIntervalCharacter.push(this.intervalRunCharacter);
+		this.allIntervalCharacter.push(this.intervalPlayRunCharacter);
 	}
 }

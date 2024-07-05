@@ -5,14 +5,9 @@ class DrawableObject {
   height = 200;
   width = 100;
   img;
-  currentImageWalking = 0;
+  currentImage = 0;
   imageCache = {};
-  offset = {
-    top:0,
-    right:0,
-    bottom: 0,
-    left: 0
-  } 
+  
   /**
    * This function load one images
    * @param {string} path - path of the image to load 
@@ -56,7 +51,7 @@ class DrawableObject {
       // context.stroke();
 
       context.beginPath();
-      context.lineWidth = "4";
+      context.lineWidth = "1";
       context.strokeStyle = "red";
       context.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right- this.offset.left, this.height - this.offset.bottom - this.offset.top);
       context.stroke();
