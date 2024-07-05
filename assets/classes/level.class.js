@@ -3,15 +3,17 @@ class Level extends DrawableObject{
   enemies;
   backgroundObjects;
   level_end_x = (this.countStage * 720) + 90;
-  treasures;
+  lifeBottles;
+  throwableObjects;
   
 
-  constructor(clouds, enemies, backgroundObjects, treasures){
+  constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects){
     super();
     this.clouds = clouds;
     this.enemies = enemies;
     this.backgroundObjects = backgroundObjects;
-    this.treasures = treasures;
+    this.lifeBottles = lifeBottles;
+    this.throwableObjects = throwableObjects;
     this.settingBackground();
   }
 

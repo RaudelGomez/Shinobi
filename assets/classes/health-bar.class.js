@@ -8,9 +8,17 @@ class HealthBar extends StatusBar{
     'assets/img/health-bar/100.png'
   ];
 
+
   constructor(){
     super();
-    this.loadImages(this.healthImages);
-    this.setPercentage(this.percentage, this.healthImages);
+    this.arrayImages = this.healthImages;
+    this.loadImages(this.arrayImages);
+    this.setPercentage(this.percentage, this.arrayImages);
   }
+
+  // setPercentage(percentage){
+  //   this.percentage = percentage;
+  //   let path = this.healthImages[this.resolvePercentageImgs()];
+  //   this.img = this.imageCache[path];
+  // }
 }

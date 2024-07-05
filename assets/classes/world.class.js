@@ -24,7 +24,7 @@ class World {
 		this.setWorld();
 		this.draw();
 		this.checkCollisions();
-		this.takeObject();
+		this.takeObject(this.level.lifeBottles);
 	}
 
   /**
@@ -41,21 +41,22 @@ class World {
 			this.level.enemies.forEach((enemy)=>{
 				if(this.character.isColliding(enemy)){
 					this.character.hit();
-					this.statusBar.setPercentage(this.character.life);
+					this.healthbar.setPercentage(this.character.life);
 				}
 			});
 		}, 200);
 	}
 
-	takeObject(){
+	takeObject(objs){
 		setInterval(() => {
-			for (let i = 0; i < this.level.treasures.length; i++) {
-				const treasure = this.level.treasures[i];
-				if(this.character.isColliding(treasure)){
-					this.level.treasures.splice(i, 1);
+			for (let i = 0; i < objs.length; i++) {
+				const obj = objs[i];
+				if(this.character.isColliding(obj)){
+					objs.splice(i, 1);
 					if(this.character.life <= 90){
 						this.character.life += 10;
-						this.statusBar.setPercentage(this.character.life);
+						this.healthbar.setPercentage(this.character.life);
+						console.log(this.character.life);
 					}
 				}
 			}
@@ -82,7 +83,8 @@ class World {
 		this.addToMap(this.knifebar);
 		this.context.translate(this.camera_x, 0); //Camara foward
 
-		this.addObjectsToMap(this.level.treasures);
+		this.addObjectsToMap(this.level.lifeBottles);
+		this.addObjectsToMap(this.level.throwableObjects);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);
 
