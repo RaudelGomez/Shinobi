@@ -7,6 +7,13 @@ class DrawableObject {
   img;
   currentImage = 0;
   imageCache = {};
+   //Frame Objects
+   offset = {
+    top:0,
+    right:0,
+    bottom: 0,
+    left: 0
+  } 
   
   /**
    * This function load one images
@@ -43,7 +50,7 @@ class DrawableObject {
    */
   drawFrame(context){
     //Drawing only instance of Character or Enemy
-    if(this instanceof Character || this instanceof Enemy ){
+    if(this instanceof Character || this instanceof Enemy || this instanceof Treasure ){
       // context.beginPath();
       // context.lineWidth = "4";
       // context.strokeStyle = "blue";

@@ -199,4 +199,5 @@ class Character extends MovableObject {
 		this.allIntervalCharacter.push(this.intervalRunCharacter);
 		this.allIntervalCharacter.push(this.intervalPlayRunCharacter);
 	}
+
 }

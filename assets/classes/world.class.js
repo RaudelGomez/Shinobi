@@ -8,7 +8,9 @@ class World {
 	canvas;
 	keyboard;
   camera_x = 0;
-	statusBar = new StatusBar();
+	healthbar = new HealthBar();
+	spellbar = new SpellBar();
+	knifebar = new ObjectBar();
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -22,6 +24,7 @@ class World {
 		this.setWorld();
 		this.draw();
 		this.checkCollisions();
+		this.takeObject();
 	}
 
   /**
@@ -40,7 +43,22 @@ class World {
 					this.character.hit();
 					this.statusBar.setPercentage(this.character.life);
 				}
-			})
+			});
+		}, 200);
+	}
+
+	takeObject(){
+		setInterval(() => {
+			for (let i = 0; i < this.level.treasures.length; i++) {
+				const treasure = this.level.treasures[i];
+				if(this.character.isColliding(treasure)){
+					this.level.treasures.splice(i, 1);
+					if(this.character.life <= 90){
+						this.character.life += 10;
+						this.statusBar.setPercentage(this.character.life);
+					}
+				}
+			}
 		}, 200);
 	}
 
@@ -59,9 +77,12 @@ class World {
 
 		this.context.translate(-this.camera_x, 0); //Camara back
 		//----space for fixing object-------------
-		this.addToMap(this.statusBar);
+		this.addToMap(this.healthbar);
+		this.addToMap(this.spellbar);
+		this.addToMap(this.knifebar);
 		this.context.translate(this.camera_x, 0); //Camara foward
 
+		this.addObjectsToMap(this.level.treasures);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);
 
