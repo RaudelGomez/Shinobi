@@ -47,7 +47,7 @@ class World {
 					this.healthbar.setPercentage(this.character.life);
 				}
 			});
-		}, 200);
+		}, 1000 / 60);
 	}
 
 	takeObject(objs){
@@ -57,6 +57,8 @@ class World {
 				const valueObj = obj.valueTreasure;
 				if(this.character.isColliding(obj)){
 					this.objectTakedAudio.pause();
+					this.objectTakedAudio.play();
+					this.objectTakedAudio.volume = 0.2;
 					objs.splice(i, 1);
 					if(this.isLifeBottle(obj)){
 						this.collectBottle(valueObj);
@@ -66,12 +68,10 @@ class World {
 					}
 					if(this.isSpellObject(obj)){
 						this.collectSpell(valueObj);
-					}
-				this.objectTakedAudio.play();
-				this.objectTakedAudio.volume = 0.2;
+					}				
 				}
 			}
-		}, 200);
+		}, 1000 / 60);
 	}
 
 	isLifeBottle(obj){

@@ -85,7 +85,7 @@ class Character extends MovableObject {
 		this.intervalMoveCharacter = setInterval(() => {
       this.run_sound.pause();
       this.walk_sound.pause();
-			if (this.world.keyboard.right && this.x < this.world.level.level_end_x) {
+			if (this.world.keyboard.right && this.x < (this.world.level.level_end_x + 400)) {
 				this.moveRight();
 				this.walk_sound.play();
 			}
@@ -100,8 +100,12 @@ class Character extends MovableObject {
 				this.actionAudio.play();
 				this.jump();
 			}
-			
-      this.world.camera_x = -this.x + 100;
+
+			if(this.isTheEndOfTheLevel()){
+				return
+			}
+			this.cameraMoveLeft();
+		      
 		}, 100);
 
 		
@@ -134,15 +138,15 @@ class Character extends MovableObject {
 	}
 
 	animationRun() {
-    this.walk_sound.pause();
-    this.run_sound.pause();
 		this.intervalRunCharacter = setInterval(() => {
-			if (this.world.keyboard.right && this.world.keyboard.space && (this.x < this.world.level.level_end_x)) {
-				this.runRight();
+			this.walk_sound.pause();
+			this.run_sound.pause();
+			if (this.world.keyboard.right && this.world.keyboard.a && (this.x < this.world.level.level_end_x + 400)) {
+				this.runRight(this.run);
 				this.run_sound.play();
 			};
 
-			if (this.world.keyboard.left && this.world.keyboard.space && this.x > -600) {
+			if (this.world.keyboard.left && this.world.keyboard.a && this.x > -600) {
 				this.runLeft(this.run);
 				this.run_sound.play();
 			}
@@ -153,7 +157,11 @@ class Character extends MovableObject {
 				this.run_sound.play();
 			}
 
-      this.world.camera_x = -this.x + 100;
+      if(this.isTheEndOfTheLevel()){
+				return
+			}
+			this.cameraMoveLeft();
+
 		}, 1000 / 60);
 
 		this.intervalPlayRunCharacter = setInterval(() => {
@@ -173,14 +181,32 @@ class Character extends MovableObject {
 			if(this.isInTheAir()){
 				this.playAnimation(this.jumpImgs);
 			}else{
-				if ((this.world.keyboard.right && this.world.keyboard.space) || (this.world.keyboard.left && this.world.keyboard.space)) 
+				if ((this.world.keyboard.right && this.world.keyboard.a) || (this.world.keyboard.left && this.world.keyboard.a)) 
 					{
 					//run animation
 					this.playAnimation(this.runImgs);
 					}
 			}			
-		}, 40);
+		}, 1000/60);
 	}
+
+	cameraMoveLeft(){
+		this.world.camera_x = -this.x + 100;
+	}
+
+	isTheEndOfTheLevel(){
+		return (this.x >= (this.world.level.level_end_x) && this.x <= (this.world.level.level_end_x + 500));
+	}
+
+	runRight(run){
+    this.x += run;
+    this.otherDirection = false;
+  }
+
+	runLeft(run){
+    this.x -= run;
+    this.otherDirection = true;
+  }
 	
 	jump() {
 		this.speedY = 30;

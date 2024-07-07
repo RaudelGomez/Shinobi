@@ -45,16 +45,6 @@ class MovableObject extends DrawableObject {
     this.otherDirection = false;
   }
 
-  runLeft(run){
-    this.x -= run;
-    this.otherDirection = true;
-  }
-
-  runRight(){
-    this.x += this.run;
-    this.otherDirection = false;
-  }
-
   applyGravity(){
     setInterval(() => {
       if(this.isInTheAir() || this.speedY > 0){
