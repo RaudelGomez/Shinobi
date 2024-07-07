@@ -13,6 +13,7 @@ class World {
 	spellbar = new SpellBar();
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
+	throwedSpell = []
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -44,6 +45,7 @@ class World {
 		setInterval(() => {
 			this.collisionChecked();
 			this.checkThrow();
+			this.checkSpell();
 		}, 1000 / 60);
 	}
 
@@ -58,11 +60,38 @@ class World {
 
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
-			let newObj = new ThrowableObject(this.character.x + 100, this.character.y );
+			this.character.actionAudio.play();
+			let newObj;
+			if(this.character.otherDirection == false){
+				newObj = new ThrowableObject(this.character.x + 100, this.character.y );
+				newObj.throwRight();
+			}else{
+				newObj = new ThrowableObject(this.character.x , this.character.y );
+				newObj.throwLeft();
+			}
 			this.throwedObject.push(newObj);
-			newObj.throw();
 			this.character.throwableObj -= 1;
-			console.log(this.throwedObject);
+			this.character.playAnimation(this.character.throwObjectImages);
+			this.objetbar.setPercentage(this.character.throwableObj);
+		}
+	}
+
+	checkSpell(){
+		if(this.keyboard.d && this.character.spellObject > 0){
+			this.character.actionAudio.play();
+			let spellImage = "assets/img/weapons/spell-attack/Magic_Attack6.png";
+			let newObj;
+			if(this.character.otherDirection == false){
+				newObj = new SpellObject(this.character.x + 100, this.character.y + 50, spellImage);
+				newObj.throwSpellRight();
+			}else{
+				newObj = new SpellObject(this.character.x - 100, this.character.y + 50, spellImage);
+				newObj.throwSpellLeft();
+			}
+			this.throwedSpell.push(newObj);
+			this.character.spellObject -= 1;
+			this.character.playAnimation(this.character.throwObjectImages);
+			this.spellbar.setPercentage(this.character.spellObject);
 		}
 	}
 
@@ -150,6 +179,7 @@ class World {
 		this.addObjectsToMap(this.level.throwableObjects);
 		this.addObjectsToMap(this.throwedObject);
 		this.addObjectsToMap(this.level.spellObjects);
+		this.addObjectsToMap(this.throwedSpell);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);
 

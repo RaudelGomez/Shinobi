@@ -57,4 +57,10 @@ window.addEventListener('keyup', (e)=>{
       keyboard.s = false;
     }, 10);
   }
+  if(e.keyCode == 68){
+    keyboard.d = true;
+    setTimeout(() => {
+      keyboard.d = false;
+    }, 10);
+  }
 });

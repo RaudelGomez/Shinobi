@@ -42,6 +42,14 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/hurt/hurt-1.png",
 		"assets/img/characters/Samurai/hurt/hurt-2.png",
 		"assets/img/characters/Samurai/hurt/hurt-3.png",
+	];
+	throwObjectImages = [
+		"assets/img/characters/Samurai/attack1/attack-1.png",
+		"assets/img/characters/Samurai/attack1/attack-2.png",
+		"assets/img/characters/Samurai/attack1/attack-3.png",
+		"assets/img/characters/Samurai/attack1/attack-4.png",
+		"assets/img/characters/Samurai/attack1/attack-5.png",
+		"assets/img/characters/Samurai/attack1/attack-6.png",
 	]
 	x = 100;
 	y = 190;
@@ -76,6 +84,7 @@ class Character extends MovableObject {
 		this.loadImages(this.jumpImgs);
 		this.loadImages(this.hurtImgs);
 		this.loadImages(this.deadImgs);
+		this.loadImages(this.throwObjectImages);
 		this.animate();
 		this.animationRun();
 		this.applyGravity();
@@ -227,5 +236,6 @@ class Character extends MovableObject {
 		this.allIntervalCharacter.push(this.intervalRunCharacter);
 		this.allIntervalCharacter.push(this.intervalPlayRunCharacter);
 	}
+
 
 }

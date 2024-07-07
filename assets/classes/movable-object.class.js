@@ -12,6 +12,7 @@ class MovableObject extends DrawableObject {
   //Treasures
   throwableObj = 0;
   spellObject = 0;
+  throwObjectImages = [];
   
 
 
@@ -45,6 +46,18 @@ class MovableObject extends DrawableObject {
     this.otherDirection = false;
   }
 
+  throwSpellRight(){
+    setInterval(() => {
+      this.x += 10;
+    }, 1000 / 60);
+  }
+
+  throwSpellLeft(){
+    setInterval(() => {
+      this.x -= 10;
+    }, 1000 / 60);
+  }
+  
   applyGravity(){
     setInterval(() => {
       if(this.isInTheAir() || this.speedY > 0){
@@ -85,9 +98,9 @@ class MovableObject extends DrawableObject {
 
   }
 
-  attackSpell(){
-    
-  }
+  animateThrowObject(){
+    this.playAnimation(this.throwObjectImages);
+	}
 
   hurt(){
 

@@ -14,11 +14,19 @@ class ThrowableObject extends Treasure{
     this.height = 60;
   }
 
-  throw(){
+  throwRight(){
     this.speedY = 30;
     this.applyGravity();
     setInterval(() => {
       this.x += 10;   
+    }, 50);
+  }
+
+  throwLeft(){
+    this.speedY = 30;
+    this.applyGravity();
+    setInterval(() => {
+      this.x -= 10;   
     }, 50);
   }
 };
