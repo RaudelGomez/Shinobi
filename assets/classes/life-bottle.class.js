@@ -1,5 +1,5 @@
 class LifeBottle extends Treasure{
-  valueTreasure = 30;
+  valueTreasure = 10;
   constructor(){
     super();
     this.loadInitialPositionImage('assets/img/weapons/3.png')

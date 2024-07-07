@@ -1,5 +1,5 @@
 class SpellObject extends Treasure{
-  valueTreasure = 15;
+  valueTreasure = 20;
   constructor(){
     super();
     this.loadInitialPositionImage('assets/img/weapons/14.png')
