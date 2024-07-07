@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
  
   //Life
   lastHit = 0;
-  life = 20;
+  life = 100;
   //Treasures
   throwableObj = 0;
   spellObject = 0;
@@ -55,7 +55,11 @@ class MovableObject extends DrawableObject {
   }
 
   isInTheAir(){
-    return this.y < this.yAfterJump;
+    if(this instanceof ThrowableObject){
+      return true;
+    }else{
+      return this.y < this.yAfterJump;
+    }
   }
 
   hit(){

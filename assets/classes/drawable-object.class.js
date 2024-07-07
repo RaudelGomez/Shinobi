@@ -14,7 +14,8 @@ class DrawableObject {
     bottom: 0,
     left: 0
   } 
-  
+
+    
   /**
    * This function load one images
    * @param {string} path - path of the image to load 

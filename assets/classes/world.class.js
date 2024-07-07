@@ -12,6 +12,7 @@ class World {
 	objetbar = new ObjectBar();
 	spellbar = new SpellBar();
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
+	throwedObject = [];
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -41,13 +42,28 @@ class World {
 
 	checkCollisions(){
 		setInterval(() => {
-			this.level.enemies.forEach((enemy)=>{
-				if(this.character.isColliding(enemy)){
-					this.character.hit();
-					this.healthbar.setPercentage(this.character.life);
-				}
-			});
+			this.collisionChecked();
+			this.checkThrow();
 		}, 1000 / 60);
+	}
+
+	collisionChecked(){
+		this.level.enemies.forEach((enemy)=>{
+			if(this.character.isColliding(enemy)){
+				this.character.hit();
+				this.healthbar.setPercentage(this.character.life);
+			}
+		});
+	}
+
+	checkThrow(){
+		if(this.keyboard.s && this.character.throwableObj > 0){
+			let newObj = new ThrowableObject(this.character.x + 100, this.character.y );
+			this.throwedObject.push(newObj);
+			newObj.throw();
+			this.character.throwableObj -= 1;
+			console.log(this.throwedObject);
+		}
 	}
 
 	takeObject(objs){
@@ -132,6 +148,7 @@ class World {
 
 		this.addObjectsToMap(this.level.lifeBottles);
 		this.addObjectsToMap(this.level.throwableObjects);
+		this.addObjectsToMap(this.throwedObject);
 		this.addObjectsToMap(this.level.spellObjects);
 		this.addToMap(this.character);
 		this.addObjectsToMap(this.level.enemies);

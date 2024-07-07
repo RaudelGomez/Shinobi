@@ -61,6 +61,8 @@ class Character extends MovableObject {
     left: 40
   }
 	allIntervalCharacter = [];
+	throwableObj = 0;
+	spellObject = 0;
 	
 	gameOverAudio = new Audio('assets/audio/gameOver.mp3');
 	hurtAudio = new Audio('assets/audio/hurt.mp3');

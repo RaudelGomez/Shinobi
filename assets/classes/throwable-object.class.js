@@ -1,10 +1,24 @@
 class ThrowableObject extends Treasure{
-  constructor(){
+  offset = {
+    top:0,
+    right:-15,
+    bottom: 0,
+    left: -15
+  } 
+  constructor(x, y){
     super();
     this.loadInitialPositionImage('assets/img/weapons/5.png')
-    this.x = 200 + Math.random() * 500 * this.countStage;
-    this.y = 100 + Math.random() * 80 * this.countStage;
+    this.x = x;
+    this.y = y;
     this.width = 25;
     this.height = 60;
+  }
+
+  throw(){
+    this.speedY = 30;
+    this.applyGravity();
+    setInterval(() => {
+      this.x += 10;   
+    }, 50);
   }
 };
