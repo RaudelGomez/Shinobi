@@ -10,6 +10,23 @@ class Lizard extends Enemy{
     'assets/img/enemies/lizard/Walk5.png',
     'assets/img/enemies/lizard/Walk6.png',
   ];
+  attackImgs = [
+    'assets/img/enemies/lizard/Attack1.png',
+    'assets/img/enemies/lizard/Attack2.png',
+    'assets/img/enemies/lizard/Attack3.png',
+    'assets/img/enemies/lizard/Attack4.png',
+    'assets/img/enemies/lizard/Attack5.png',
+  ];
+
+  deadImgs = [
+    'assets/img/enemies/lizard/Death1.png',
+    'assets/img/enemies/lizard/Death2.png',
+    'assets/img/enemies/lizard/Death3.png',
+    'assets/img/enemies/lizard/Death4.png',
+    'assets/img/enemies/lizard/Death5.png',
+    'assets/img/enemies/lizard/Death6.png',
+  ];
+
   offset = {
     top:160,
     right:140,
@@ -21,17 +38,11 @@ class Lizard extends Enemy{
     super().loadInitialPositionImage(this.walkingImgs[0]);
     this.x = 200 + Math.random() * 500 * this.countStage;
     this.loadImages(this.walkingImgs);
+    this.loadImages(this.attackImgs);
+    this.loadImages(this.deadImgs);
     this.speed = 0.15 + Math.random() * 0.5;
-    this.animate()
+    this.animate(this.walkingImgs);
   }
 
-  animate(){
-    setInterval(() => {
-      this.moveLeft(this.speed);
-    }, 1000 / 60);
-
-    setInterval(() => {
-      this.playAnimation(this.walkingImgs);
-    }, 200);
-  }
+  
 }

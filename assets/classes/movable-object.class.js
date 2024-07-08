@@ -94,7 +94,8 @@ class MovableObject extends DrawableObject {
   }
 
   hit(){
-    this.life -= 2;
+    this.life -= 0.1;
+    console.log(this.life);
     if(this.life < 0){
       this.life = 0;
     }else{
@@ -110,10 +111,6 @@ class MovableObject extends DrawableObject {
     let timePassed = new Date().getTime() - this.lastHit;//Difference in ms
     timePassed = timePassed / 1000; //Difference in s
     return timePassed < 1;
-  }
-
-  attackNormal(){
-
   }
 
   animateThrowObject(){

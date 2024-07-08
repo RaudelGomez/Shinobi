@@ -44,19 +44,50 @@ class World {
 
 	checkCollisions(){
 		setInterval(() => {
-			this.collisionChecked();
 			this.checkThrow();
 			this.checkSpell();
+		}, 1000 / 60);
+
+		//Interval collision with enemy hit and attacked
+		setInterval(() => {
+			this.collisionChecked();
+		}, 200);
+
+		setInterval(() => {
+			this.collisionEnemySpell();
 		}, 1000 / 60);
 	}
 
 	collisionChecked(){
 		this.level.enemies.forEach((enemy)=>{
 			if(this.character.isColliding(enemy)){
+				enemy.animate(enemy.attackImgs);
 				this.character.hit();
 				this.healthbar.setPercentage(this.character.life);
 			}
 		});
+	}
+
+	collisionEnemySpell(){
+		let enemyEliminatedIndex;
+			for (let i = 0; i < this.throwedSpell.length; i++) {
+				const spell = this.throwedSpell[i];
+				for (let j = 0; j < this.level.enemies.length; j++) {
+					const enemy = this.level.enemies[j];
+					if(spell.isColliding(enemy)){		
+						enemy.life = 0;
+						console.log(j);
+						enemyEliminatedIndex = j;
+						clearInterval(enemy.intervalMove);
+						clearInterval(enemy.intervalAnimation);
+						enemy.dead(enemy.deadImgs);
+						setTimeout(() => {
+							this.level.enemies.splice(j, 1);
+						}, 1500);
+					}
+				}
+		
+			}
 	}
 
 	checkThrow(){
