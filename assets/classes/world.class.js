@@ -73,7 +73,7 @@ class World {
 				const enemy = this.level.enemies[j];
 				if(spell.isColliding(enemy)){		
 					enemy.life -= enemy.enemyLifeTaked;
-					console.log(enemy.life);
+					
 					if(enemy.life <= 0){
 						console.log(enemy.life);
 						clearInterval(enemy.intervalMove);
@@ -82,6 +82,12 @@ class World {
 						setTimeout(() => {
 							this.level.enemies.splice(j, 1);
 						}, 1500);
+					}
+					if(enemy instanceof Endboss){
+						if(enemy.life <= 90){
+							enemy.animate(this.attackImgs);
+							(console.log('boss', enemy.life));
+						}
 					}
 				}
 			}

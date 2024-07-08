@@ -2,7 +2,7 @@ class Enemy extends MovableObject{
   otherDirection = true;
   intervalMove;
   intervalAnimation;
-  enemyLifeTaked = 1;
+  enemyLifeTaked = 0.5;
 
   //Audio
   enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
