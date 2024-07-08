@@ -16,10 +16,7 @@ class MovableObject extends DrawableObject {
 
   speedSpell = 10;
   spellInterval;
-
   
-
-
    /**
    * This function play all Photos in the array and makes animation.
    * @param {string} images - path of the images

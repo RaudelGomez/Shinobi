@@ -46,16 +46,15 @@ class World {
 		setInterval(() => {
 			this.checkThrow();
 			this.checkSpell();
+			this.collisionEnemySpell(this.throwedSpell);
+			this.collisionEnemySpell(this.throwedObject);
+			this.collisionChecked();
 		}, 1000 / 60);
 
 		//Interval collision with enemy hit and attacked
-		setInterval(() => {
-			this.collisionChecked();
-		}, 200);
-
-		setInterval(() => {
-			this.collisionEnemySpell();
-		}, 1000 / 60);
+		// setInterval(() => {
+		// 	this.collisionChecked();
+		// }, 200);
 	}
 
 	collisionChecked(){
@@ -68,27 +67,41 @@ class World {
 		});
 	}
 
-	collisionEnemySpell(){
-		let enemyEliminatedIndex;
-			for (let i = 0; i < this.throwedSpell.length; i++) {
-				const spell = this.throwedSpell[i];
-				for (let j = 0; j < this.level.enemies.length; j++) {
-					const enemy = this.level.enemies[j];
-					if(spell.isColliding(enemy)){		
-						enemy.life = 0;
-						console.log(j);
-						enemyEliminatedIndex = j;
-						clearInterval(enemy.intervalMove);
-						clearInterval(enemy.intervalAnimation);
-						enemy.dead(enemy.deadImgs);
-						setTimeout(() => {
-							this.level.enemies.splice(j, 1);
-						}, 1500);
-					}
+	collisionEnemySpell(throwed){
+		for (let i = 0; i < throwed.length; i++) {
+			const spell = throwed[i];
+			for (let j = 0; j < this.level.enemies.length; j++) {
+				const enemy = this.level.enemies[j];
+				if(spell.isColliding(enemy)){		
+					enemy.life = 0;
+					clearInterval(enemy.intervalMove);
+					clearInterval(enemy.intervalAnimation);
+					enemy.dead(enemy.deadImgs);
+					setTimeout(() => {
+						this.level.enemies.splice(j, 1);
+					}, 1500);
 				}
-		
 			}
+		}
 	}
+
+	// collisionEnemySpell(){
+	// 		for (let i = 0; i < this.throwedSpell.length; i++) {
+	// 			const spell = this.throwedSpell[i];
+	// 			for (let j = 0; j < this.level.enemies.length; j++) {
+	// 				const enemy = this.level.enemies[j];
+	// 				if(spell.isColliding(enemy)){		
+	// 					enemy.life = 0;
+	// 					clearInterval(enemy.intervalMove);
+	// 					clearInterval(enemy.intervalAnimation);
+	// 					enemy.dead(enemy.deadImgs);
+	// 					setTimeout(() => {
+	// 						this.level.enemies.splice(j, 1);
+	// 					}, 1500);
+	// 				}
+	// 			}
+	// 		}
+	// }
 
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
