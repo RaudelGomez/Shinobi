@@ -2,6 +2,7 @@ class Lizard extends Enemy{
   y = 90;
   height = 400;
   width = 400;
+  enemyLifeTaked = 3
   walkingImgs = [
     'assets/img/enemies/lizard/Walk1.png',
     'assets/img/enemies/lizard/Walk2.png',
@@ -42,7 +43,5 @@ class Lizard extends Enemy{
     this.loadImages(this.deadImgs);
     this.speed = 0.15 + Math.random() * 0.5;
     this.animate(this.walkingImgs);
-  }
-
-  
+  } 
 }

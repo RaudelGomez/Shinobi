@@ -48,13 +48,12 @@ class World {
 			this.checkSpell();
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
-			this.collisionChecked();
 		}, 1000 / 60);
 
-		//Interval collision with enemy hit and attacked
-		// setInterval(() => {
-		// 	this.collisionChecked();
-		// }, 200);
+		// Interval collision with enemy hit and attacked
+		setInterval(() => {
+			this.collisionChecked();
+		}, 200);
 	}
 
 	collisionChecked(){
@@ -73,35 +72,22 @@ class World {
 			for (let j = 0; j < this.level.enemies.length; j++) {
 				const enemy = this.level.enemies[j];
 				if(spell.isColliding(enemy)){		
-					enemy.life = 0;
-					clearInterval(enemy.intervalMove);
-					clearInterval(enemy.intervalAnimation);
-					enemy.dead(enemy.deadImgs);
-					setTimeout(() => {
-						this.level.enemies.splice(j, 1);
-					}, 1500);
+					enemy.life -= enemy.enemyLifeTaked;
+					console.log(enemy.life);
+					if(enemy.life <= 0){
+						console.log(enemy.life);
+						clearInterval(enemy.intervalMove);
+						clearInterval(enemy.intervalAnimation);
+						enemy.dead(enemy.deadImgs);
+						setTimeout(() => {
+							this.level.enemies.splice(j, 1);
+						}, 1500);
+					}
 				}
 			}
 		}
 	}
 
-	// collisionEnemySpell(){
-	// 		for (let i = 0; i < this.throwedSpell.length; i++) {
-	// 			const spell = this.throwedSpell[i];
-	// 			for (let j = 0; j < this.level.enemies.length; j++) {
-	// 				const enemy = this.level.enemies[j];
-	// 				if(spell.isColliding(enemy)){		
-	// 					enemy.life = 0;
-	// 					clearInterval(enemy.intervalMove);
-	// 					clearInterval(enemy.intervalAnimation);
-	// 					enemy.dead(enemy.deadImgs);
-	// 					setTimeout(() => {
-	// 						this.level.enemies.splice(j, 1);
-	// 					}, 1500);
-	// 				}
-	// 			}
-	// 		}
-	// }
 
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
@@ -119,7 +105,7 @@ class World {
 			this.character.throwableObj -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.objetbar.setPercentage(this.character.throwableObj);
-			console.log(this.throwedObject);
+			//console.log(this.throwedObject);
 		}
 	}
 
