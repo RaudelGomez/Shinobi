@@ -13,7 +13,8 @@ class World {
 	spellbar = new SpellBar();
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
-	throwedSpell = []
+	throwedSpell = [];
+
   
   /**
    * That is the constructor that bring all elements from game.js
@@ -65,6 +66,7 @@ class World {
 			if(this.character.otherDirection == false){
 				newObj = new ThrowableObject(this.character.x + 100, this.character.y );
 				newObj.throwRight();
+				
 			}else{
 				newObj = new ThrowableObject(this.character.x , this.character.y );
 				newObj.throwLeft();
@@ -73,6 +75,7 @@ class World {
 			this.character.throwableObj -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.objetbar.setPercentage(this.character.throwableObj);
+			console.log(this.throwedObject);
 		}
 	}
 
@@ -92,8 +95,13 @@ class World {
 			this.character.spellObject -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.spellbar.setPercentage(this.character.spellObject);
+			//deleting spell sent
+			setTimeout(() => {
+				this.throwedSpell.pop();
+			}, 500);
 		}
 	}
+
 
 	takeObject(objs){
 		setInterval(() => {

@@ -6,6 +6,7 @@ class Level extends DrawableObject{
   lifeBottles;
   throwableObjects;
   spellObjects;
+  world;
   
 
   constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects){

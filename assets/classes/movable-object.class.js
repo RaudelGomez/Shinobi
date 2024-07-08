@@ -13,6 +13,10 @@ class MovableObject extends DrawableObject {
   throwableObj = 0;
   spellObject = 0;
   throwObjectImages = [];
+
+  speedSpell = 10;
+  spellInterval;
+
   
 
 
@@ -47,17 +51,31 @@ class MovableObject extends DrawableObject {
   }
 
   throwSpellRight(){
-    setInterval(() => {
-      this.x += 10;
+    let x = this.x;
+    this.spellInterval = setInterval(() => {
+      this.x += this.speedSpell;
+      //If the x nof the spell is bigger than the initial postion of x + 1200 than stop
+      if(this.x  >= x + 400){
+        this.cleanInterval(this.spellInterval);
+      }
     }, 1000 / 60);
   }
 
   throwSpellLeft(){
-    setInterval(() => {
-      this.x -= 10;
+    let x = this.x;
+    this.spellInterval = setInterval(() => {
+      this.x -= this.speedSpell;
+      //If the x nof the spell is bigger than the initial postion of x + 1200 than stop
+      if(this.x  <= x - 400){
+        this.cleanInterval(this.spellInterval);
+      }
     }, 1000 / 60);
   }
-  
+
+  cleanInterval(id){
+    return clearInterval(id);
+  };
+
   applyGravity(){
     setInterval(() => {
       if(this.isInTheAir() || this.speedY > 0){
