@@ -51,7 +51,7 @@ class DrawableObject {
    */
   drawFrame(context){
     //Drawing only instance of Character or Enemy
-    if(this instanceof Character || this instanceof Enemy || this instanceof Treasure ){
+    if(this instanceof Character || this instanceof Enemy || this instanceof Treasure || this instanceof SpellEnemy ){
       // context.beginPath();
       // context.lineWidth = "4";
       // context.strokeStyle = "blue";

@@ -11,6 +11,7 @@ class World {
 	healthbar = new HealthBar();
 	objetbar = new ObjectBar();
 	spellbar = new SpellBar();
+	spellEnemy = new SpellEnemy(100, 100);
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
@@ -48,6 +49,7 @@ class World {
 			this.checkSpell();
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
+			this.checkCharacterDamageSpell();
 		}, 1000 / 60);
 
 		// Interval collision with enemy hit and attacked
@@ -59,11 +61,37 @@ class World {
 	collisionChecked(){
 		this.level.enemies.forEach((enemy)=>{
 			if(this.character.isColliding(enemy)){
+				if(enemy instanceof Endboss){
+					console.log('boss');
+					clearInterval(enemy.intervalAnimation);
+					enemy.animate(enemy.attackImgs);
+					setTimeout(() => {
+						clearInterval(enemy.intervalAnimation);
+						enemy.animate(enemy.walkingImgs);
+						// this.spellEnemy = new SpellEnemy((this.level.enemies[this.level.enemies.length - 1].countStage) * 720 , -80);
+						// this.spellEnemy.moveLeftSpell();
+						// setTimeout(() => {		
+						// 	clearInterval(this.spellEnemy.intervalSpellBoss);
+						// }, 2000);
+					}, 2000);
+					return
+				}
 				enemy.animate(enemy.attackImgs);
 				this.character.hit();
 				this.healthbar.setPercentage(this.character.life);
 			}
 		});
+	}
+
+	checkCharacterDamageSpell(){
+		if(this.character.isColliding(this.spellEnemy)){
+			console.log('colliding');
+			// this.character.life -= this.spellEnemy.damage;
+			// this.healthbar.setPercentage(this.character.life);
+			// console.log(this.character.life);
+		}else{
+			console.log('no colliding');
+		}
 	}
 
 	collisionEnemySpell(throwed){
@@ -85,7 +113,8 @@ class World {
 					}
 					if(enemy instanceof Endboss){
 						if(enemy.life <= 90){
-							enemy.animate(this.attackImgs);
+							clearInterval(enemy.intervalAnimation);
+							enemy.animate(enemy.attackImgs);
 							(console.log('boss', enemy.life));
 						}
 					}
@@ -225,6 +254,7 @@ class World {
 		this.addObjectsToMap(this.level.spellObjects);
 		this.addObjectsToMap(this.throwedSpell);
 		this.addToMap(this.character);
+		this.addToMap(this?.spellEnemy);
 		this.addObjectsToMap(this.level.enemies);
 
     

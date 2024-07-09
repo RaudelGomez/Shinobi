@@ -1,8 +1,5 @@
 class Endboss extends Enemy{
   y = -250;
-  //Medidas attack
-  // height = 350;
-  // width = 250;
   height = 800;
   width = 800;
   speed = 1;
@@ -18,7 +15,7 @@ class Endboss extends Enemy{
     'assets/img/enemies/dragon/Walk4.png',
     'assets/img/enemies/dragon/Walk5.png',
   ];
-  attackImages = [
+  attackImgs = [
     'assets/img/enemies/dragon/Death1.png',
     'assets/img/enemies/dragon/Attack2.png',
     'assets/img/enemies/dragon/Attack3.png',
@@ -30,7 +27,10 @@ class Endboss extends Enemy{
     'assets/img/enemies/dragon/Death3.png',
     'assets/img/enemies/dragon/Death4.png',
     'assets/img/enemies/dragon/Death5.png',
-  ]
+  ];
+  
+  //spellBoss;
+
   //Frame 
   offset = {
     top:390,
@@ -42,13 +42,17 @@ class Endboss extends Enemy{
   constructor(){
     super().loadInitialPositionImage(this.walkingImgs[0]);
     this.x = (this.countStage * 720 + 150) ;
+    console.log(this.x -1000);
     this.loadImages(this.walkingImgs);
-    this.loadImages(this.attackImages);
+    this.loadImages(this.attackImgs);
     this.loadImages(this.deadImgs);
+    this.loadImages(this.throwingSomethingImgs);
+    this.animate(this.walkingImgs);
+    //this.spellBoss = new SpellEnemy(this.x - 10000 , this.y, this.throwingSomethingImgs[0]);
+    //this.throwingSpellBoss();
   }
 
   animate(imgs){
-
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);
@@ -61,4 +65,9 @@ class Endboss extends Enemy{
       this.playAnimation(imgs);
     }, 200);
   }
+
+  // throwingSpellBoss(){
+  //   this.animate(this.throwingSomethingImgs);
+  //   console.log(this.spellBoss);
+  // }
 }
