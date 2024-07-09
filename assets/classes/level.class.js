@@ -9,7 +9,7 @@ class Level extends DrawableObject{
   world;
   
 
-  constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects){
+  constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects, audio){
     super();
     this.clouds = clouds;
     this.enemies = enemies;
@@ -17,6 +17,7 @@ class Level extends DrawableObject{
     this.lifeBottles = lifeBottles;
     this.throwableObjects = throwableObjects;
     this.spellObjects = spellObjects;
+    this.audio = audio;
     this.settingBackground();
   }
 

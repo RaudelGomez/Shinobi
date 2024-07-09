@@ -1,11 +1,34 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
+let musicVolume = document.getElementById('music-volume');
+let btnPlayPause = document.getElementById('btn-play-pause');
+let musicGame = new Audio('assets/audio/gameMusic.mp3');
 
+let isMusicOn = false;
+	
 function init() {
   canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
+  setInterval(() => {
+    musicGame.volume = turnVolumeMusic();
+  }, 100);
 };
+
+function playPauseMusic() {
+  isMusicOn = !isMusicOn;
+  if(isMusicOn){
+    musicGame.play();
+    btnPlayPause.textContent = 'pause';
+  }else{
+    musicGame.pause();
+    btnPlayPause.textContent = 'play';
+  }
+}
+
+function turnVolumeMusic(){
+  return musicVolume.value;
+}
 
 window.addEventListener('keydown', (e)=>{
   //console.log(e);

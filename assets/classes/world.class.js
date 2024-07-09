@@ -15,8 +15,8 @@ class World {
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
-
-  
+	intervalEndBossAttack;
+	  
   /**
    * That is the constructor that bring all elements from game.js
    * @param {canvas} canvas - Canvas element where will be painted every img
@@ -32,7 +32,9 @@ class World {
 		this.takeObject(this.level.lifeBottles);
 		this.takeObject(this.level.throwableObjects);
 		this.takeObject(this.level.spellObjects);
+		
 	}
+
 
   /**
    * This function set the world in the character, like this this one has a referenz about what
@@ -62,25 +64,28 @@ class World {
 		this.level.enemies.forEach((enemy)=>{
 			if(this.character.isColliding(enemy)){
 				if(enemy instanceof Endboss){
-					console.log('boss');
-					clearInterval(enemy.intervalAnimation);
+					this.EndBossSequenceAttack(enemy);
+				}else{
 					enemy.animate(enemy.attackImgs);
-					setTimeout(() => {
-						clearInterval(enemy.intervalAnimation);
-						enemy.animate(enemy.walkingImgs);
-						this.spellEnemy = new SpellEnemy((this.level.enemies[this.level.enemies.length - 1].countStage) * 720 + 400 , 80);
-						this.spellEnemy.moveLeftSpell();
-						setTimeout(() => {		
-							clearInterval(this.spellEnemy.intervalSpellBoss);
-						}, 10000);
-					}, 2000);
-					return
 				}
-				enemy.animate(enemy.attackImgs);
 				this.character.hit();
 				this.healthbar.setPercentage(this.character.life);
 			}
 		});
+	}
+
+	EndBossSequenceAttack(enemy){
+		this.intervalEndBossAttack = clearInterval(enemy.intervalAnimation);
+			enemy.animate(enemy.attackImgs);
+			setTimeout(() => {
+				clearInterval(enemy.intervalAnimation);
+				enemy.animate(enemy.walkingImgs);
+				this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
+				this.spellEnemy.moveLeftSpell();
+				setTimeout(() => {		
+					clearInterval(this.spellEnemy.intervalSpellBoss);
+				}, 20000);
+			}, 2000);
 	}
 
 	collisionEnemySpell(throwed){
@@ -90,9 +95,13 @@ class World {
 				const enemy = this.level.enemies[j];
 				if(spell.isColliding(enemy)){		
 					enemy.life -= enemy.enemyLifeTaked;
-					
+					if(enemy instanceof Endboss){
+						if(enemy.life <= 90 && enemy.life >10){
+							this.EndBossSequenceAttack(enemy);						
+							clearInterval(this.intervalEndBossAttack);
+						}
+					}
 					if(enemy.life <= 0){
-						console.log(enemy.life);
 						clearInterval(enemy.intervalMove);
 						clearInterval(enemy.intervalAnimation);
 						enemy.dead(enemy.deadImgs);
@@ -100,13 +109,7 @@ class World {
 							this.level.enemies.splice(j, 1);
 						}, 1500);
 					}
-					if(enemy instanceof Endboss){
-						if(enemy.life <= 90){
-							clearInterval(enemy.intervalAnimation);
-							enemy.animate(enemy.attackImgs);
-							(console.log('boss', enemy.life));
-						}
-					}
+					
 				}
 			}
 		}
@@ -116,6 +119,9 @@ class World {
 		if(this.character.isCollidingSpell(this.spellEnemy)){
 			this.character.life -= this.spellEnemy.damage;
 			this.healthbar.setPercentage(this.character.life);
+			this.character.hurtAudio.volume = 0.1; 
+			this.character.hurtAudio.play();
+			this.character.playAnimation(this.character.hurtImgs);
 		}
 	}
 

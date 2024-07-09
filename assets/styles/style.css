@@ -7,3 +7,7 @@ body{
 canvas{
   background-color: black;
 }
+
+.input-volume{
+  accent-color: red;
+}

@@ -1,3 +1,4 @@
+let audio = 'assets/audio/gameMusic.mp3';
 let drawObject = new DrawableObject();
 let object_x = 200 + Math.random() * 500 * drawObject.countStage;
 let object_y = 100 + Math.random() * 80 * drawObject.countStage;
@@ -10,6 +11,7 @@ let level1 = new Level(
   // [new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle() ],
   [],
   [],
+  audio
 );
 
 function pushThrowableObjects() {
@@ -31,8 +33,8 @@ function pushSpellObject() {
   }
 }
 
-//pushThrowableObjects();
-//pushSpellObject();
+pushThrowableObjects();
+pushSpellObject();
 
 
 //new Lizard(), new Lizard(), new Lizard(), new Lizard(), new Lizard(), new Endboss()
