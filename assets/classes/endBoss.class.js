@@ -42,7 +42,6 @@ class Endboss extends Enemy{
   constructor(){
     super().loadInitialPositionImage(this.walkingImgs[0]);
     this.x = (this.countStage * 720 + 150) ;
-    console.log(this.x -1000);
     this.loadImages(this.walkingImgs);
     this.loadImages(this.attackImgs);
     this.loadImages(this.deadImgs);

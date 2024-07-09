@@ -49,6 +49,7 @@ class World {
 			this.checkSpell();
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
+			this.checkCharacterDamageSpell();
 		}, 1000 / 60);
 
 		// Interval collision with enemy hit and attacked
@@ -67,11 +68,11 @@ class World {
 					setTimeout(() => {
 						clearInterval(enemy.intervalAnimation);
 						enemy.animate(enemy.walkingImgs);
-						this.spellEnemy = new SpellEnemy((this.level.enemies[this.level.enemies.length - 1].countStage) * 720 , -80);
+						this.spellEnemy = new SpellEnemy((this.level.enemies[this.level.enemies.length - 1].countStage) * 720 + 400 , 80);
 						this.spellEnemy.moveLeftSpell();
 						setTimeout(() => {		
 							clearInterval(this.spellEnemy.intervalSpellBoss);
-						}, 2000);
+						}, 10000);
 					}, 2000);
 					return
 				}
@@ -108,6 +109,13 @@ class World {
 					}
 				}
 			}
+		}
+	}
+
+	checkCharacterDamageSpell(){
+		if(this.character.isCollidingSpell(this.spellEnemy)){
+			this.character.life -= this.spellEnemy.damage;
+			this.healthbar.setPercentage(this.character.life);
 		}
 	}
 
