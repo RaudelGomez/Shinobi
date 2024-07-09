@@ -1,13 +1,52 @@
-body{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+@font-face {
+  font-family: "GoblinOne-Regular";
+  src: url("../fonts/GoblinOne-Regular.ttf") format("opentype"),
 }
 
+body{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  background-image: url('../img/backgroundGame/back1.jpg');
+  background-size: cover;
+  background-position: center;
+  font-family: "GoblinOne-Regular", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 canvas{
   background-color: black;
+  border: 5px solid black;
+  border-radius: 8px;
+}
+
+h1{
+  font-size: 64px;
+  -webkit-text-stroke: 2px black; /* width and color */
+  font-family: GoblinOne-Regular; color: yellow;
+  margin: 8px;
+  text-shadow: 4px 10px 8px rgba(0, 0, 0, 0.7);
 }
 
 .input-volume{
   accent-color: red;
+}
+
+/*Smartphones*/
+@media only screen and (max-width: 720px){
+  canvas{
+    width: 100%;
+  }
+  h1{
+    font-size: 40px;
+  }
+}
+
+@media only screen and (max-height: 480px){
+  canvas{
+    height: 75vh;
+  }
+  h1{
+    display: none;
+  }
 }

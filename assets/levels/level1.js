@@ -1,3 +1,4 @@
+
 let audio = 'assets/audio/gameMusic.mp3';
 let drawObject = new DrawableObject();
 let object_x = 200 + Math.random() * 500 * drawObject.countStage;
