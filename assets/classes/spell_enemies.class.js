@@ -9,6 +9,7 @@ class SpellEnemy extends MovableObject{
     bottom: 270,
     left: 80
   } 
+  
  
   damage = 5;
   intervalSpellBoss;

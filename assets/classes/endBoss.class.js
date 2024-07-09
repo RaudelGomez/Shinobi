@@ -46,7 +46,7 @@ class Endboss extends Enemy{
     this.loadImages(this.walkingImgs);
     this.loadImages(this.attackImgs);
     this.loadImages(this.deadImgs);
-    this.loadImages(this.throwingSomethingImgs);
+    //this.loadImages(this.throwingSomethingImgs);
     this.animate(this.walkingImgs);
     //this.spellBoss = new SpellEnemy(this.x - 10000 , this.y, this.throwingSomethingImgs[0]);
     //this.throwingSpellBoss();
