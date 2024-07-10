@@ -37,7 +37,10 @@
 	<body onload="init()">
 		<section id="screen-game" class="game">
 			<h1>Shinobi</h1>
-			<canvas id="canvas" height="480" width="720"></canvas>
+			<canvas id="canvas" class="d-none" height="480" width="720"></canvas>
+			<div id="presentation" class="presentation">
+				<div class="color-over-div"></div>
+			</div>
 			<article class="panel main-panel">
 				<figure>
 					<svg
@@ -54,7 +57,7 @@
 						/>
 					</svg>
 				</figure>
-				<figure class="start-game-btn cursor-pointer" onclick="initGame()">
+				<figure id="btn-start" class="start-game-btn cursor-pointer" onclick="initGame()">
 					start
 				</figure>
 				<figure id="figure-fullScreen">

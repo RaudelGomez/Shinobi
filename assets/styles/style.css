@@ -54,7 +54,7 @@ article figure{
 }
 
 .d-none{
-  display: none;
+  display: none !important;
 }
 
 .d-flex{
@@ -90,6 +90,7 @@ article figure{
   width: 100%;
   align-items: center;
   justify-content: center;
+  z-index: 50;
 }
 
 .music-panel-subContainer{
@@ -144,6 +145,28 @@ article figure{
   height: 24px;
 }
 
+.presentation{
+  width: 720px;
+  height: 480px;
+  background-image: url(../img/backgroundGame/back2.jpg);
+  background-size: cover;
+  border-radius: 16px;
+  border: 1px solid red;
+  position: relative;
+}
+
+.color-over-div{
+  position: absolute;
+  /* width: 100%;
+  height: 100%; */
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
 /*Smartphones*/
 @media only screen and (max-width: 720px){
   canvas{
@@ -165,6 +188,13 @@ article figure{
     width: 80%;
     align-items: center;
     justify-content: space-between;
+  }
+
+  .presentation{
+    width: 500px;
+    height: 260px;
+    background-image: url(../img/backgroundGame/back2.jpg);
+    border-radius: 16px;
   }
   
 }
@@ -190,6 +220,14 @@ article figure{
     width: 80%;
     align-items: center;
     justify-content: space-between;
+  }
+
+  
+  .presentation{
+    width: 500px;
+    height: 260px;
+    background-image: url(../img/backgroundGame/back2.jpg);
+    border-radius: 16px;
   }
 
 }

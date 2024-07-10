@@ -19,7 +19,12 @@ function init() {
 
 function initGame(){
   world = new World(canvas, keyboard);
+  document.getElementById('presentation').classList.add('d-none');
+  document.getElementById('canvas').classList.remove('d-none');
+  document.getElementById('btn-start').classList.add('d-none');
 }
+
+
 
 function playPauseMusic() {
   isMusicOn = !isMusicOn;

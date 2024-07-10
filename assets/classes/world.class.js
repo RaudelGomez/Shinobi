@@ -80,7 +80,7 @@ class World {
 			enemy.animate(enemy.attackImgs);
 			setTimeout(() => {
 				if(enemy.life > 0){
-					console.log(enemy.life);
+					//console.log(enemy.life);
 					clearInterval(enemy.intervalAnimation);
 					enemy.animate(enemy.walkingImgs);
 					this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
