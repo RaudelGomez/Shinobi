@@ -6,9 +6,9 @@ let object_y = 100 + Math.random() * 80 * drawObject.countStage;
 let level1 = new Level(
   [new Cloud(), new Cloud(), new Cloud()],
   [ new Endboss()],
-  // [new Lizard(), new Lizard(), new Demon(), new Demon(), new Endboss()],
+  //[new Lizard(), new Lizard(), new Demon(), new Demon(), new Endboss()],
   [],
-  [ ],
+  [],
   // [new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle() ],
   [],
   [],

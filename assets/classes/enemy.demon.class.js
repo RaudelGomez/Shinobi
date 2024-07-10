@@ -36,7 +36,7 @@ class Demon extends Enemy{
 
   constructor(){
     super().loadInitialPositionImage(this.walkingImgs[0]);
-    this.x = 200 + Math.random() * 500 * this.countStage;
+    this.x = 600 + Math.random() * 500 * this.countStage;
     this.loadImages(this.walkingImgs);
     this.loadImages(this.attackImgs);
     this.loadImages(this.deadImgs);

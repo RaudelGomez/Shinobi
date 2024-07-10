@@ -32,9 +32,21 @@
 </head>
 <body onload="init()">
   <h1>Shinobi</h1>
-  <canvas id="canvas" height="480" width="720"></canvas>
-  <input class="input-volume" type="range" id="music-volume" min="0" max="1" step="0.1" value="0.2" onchange="turnVolumeMusic()">
-  <button id="btn-play-pause" onclick="playPauseMusic()">play</button>
-  <button onclick="initLevel()">start</button>
+  <section class="game">
+    <canvas id="canvas" height="480" width="720"></canvas>
+    <article class="panel">
+      <input class="input-volume" type="range" id="music-volume" min="0" max="1" step="0.1" value="0.2" onchange="turnVolumeMusic()">
+      <button id="btn-play-pause" onclick="playPauseMusic()">play</button>
+      <button onclick="initGame()">start</button>
+    </article>
+    <article class="panel">
+      <button id="btn-left">left</button>
+      <button id="btn-right">right</button>
+      <button id="btn-up">jump</button>
+      <button id="btn-a">run</button>
+      <button id="btn-s">throw</button>
+      <button id="btn-d">spell</button>
+    </article>
+  </section>
 </body>
 </html>
