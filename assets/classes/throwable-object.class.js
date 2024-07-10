@@ -5,19 +5,25 @@ class ThrowableObject extends Treasure{
     bottom: 0,
     left: -15
   } 
-  constructor(x, y){
+  intervalInTheAir;
+  imgWeapon = ['assets/img/weapons/5.png', 'assets/img/weapons/44.png'];
+  imgWeaponThrowed;
+
+
+  constructor(x, y, img){
     super();
-    this.loadInitialPositionImage('assets/img/weapons/5.png')
     this.x = x;
     this.y = y;
+    this.imgWeaponThrowed = img;
     this.width = 25;
     this.height = 60;
+    this.loadInitialPositionImage(this.imgWeaponThrowed);
   }
 
   throwRight(){
     this.speedY = 30;
     this.applyGravity();
-    setInterval(() => {
+    this.intervalInTheAir = setInterval(() => {
       this.x += 10;   
     }, 50);
   }
@@ -25,8 +31,8 @@ class ThrowableObject extends Treasure{
   throwLeft(){
     this.speedY = 30;
     this.applyGravity();
-    setInterval(() => {
+    this.intervalInTheAir = setInterval(() => {
       this.x -= 10;   
     }, 50);
-  }
+  };
 };

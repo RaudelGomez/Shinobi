@@ -16,6 +16,7 @@ class World {
 	throwedObject = [];
 	throwedSpell = [];
 	intervalEndBossAttack;
+	
 	  
   /**
    * That is the constructor that bring all elements from game.js
@@ -78,13 +79,16 @@ class World {
 		this.intervalEndBossAttack = clearInterval(enemy.intervalAnimation);
 			enemy.animate(enemy.attackImgs);
 			setTimeout(() => {
-				clearInterval(enemy.intervalAnimation);
-				enemy.animate(enemy.walkingImgs);
-				this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
-				this.spellEnemy.moveLeftSpell();
-				setTimeout(() => {		
-					clearInterval(this.spellEnemy.intervalSpellBoss);
-				}, 20000);
+				if(enemy.life > 0){
+					console.log(enemy.life);
+					clearInterval(enemy.intervalAnimation);
+					enemy.animate(enemy.walkingImgs);
+					this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
+					this.spellEnemy.moveLeftSpell();
+					setTimeout(() => {		
+						clearInterval(this.spellEnemy.intervalSpellBoss);
+					}, 20000);
+				}
 			}, 2000);
 	}
 
@@ -96,9 +100,9 @@ class World {
 				if(spell.isColliding(enemy)){		
 					enemy.life -= enemy.enemyLifeTaked;
 					if(enemy instanceof Endboss){
-						if(enemy.life <= 90 && enemy.life >10){
+						if(enemy.life <= 90 && enemy.life >1){
 							this.EndBossSequenceAttack(enemy);						
-							clearInterval(this.intervalEndBossAttack);
+							//clearInterval(this.intervalEndBossAttack);
 						}
 					}
 					if(enemy.life <= 0){
@@ -130,12 +134,13 @@ class World {
 		if(this.keyboard.s && this.character.throwableObj > 0){
 			this.character.actionAudio.play();
 			let newObj;
+			let imgObjectThrow = 'assets/img/weapons/44.png';
 			if(this.character.otherDirection == false){
-				newObj = new ThrowableObject(this.character.x + 100, this.character.y );
+				newObj = new ThrowableObject(this.character.x + 100, this.character.y, imgObjectThrow);
 				newObj.throwRight();
-				
+							
 			}else{
-				newObj = new ThrowableObject(this.character.x , this.character.y );
+				newObj = new ThrowableObject(this.character.x , this.character.y, imgObjectThrow);
 				newObj.throwLeft();
 			}
 			this.throwedObject.push(newObj);
@@ -143,6 +148,14 @@ class World {
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.objetbar.setPercentage(this.character.throwableObj);
 			//console.log(this.throwedObject);
+
+			//Deleting the object throwed afet 5s
+			setTimeout(() => {
+				let index = this.throwedObject.indexOf(newObj);
+				if (index > -1) {
+						this.throwedObject.splice(index, 1);
+				}
+			}, 1500);
 		}
 	}
 

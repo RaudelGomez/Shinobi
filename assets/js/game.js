@@ -89,8 +89,9 @@ function showFullScrenIcon() {
 }
 
 window.addEventListener('keyup', (e)=>{
-  console.log(e);
-  if(e.keyCode == 27){
+  //console.log(e);
+  e.preventDefault();
+  if(e.key == 'Escape'){
     showFullScrenIcon();
   }
 })

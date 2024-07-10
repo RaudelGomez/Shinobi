@@ -15,7 +15,7 @@ class DrawableObject {
     left: 0
   } 
 
-    
+   
   /**
    * This function load one images
    * @param {string} path - path of the image to load 
@@ -42,7 +42,11 @@ class DrawableObject {
    * @param {ctx} context - context of Canvas
    */
   draw(context){
-    context.drawImage(this.img, this.x, this.y, this.width, this.height);
+    try {
+      context.drawImage(this.img, this.x, this.y, this.width, this.height);
+    } catch (error) {
+      console.warn(error);
+    }
   };
 
   /**

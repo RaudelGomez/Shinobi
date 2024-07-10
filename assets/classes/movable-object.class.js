@@ -86,6 +86,15 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
+      if(this instanceof ThrowableObject){
+        setInterval(() => {
+          if(this.y >= 320){
+            this.y = 320;
+            this.cleanInterval(this.intervalInTheAir)
+          }
+        }, 1000 / 60);
+        
+      }
     }, 1000 / 25);
   }
 
