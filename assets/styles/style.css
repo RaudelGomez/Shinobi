@@ -4,6 +4,7 @@
 }
 
 body{
+  position: relative;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -12,6 +13,8 @@ body{
   background-image: url('../img/backgroundGame/back1.jpg');
   background-size: cover;
   background-position: center;
+  margin: 0;
+  box-sizing: border-box;
   font-family: "GoblinOne-Regular", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 canvas{
@@ -28,8 +31,56 @@ h1{
   text-shadow: 4px 10px 8px rgba(0, 0, 0, 0.7);
 }
 
+.d-none{
+  display: none;
+}
+
+.d-flex{
+  display: flex;
+}
+
 .input-volume{
   accent-color: red;
+}
+
+.game{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.secondary-panel{
+  display: none;
+}
+
+.music-panel{
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.15);
+  height: 100vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.music-panel-subContainer{
+  position: relative;
+  background-color: aqua;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-radius: 8px;
+  border: 1px solid red;
+  position: relative;
+}
+
+.btn-close{
+  z-index: 10;
+  display: block;
+  position: absolute;
+  top: -30px;
+  right: -20px;
 }
 
 /*Smartphones*/
@@ -40,13 +91,26 @@ h1{
   h1{
     font-size: 40px;
   }
+  .main-panel{
+    top: 8px;
+    right: 10px;
+    position: absolute;
+  }
+
+  .secondary-panel{
+    display: block;
+    position: absolute;
+    bottom: 16px;
+  }
+  
 }
 
 @media only screen and (max-height: 480px){
   canvas{
-    height: 75vh;
+    height: 97vh;
   }
   h1{
     display: none;
   }
+
 }

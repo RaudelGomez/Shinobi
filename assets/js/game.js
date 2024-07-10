@@ -5,6 +5,7 @@ let musicVolume = document.getElementById('music-volume');
 let btnPlayPause = document.getElementById('btn-play-pause');
 let musicGame = new Audio('assets/audio/gameMusic.mp3');
 let isMusicOn = false;
+let screenGame = document.getElementById('screen-game');
 	
 function init() {
   canvas = document.getElementById('canvas');
@@ -31,6 +32,48 @@ function playPauseMusic() {
 
 function turnVolumeMusic(){
   return musicVolume.value;
+}
+
+function viewFullScreen() {
+  openFullscreen(screenGame);
+}
+
+/* View in fullscreen */
+function openFullscreen(elem) {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.webkitRequestFullscreen) { /* Safari */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) { /* IE11 */
+    elem.msRequestFullscreen();
+  }
+}
+
+/* Close fullscreen */
+function closeFullscreen() {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+  } else if (document.webkitExitFullscreen) { /* Safari */
+    document.webkitExitFullscreen();
+  } else if (document.msExitFullscreen) { /* IE11 */
+    document.msExitFullscreen();
+  }
+}
+
+function activePanelMusic() {
+  let panelMusic = document.getElementById('music-panel');
+  panelMusic.classList.remove('d-none');
+  panelMusic.classList.add('d-flex');
+}
+
+function disablePanelMusic() {
+  let panelMusic = document.getElementById('music-panel');
+  panelMusic.classList.add('d-none')
+  panelMusic.classList.remove('d-flex')
+}
+
+function stopPropagation(event) {
+  event.stopPropagation();
 }
 
 

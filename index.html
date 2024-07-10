@@ -1,52 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./assets/styles/style.css">
-  <script defer src="./assets/classes/drawable-object.class.js"></script>
-  <script defer src="./assets/classes/status-bar.class.js"></script>
-  <script defer src="./assets/classes/health-bar.class.js"></script>
-  <script defer src="./assets/classes/spell-bar.class.js"></script>
-  <script defer src="./assets/classes/object-bar.class.js"></script>
-  <script defer src="./assets/classes/movable-object.class.js"></script>
-  <script defer src="./assets/classes/character.class.js"></script>
-  <script defer src="./assets/classes/enemy.class.js"></script>
-  <script defer src="./assets/classes/enemy.lizard.class.js"></script>
-  <script defer src="./assets/classes/enemy.demon.class.js"></script>
-  <script defer src="./assets/classes/endBoss.class.js"></script>
-  <script defer src="./assets/classes/spell_enemies.class.js"></script>
-  <script defer src="./assets/classes/cloud.class.js"></script>
-  <script defer src="./assets/classes/theasures.class.js"></script>
-  <script defer src="./assets/classes/life-bottle.class.js"></script>
-  <script defer src="./assets/classes/spell-object.class.js"></script>
-  <script defer src="./assets/classes/throwable-object.class.js"></script>
-  <script defer src="./assets/classes/world.class.js"></script>
-  <script defer src="./assets/classes/background-object.class.js"></script>
-  <script defer src="./assets/classes/keyboard.class.js"></script>
-  <script defer src="./assets/classes/level.class.js"></script>
-  <script defer src="./assets/levels/level1.js"></script>
-  <script defer src="./assets/js/game.js"></script>
-  <title>Shinobi</title>
-  <link rel="shortcut icon" href="./assets/img/weapons/Icon28_13.png" type="image/x-icon">
-</head>
-<body onload="init()">
-  <h1>Shinobi</h1>
-  <section class="game">
-    <canvas id="canvas" height="480" width="720"></canvas>
-    <article class="panel">
-      <input class="input-volume" type="range" id="music-volume" min="0" max="1" step="0.1" value="0.2" onchange="turnVolumeMusic()">
-      <button id="btn-play-pause" onclick="playPauseMusic()">play</button>
-      <button onclick="initGame()">start</button>
-    </article>
-    <article class="panel">
-      <button id="btn-left">left</button>
-      <button id="btn-right">right</button>
-      <button id="btn-up">jump</button>
-      <button id="btn-a">run</button>
-      <button id="btn-s">throw</button>
-      <button id="btn-d">spell</button>
-    </article>
-  </section>
-</body>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="stylesheet" href="./assets/styles/style.css" />
+		<script defer src="./assets/classes/drawable-object.class.js"></script>
+		<script defer src="./assets/classes/status-bar.class.js"></script>
+		<script defer src="./assets/classes/health-bar.class.js"></script>
+		<script defer src="./assets/classes/spell-bar.class.js"></script>
+		<script defer src="./assets/classes/object-bar.class.js"></script>
+		<script defer src="./assets/classes/movable-object.class.js"></script>
+		<script defer src="./assets/classes/character.class.js"></script>
+		<script defer src="./assets/classes/enemy.class.js"></script>
+		<script defer src="./assets/classes/enemy.lizard.class.js"></script>
+		<script defer src="./assets/classes/enemy.demon.class.js"></script>
+		<script defer src="./assets/classes/endBoss.class.js"></script>
+		<script defer src="./assets/classes/spell_enemies.class.js"></script>
+		<script defer src="./assets/classes/cloud.class.js"></script>
+		<script defer src="./assets/classes/theasures.class.js"></script>
+		<script defer src="./assets/classes/life-bottle.class.js"></script>
+		<script defer src="./assets/classes/spell-object.class.js"></script>
+		<script defer src="./assets/classes/throwable-object.class.js"></script>
+		<script defer src="./assets/classes/world.class.js"></script>
+		<script defer src="./assets/classes/background-object.class.js"></script>
+		<script defer src="./assets/classes/keyboard.class.js"></script>
+		<script defer src="./assets/classes/level.class.js"></script>
+		<script defer src="./assets/levels/level1.js"></script>
+		<script defer src="./assets/js/game.js"></script>
+		<title>Shinobi</title>
+		<link
+			rel="shortcut icon"
+			href="./assets/img/weapons/Icon28_13.png"
+			type="image/x-icon"
+		/>
+	</head>
+	<body onload="init()">
+		<section id="screen-game" class="game">
+			<h1>Shinobi</h1>
+			<canvas id="canvas" height="480" width="720"></canvas>
+			<article class="panel main-panel">
+        <button id="btn-open-music-panel" class="btn-open-music-panel" onclick="activePanelMusic()">music</button>
+				<button onclick="initGame()">start</button>
+        <button id="fullscreen-view" onclick="viewFullScreen()">
+					Fulscreen
+				</button>
+			</article>
+			<article class="panel secondary-panel">
+				<button id="btn-left">left</button>
+				<button id="btn-right">right</button>
+				<button id="btn-up">jump</button>
+				<button id="btn-a">run</button>
+				<button id="btn-s">throw</button>
+				<button id="btn-d">spell</button>
+			</article>
+      <article id="music-panel" class="music-panel d-none" onclick="disablePanelMusic()">
+        <div class="music-panel-subContainer" onclick="stopPropagation(event)">
+          <button class="btn-close" onclick=" disablePanelMusic()">close</button>
+          <button id="btn-play-pause" onclick="playPauseMusic()">play</button>
+          <input
+            class="input-volume"
+            type="range"
+            id="music-volume"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.2"
+            onchange="turnVolumeMusic()"
+          />
+        </div>
+      </article>
+		</section>
+	</body>
 </html>
