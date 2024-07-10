@@ -3,6 +3,11 @@
   src: url("../fonts/GoblinOne-Regular.ttf") format("opentype"),
 }
 
+html{
+  --main-color: red;
+  --second-color: gold;
+}
+
 body{
   position: relative;
   display: flex;
@@ -26,9 +31,26 @@ canvas{
 h1{
   font-size: 64px;
   -webkit-text-stroke: 2px black; /* width and color */
-  font-family: GoblinOne-Regular; color: yellow;
+  font-family: GoblinOne-Regular; color: var(--second-color);
   margin: 8px;
   text-shadow: 4px 10px 8px rgba(0, 0, 0, 0.7);
+}
+
+article figure{
+  margin: 0;
+  padding: 0;
+  width:32px;
+  aspect-ratio: 1/1;
+  display: inline;
+  background-color: var(--second-color);
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cursor-pointer{
+  cursor: pointer;
 }
 
 .d-none{
@@ -48,6 +70,13 @@ h1{
   justify-content: center;
   flex-direction: column;
   align-items: center;
+}
+
+.main-panel{
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 8px;
 }
 
 .secondary-panel{
@@ -79,8 +108,40 @@ h1{
   z-index: 10;
   display: block;
   position: absolute;
-  top: -30px;
-  right: -20px;
+  top: -10px;
+  right: -10px;
+}
+
+.img-button{
+  width: 16px;
+  height: 16px;
+}
+
+.game-button-color{
+  fill: var(--main-color)
+}
+
+.start-game-btn{
+  width: 100px;
+  height: 32px;
+  border-radius: 8px;
+  color: var(--main-color);
+}
+
+.right-btns, .left-btns{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-game-throw{
+  width: 12px;
+  height: 24px;
+}
+
+.icon-game-spell{
+  width: 24px;
+  height: 24px;
 }
 
 /*Smartphones*/
@@ -98,9 +159,12 @@ h1{
   }
 
   .secondary-panel{
-    display: block;
     position: absolute;
     bottom: 16px;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
   }
   
 }
@@ -111,6 +175,21 @@ h1{
   }
   h1{
     display: none;
+  }
+
+  .main-panel{
+    top: 8px;
+    right: 10px;
+    position: absolute;
+  }
+
+  .secondary-panel{
+    position: absolute;
+    bottom: 16px;
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: space-between;
   }
 
 }
