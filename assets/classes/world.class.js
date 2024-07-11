@@ -62,8 +62,8 @@ class World {
 	}
 
 	collisionChecked(){
-		this.level.enemies.forEach((enemy)=>{
-			if(this.character.isColliding(enemy)){
+		this.level.enemies.forEach((enemy, index)=>{
+			if(this.character.isColliding(enemy) && enemy.life > 0){
 				if(enemy instanceof Endboss){
 					this.EndBossSequenceAttack(enemy);
 				}else{
@@ -72,8 +72,33 @@ class World {
 				this.character.hit();
 				this.healthbar.setPercentage(this.character.life);
 			}
+			// if(enemy.life <= 0 && !(enemy instanceof Endboss)){
+			// 	//clearInterval(enemy.intervalAnimation);
+			// 	setTimeout(() => {
+			// 		this.level.enemies.splice(index, 1);
+			// 	}, 1000);
+			// }
 		});
 	}
+
+	enemyIsNotAlive(enemy){
+		clearInterval(enemy.intervalMove);
+		clearInterval(enemy.intervalAnimation);
+		enemy.dead(enemy.deadImgs);
+		setTimeout(() => {
+			clearInterval(enemy.intervalAnimation);
+		}, 1550);
+		if(enemy instanceof Endboss){
+			return;
+		}
+		setTimeout(() => {
+			let index = this.level.enemies.indexOf(enemy);
+			if (index > -1) {
+					this.level.enemies.splice(index, 1);
+			}
+		}, 800);
+	}
+
 
 	EndBossSequenceAttack(enemy){
 		this.intervalEndBossAttack = clearInterval(enemy.intervalAnimation);
@@ -81,15 +106,18 @@ class World {
 			setTimeout(() => {
 				if(enemy.life > 0){
 					//console.log(enemy.life);
-					clearInterval(enemy.intervalAnimation);
-					enemy.animate(enemy.walkingImgs);
-					this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
-					this.spellEnemy.moveLeftSpell();
-					setTimeout(() => {		
-						clearInterval(this.spellEnemy.intervalSpellBoss);
-					}, 20000);
+					if(this.character.x <  enemy.x){
+						clearInterval(enemy.intervalAnimation);
+						enemy.animate(enemy.walkingImgs);
+						this.spellEnemy = new SpellEnemy(enemy.x +190 , 80);
+						//this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
+						this.spellEnemy.moveLeftSpell();
+						setTimeout(() => {		
+							clearInterval(this.spellEnemy.intervalSpellBoss);
+						}, 20000);
+					}
 				}
-			}, 2000);
+			}, 1900);
 	}
 
 	collisionEnemySpell(throwed){
@@ -97,21 +125,28 @@ class World {
 			const spell = throwed[i];
 			for (let j = 0; j < this.level.enemies.length; j++) {
 				const enemy = this.level.enemies[j];
-				if(spell.isColliding(enemy)){		
+				if(spell.isColliding(enemy) && enemy.life >= 0 && spell.y < 320 ){	
+					//console.log(enemy.life);	
 					enemy.life -= enemy.enemyLifeTaked;
 					if(enemy instanceof Endboss){
+						console.log(enemy.life);
 						if(enemy.life <= 90 && enemy.life >1){
 							this.EndBossSequenceAttack(enemy);						
 							//clearInterval(this.intervalEndBossAttack);
 						}
 					}
 					if(enemy.life <= 0){
-						clearInterval(enemy.intervalMove);
-						clearInterval(enemy.intervalAnimation);
-						enemy.dead(enemy.deadImgs);
-						setTimeout(() => {
-							this.level.enemies.splice(j, 1);
-						}, 1500);
+						this.enemyIsNotAlive(enemy);
+						
+						// clearInterval(enemy.intervalMove);
+						// clearInterval(enemy.intervalAnimation);
+						// enemy.dead(enemy.deadImgs);
+						// setTimeout(() => {
+						// 	clearInterval(enemy.intervalAnimation);
+						// }, 1550);
+						// setTimeout(() => {
+						// 	this.level.enemies.splice(j, 1);
+						// }, 5000);
 					}
 					
 				}
@@ -155,7 +190,7 @@ class World {
 				if (index > -1) {
 						this.throwedObject.splice(index, 1);
 				}
-			}, 1500);
+			}, 5000);
 		}
 	}
 

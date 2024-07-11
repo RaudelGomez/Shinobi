@@ -8,13 +8,15 @@ class Enemy extends MovableObject{
   enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
 
   animate(imgs){
-    this.intervalMove = setInterval(() => {
-      this.moveLeft(this.speed);
-    }, 1000 / 60);
-
-    this.intervalAnimation = setInterval(() => {
-      this.playAnimation(imgs);
-    }, 200);
+    if(this.life > 0){
+      this.intervalMove = setInterval(() => {
+        this.moveLeft(this.speed);
+      }, 1000 / 60);
+  
+      this.intervalAnimation = setInterval(() => {
+        this.playAnimation(imgs);
+      }, 200);
+    }
   }
 
   dead(imgs){
