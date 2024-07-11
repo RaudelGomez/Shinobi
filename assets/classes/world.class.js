@@ -44,7 +44,9 @@ class World {
 		})
 		this.level.enemies.forEach(e=>{
 			this.allIntervalGame.push(e.intervalAnimation);
-			this.allIntervalGame.push(e.intervalMove);
+			if(e.intervalMove){
+				this.allIntervalGame.push(e.intervalMove);
+			}
 		})
 		this.allIntervalGame.push(this.intervalCollisions);
 		this.allIntervalGame.push(this.intervalCollisionChecked);

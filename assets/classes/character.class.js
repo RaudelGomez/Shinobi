@@ -127,12 +127,14 @@ class Character extends MovableObject {
 
 		this.intervalPlayCharacter = setInterval(() => {
 			if(this.isDead()){
+				this.y = 190;
 				this.stopintervalCharacter();
 				this.gameOverAudio.volume = 0.3;
 				this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
 				this.cleanInterval(this.world.allIntervalGame);
 				this.world.keyboard = '';
+				this.game = new GameOver(0, 0, 'assets/img/backgroundGame/game_over.jpg');
 				// setTimeout(() => {
 				// 	this.playAnimation(this.gameOverImg);
 				// 	this.height = 480;
@@ -194,10 +196,10 @@ class Character extends MovableObject {
 
 		this.intervalPlayRunCharacter = setInterval(() => {
 			if(this.isDead()){
-				this.gameOverAudio.volume = 0.3;
-				this.gameOverAudio.play();
+				this.y = 190; 
+				// this.gameOverAudio.volume = 0.3;
+				// this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
-				this.cleanInterval(this.world.allIntervalGame);
 				this.world.keyboard = '';
 				// setTimeout(() => {
 				// 	this.playAnimation(this.gameOverImg);
