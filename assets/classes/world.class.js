@@ -12,6 +12,7 @@ class World {
 	objetbar = new ObjectBar();
 	spellbar = new SpellBar();
 	spellEnemy = new SpellEnemy();
+	gameOver = new GameOver(this.camera_x, 1000);
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
@@ -35,6 +36,15 @@ class World {
 		this.takeObject(this.level.throwableObjects);
 		this.takeObject(this.level.spellObjects);
 		this.pushAllIntervalGame();
+		
+	}
+
+	showGameOver(){
+		setTimeout(() => {
+			this.gameOver.x = -this.camera_x;
+			this.gameOver.y = 0;
+			console.log(this.camera_x);
+		}, 3000);
 	}
 
 	pushAllIntervalGame(){
@@ -67,6 +77,12 @@ class World {
     });
 	}
 
+	isGameOver(){
+		if(this.character.life <= 0){
+			this.showGameOver()
+		}
+	}
+
 	checkCollisions(){
 		this.intervalCollisions = setInterval(() => {
 			this.checkThrow();
@@ -74,6 +90,7 @@ class World {
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
 			this.checkCharacterDamageSpell();
+			this.isGameOver();
 		}, 1000 / 60);
 
 		// Interval collision with enemy hit and attacked
@@ -327,8 +344,8 @@ class World {
 		this.addToMap(this?.spellEnemy);
 		this.addObjectsToMap(this.level.enemies);
 		this.addToMap(this.character);
-
-    
+		this.addToMap(this.gameOver);
+	    
     //setting again the context(camera in the before position)
     this.context.translate(-this.camera_x, 0);
 

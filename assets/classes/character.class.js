@@ -51,7 +51,7 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/attack1/attack-5.png",
 		"assets/img/characters/Samurai/attack1/attack-6.png",
 	];
-	gameOverImg = ['assets/img/backgroundGame/game_over.jpg'];
+
 
 	x = 100;
 	y = 190;
@@ -87,7 +87,6 @@ class Character extends MovableObject {
 		this.loadImages(this.hurtImgs);
 		this.loadImages(this.deadImgs);
 		this.loadImages(this.throwObjectImages);
-		this.loadImages(this.gameOverImg);
 		this.animate();
 		this.animationRun();
 		this.applyGravity();
@@ -134,7 +133,8 @@ class Character extends MovableObject {
 				this.playAnimation(this.deadImgs);
 				this.cleanInterval(this.world.allIntervalGame);
 				this.world.keyboard = '';
-				this.game = new GameOver(0, 0, 'assets/img/backgroundGame/game_over.jpg');
+				
+			
 				// setTimeout(() => {
 				// 	this.playAnimation(this.gameOverImg);
 				// 	this.height = 480;

@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
  
   //Life
   lastHit = 0;
-  life = 0;
+  life = 100;
   //Treasures
   throwableObj = 0;
   spellObject = 0;
@@ -113,7 +113,7 @@ class MovableObject extends DrawableObject {
   }
 
   hit(){
-    this.life -= 100;
+    this.life -= 20;
     //console.log(this.life);
     if(this.life < 0){
       this.life = 0;
