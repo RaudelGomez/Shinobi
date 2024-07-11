@@ -34,8 +34,8 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/jump/jump-12.png"
 	]
 	deadImgs = [
-		"assets/img/characters/Samurai/dead/dead-1.png",
-		"assets/img/characters/Samurai/dead/dead-2.png",
+		// "assets/img/characters/Samurai/dead/dead-1.png",
+		// "assets/img/characters/Samurai/dead/dead-2.png",
 		"assets/img/characters/Samurai/dead/dead-3.png",
 	]
 	hurtImgs = [
@@ -50,7 +50,9 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/attack1/attack-4.png",
 		"assets/img/characters/Samurai/attack1/attack-5.png",
 		"assets/img/characters/Samurai/attack1/attack-6.png",
-	]
+	];
+	gameOverImg = ['assets/img/backgroundGame/game_over.jpg'];
+
 	x = 100;
 	y = 190;
 	yAfterJump = 190;
@@ -85,13 +87,15 @@ class Character extends MovableObject {
 		this.loadImages(this.hurtImgs);
 		this.loadImages(this.deadImgs);
 		this.loadImages(this.throwObjectImages);
+		this.loadImages(this.gameOverImg);
 		this.animate();
 		this.animationRun();
 		this.applyGravity();
-		this.collectingAllIdIntervalCharacter();
+		this.pushAllInterval(this.allIntervalCharacter, [this.intervalMoveCharacter, this.intervalPlayCharacter, this.intervalRunCharacter, this.intervalPlayRunCharacter, this.intervalInTheAir ]);
 	}
-
+	
 	animate() {
+		console.log(this.life);
 		//Condition inside if to move
 		this.intervalMoveCharacter = setInterval(() => {
       this.run_sound.pause();
@@ -127,6 +131,19 @@ class Character extends MovableObject {
 				this.gameOverAudio.volume = 0.3;
 				this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
+				this.cleanInterval(this.world.allIntervalGame);
+				this.world.keyboard = '';
+				// setTimeout(() => {
+				// 	this.playAnimation(this.gameOverImg);
+				// 	this.height = 480;
+				// 	this.width = 720;
+				// 	this.x = 0;
+				// 	this.y = 0;
+				// 	//this.y = 200;
+				// 	console.log(this.x);
+				// 	console.log(this.y);
+				// 	clearInterval(this.world.allIntervalGame);
+				// }, 1000);
 				return
 			}
 			this.loadInitialPositionImage('assets/img/characters/Samurai/idle/idle.png');
@@ -180,6 +197,19 @@ class Character extends MovableObject {
 				this.gameOverAudio.volume = 0.3;
 				this.gameOverAudio.play();
 				this.playAnimation(this.deadImgs);
+				this.cleanInterval(this.world.allIntervalGame);
+				this.world.keyboard = '';
+				// setTimeout(() => {
+				// 	this.playAnimation(this.gameOverImg);
+				// 	this.height = 480;
+				// 	this.width = 720;
+				// 	this.x = 0;
+				// 	this.y = 0;
+				// 	//this.y = 200;
+				// 	console.log(this.x);
+				// 	console.log(this.y);
+				// 	clearInterval(this.world.allIntervalGame);
+				// }, 1000);
 				return
 			}
 			if(this.isHurt()){
@@ -230,12 +260,12 @@ class Character extends MovableObject {
     });
   }
 
-	collectingAllIdIntervalCharacter(){
-		this.allIntervalCharacter.push(this.intervalMoveCharacter);
-		this.allIntervalCharacter.push(this.intervalPlayCharacter);
-		this.allIntervalCharacter.push(this.intervalRunCharacter);
-		this.allIntervalCharacter.push(this.intervalPlayRunCharacter);
-	}
+	// pushAllInterval(){
+	// 	this.allIntervalCharacter.push(this.intervalMoveCharacter);
+	// 	this.allIntervalCharacter.push(this.intervalPlayCharacter);
+	// 	this.allIntervalCharacter.push(this.intervalRunCharacter);
+	// 	this.allIntervalCharacter.push(this.intervalPlayRunCharacter);
+	// }
 
 
 }

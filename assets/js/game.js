@@ -10,21 +10,27 @@ let figureFullScreen = document.getElementById('figure-fullScreen');
 let figureCloseFullScreen = document.getElementById('figure-close-fullScreen');
 	
 function init() {
-  canvas = document.getElementById('canvas');
-  //world = new World(canvas, keyboard);
   setInterval(() => {
     musicGame.volume = turnVolumeMusic();
   }, 100);
 };
 
 function initGame(){
+  delete world;
+  clearAllIntervals();
+  initLevel();
+  canvas = document.getElementById('canvas');
   world = new World(canvas, keyboard);
   document.getElementById('presentation').classList.add('d-none');
   document.getElementById('canvas').classList.remove('d-none');
-  document.getElementById('btn-start').classList.add('d-none');
+  // document.getElementById('btn-start').classList.add('d-none');
 }
 
-
+function clearAllIntervals() {
+  for (let i = 1; i < 9999; i++) {
+    window.clearInterval(i);
+  }
+}
 
 function playPauseMusic() {
   isMusicOn = !isMusicOn;
@@ -88,18 +94,30 @@ function showCloseFullScrenIcon() {
   figureFullScreen.classList.add('d-none');
 }
 
-function showFullScrenIcon() {
+function showFullScreenIcon() {
   figureFullScreen.classList.remove('d-none');
   figureCloseFullScreen.classList.add('d-none');
 }
 
-window.addEventListener('keyup', (e)=>{
-  //console.log(e);
-  e.preventDefault();
-  if(e.key == 'Escape'){
-    showFullScrenIcon();
+// window.addEventListener('keyup', (e)=>{
+//   //console.log(e);
+//   e.preventDefault();
+//   if(e.key == 'Escape'){
+//     showFullScreenIcon();
+//   }
+// })
+
+document.addEventListener("fullscreenchange", function() {
+  let elem = document.fullscreenElement;
+  console.log('outside',elem);
+  if(elem){
+    console.log('inside',elem);
+    showFullScreenIcon();
   }
-})
+  // }else{
+  //   showCloseFullScrenIcon();
+  // }
+});
 
 
 // window.addEventListener('keydown', (e)=>{

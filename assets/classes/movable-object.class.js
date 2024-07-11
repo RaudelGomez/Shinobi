@@ -28,6 +28,12 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  pushAllInterval(allInterval, arrayInteval){
+		arrayInteval.forEach(iv => {
+      allInterval.push(iv);
+    });
+	}
+
   isColliding(mo){
     return this.x + this.width - this.offset.right > mo.x + mo.offset.left && 
           this.y + this.height - this.offset.bottom > mo.y +mo.offset.top && 
@@ -81,7 +87,7 @@ class MovableObject extends DrawableObject {
   };
 
   applyGravity(){
-    setInterval(() => {
+    this.intervalInTheAir = setInterval(() => {
       if(this.isInTheAir() || this.speedY > 0){
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
@@ -107,7 +113,7 @@ class MovableObject extends DrawableObject {
   }
 
   hit(){
-    this.life -= 0.1;
+    this.life -= 100;
     //console.log(this.life);
     if(this.life < 0){
       this.life = 0;

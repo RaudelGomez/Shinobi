@@ -2,6 +2,7 @@ class Cloud extends MovableObject{
   y = 0;
   width = 500;
   height = 180;
+  intervalClouds;
 
   constructor(){
     super().loadInitialPositionImage('assets/img/objects/otherObjects/cloudsGeneral.png');
@@ -10,9 +11,8 @@ class Cloud extends MovableObject{
   }
 
   animate(){
-    setInterval(() => {
+    this.intervalClouds = setInterval(() => {
       this.moveLeft(this.speed);
     }, 1);
   }
-
 }

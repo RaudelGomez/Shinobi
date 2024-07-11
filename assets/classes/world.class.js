@@ -16,14 +16,15 @@ class World {
 	throwedObject = [];
 	throwedSpell = [];
 	intervalEndBossAttack;
+	allIntervalGame = [];
 	
-	  
   /**
    * That is the constructor that bring all elements from game.js
    * @param {canvas} canvas - Canvas element where will be painted every img
    * @param {class} keyboard - Class keyboard that has every movement of the player
    */
 	constructor(canvas, keyboard) {
+		//clearInterval(this.allIntervalGame);
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
@@ -33,9 +34,21 @@ class World {
 		this.takeObject(this.level.lifeBottles);
 		this.takeObject(this.level.throwableObjects);
 		this.takeObject(this.level.spellObjects);
-		
+		this.pushAllIntervalGame();
 	}
 
+	pushAllIntervalGame(){
+		this.pushAllInterval(this.allIntervalGame, this.character.allIntervalCharacter);
+		this.level.clouds.forEach((c)=>{
+			this.allIntervalGame.push(c.intervalClouds);
+		})
+		this.level.enemies.forEach(e=>{
+			this.allIntervalGame.push(e.intervalAnimation);
+			this.allIntervalGame.push(e.intervalMove);
+		})
+		this.allIntervalGame.push(this.intervalCollisions);
+		this.allIntervalGame.push(this.intervalCollisionChecked);
+	}
 
   /**
    * This function set the world in the character, like this this one has a referenz about what
@@ -46,8 +59,14 @@ class World {
 		this.character.world = this;
 	}
 
+	pushAllInterval(allInterval, arrayInteval){
+		arrayInteval.forEach(iv => {
+      allInterval.push(iv);
+    });
+	}
+
 	checkCollisions(){
-		setInterval(() => {
+		this.intervalCollisions = setInterval(() => {
 			this.checkThrow();
 			this.checkSpell();
 			this.collisionEnemySpell(this.throwedSpell);
@@ -56,14 +75,14 @@ class World {
 		}, 1000 / 60);
 
 		// Interval collision with enemy hit and attacked
-		setInterval(() => {
+		this.intervalCollisionChecked = setInterval(() => {
 			this.collisionChecked();
 		}, 200);
 	}
 
 	collisionChecked(){
 		this.level.enemies.forEach((enemy, index)=>{
-			if(this.character.isColliding(enemy) && enemy.life > 0){
+			if(this.character.isColliding(enemy) && enemy.life > 0 && this.character.life > 0){
 				if(enemy instanceof Endboss){
 					this.EndBossSequenceAttack(enemy);
 				}else{
@@ -303,9 +322,9 @@ class World {
 		this.addObjectsToMap(this.throwedObject);
 		this.addObjectsToMap(this.level.spellObjects);
 		this.addObjectsToMap(this.throwedSpell);
-		this.addToMap(this.character);
 		this.addToMap(this?.spellEnemy);
 		this.addObjectsToMap(this.level.enemies);
+		this.addToMap(this.character);
 
     
     //setting again the context(camera in the before position)
