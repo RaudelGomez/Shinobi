@@ -29,6 +29,7 @@ class Endboss extends Enemy{
     'assets/img/enemies/dragon/Death5.png',
   ];
   intervalMove;
+  world;
   
   //spellBoss;
 
@@ -64,5 +65,11 @@ class Endboss extends Enemy{
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);
+   setTimeout(() => {
+			this.world.youWon.x = -this.world.camera_x + 160;
+			this.world.youWon.y = 80;
+			this.world.youWon.width = 420;
+			this.world.youWon.height = 180;
+		}, 2000);
   }
 }

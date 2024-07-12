@@ -12,7 +12,8 @@ class World {
 	objetbar = new ObjectBar();
 	spellbar = new SpellBar();
 	spellEnemy = new SpellEnemy();
-	gameOver = new GameOver(this.camera_x, 1000);
+	gameOver = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/game_over.jpg');
+	youWon = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/youWin.png');
 	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
@@ -29,13 +30,13 @@ class World {
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;
-		this.setWorld();
 		this.draw();
 		this.checkCollisions();
 		this.takeObject(this.level.lifeBottles);
 		this.takeObject(this.level.throwableObjects);
 		this.takeObject(this.level.spellObjects);
 		this.pushAllIntervalGame();
+		this.setWorld();
 		
 	}
 
@@ -43,7 +44,6 @@ class World {
 		setTimeout(() => {
 			this.gameOver.x = -this.camera_x;
 			this.gameOver.y = 0;
-			console.log(this.camera_x);
 		}, 3000);
 	}
 
@@ -69,6 +69,8 @@ class World {
    */
 	setWorld() {
 		this.character.world = this;
+		this.level.enemies[this.level.enemies.length -1].world = this;
+		// this.level.enemies[this.level.enemies.length -1].world = this;
 	}
 
 	pushAllInterval(allInterval, arrayInteval){
@@ -82,6 +84,7 @@ class World {
 			this.showGameOver()
 		}
 	}
+
 
 	checkCollisions(){
 		this.intervalCollisions = setInterval(() => {
@@ -342,6 +345,7 @@ class World {
 		this.addObjectsToMap(this.level.spellObjects);
 		this.addObjectsToMap(this.throwedSpell);
 		this.addToMap(this?.spellEnemy);
+		this.addToMap(this.youWon);
 		this.addObjectsToMap(this.level.enemies);
 		this.addToMap(this.character);
 		this.addToMap(this.gameOver);

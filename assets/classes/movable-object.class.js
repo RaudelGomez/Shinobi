@@ -113,7 +113,7 @@ class MovableObject extends DrawableObject {
   }
 
   hit(){
-    this.life -= 20;
+    this.life -= 2;
     //console.log(this.life);
     if(this.life < 0){
       this.life = 0;
