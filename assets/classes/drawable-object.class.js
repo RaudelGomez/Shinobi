@@ -1,5 +1,5 @@
 class DrawableObject {
-  countStage = 2;
+  countStage = 10;
   x = 100;
   y = 150;
   height = 200;

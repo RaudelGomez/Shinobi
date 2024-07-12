@@ -60,7 +60,9 @@ class Endboss extends Enemy{
   }
 
   dead(imgs){
+    clearAllIntervals();
     if(soundOn){
+      musicGame.pause();
       enemyKilledAudio.play();
       enemyKilledAudio.volume = 0.1; 
     }
@@ -83,6 +85,7 @@ class Endboss extends Enemy{
 			this.world.youWon.y = 80;
 			this.world.youWon.width = 420;
 			this.world.youWon.height = 180;
+      musicGame.play();
 		}, 2000);
   }
 }

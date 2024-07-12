@@ -4,6 +4,9 @@
 let youWinAudio = new Audio('assets/audio/win2.mp3');
 let youWinVoice = new Audio('assets/audio/YouWinVoice.mp3');
 let gameOverAudio = new Audio('assets/audio/gameOver.mp3');
+let musicGame = new Audio('assets/audio/gameMusic.mp3');
+musicGame.loop = true;
+musicGame.volume = 0.1;
 
 /**
  * Character audios

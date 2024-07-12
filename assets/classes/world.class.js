@@ -269,8 +269,7 @@ class World {
 					if(soundOn){
 						objectTakedAudio.pause();
 						objectTakedAudio.play();
-						console.log(objectTakedAudio.volume);
-						//objectTakedAudio.volume = 0;
+						objectTakedAudio.volume = 0.2;
 					}
 					objs.splice(i, 1);
 					if(this.isLifeBottle(obj)){

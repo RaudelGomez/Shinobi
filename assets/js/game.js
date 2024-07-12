@@ -3,7 +3,6 @@ let world;
 let keyboard = new Keyboard();
 let btnPlayPauseMusic = document.getElementById('btn-play-pause-music');
 let btnPlayPauseSound = document.getElementById('btn-play-pause-sound');
-let musicGame = new Audio('assets/audio/gameMusic.mp3');
 let screenGame = document.getElementById('screen-game');
 let figureFullScreen = document.getElementById('figure-fullScreen');
 let figureCloseFullScreen = document.getElementById('figure-close-fullScreen');
@@ -35,7 +34,6 @@ function initGame(){
   playSoundCharacters();
   btnStartGame.textContent = 'restart';
   btnStartGame.classList.add('restart');
-
 }
 
 function clearAllIntervals() {
