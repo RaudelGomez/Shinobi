@@ -62,8 +62,8 @@ class Character extends MovableObject {
 	walk = 10;
 	run = 15;
 	currentImageRun = 0;
-  walk_sound = new Audio('assets/audio/walking.mp3');
-  run_sound = new Audio('assets/audio/running.mp3');
+  // walk_sound = new Audio('assets/audio/walking.mp3');
+  // run_sound = new Audio('assets/audio/running.mp3');
 	offset = {
     top:0,
     right:10,
@@ -74,9 +74,9 @@ class Character extends MovableObject {
 	throwableObj = 0;
 	spellObject = 0;
 	
-	gameOverAudio = new Audio('assets/audio/gameOver.mp3');
-	hurtAudio = new Audio('assets/audio/hurt.mp3');
-	actionAudio = new Audio('assets/audio/actionSound.mp3');
+	//gameOverAudio = new Audio('assets/audio/gameOver.mp3');
+	//hurtAudio = new Audio('assets/audio/hurt.mp3');
+	//actionAudio = new Audio('assets/audio/actionSound.mp3');
 	
 
 	constructor() {
@@ -97,21 +97,29 @@ class Character extends MovableObject {
 		console.log(this.life);
 		//Condition inside if to move
 		this.intervalMoveCharacter = setInterval(() => {
-      this.run_sound.pause();
-      this.walk_sound.pause();
+			if(soundOn){
+				run_sound.pause();
+				walk_sound.pause();
+			}
 			if (this.world.keyboard.right && this.x < (this.world.level.level_end_x + 400)) {
 				this.moveRight();
-				this.walk_sound.play();
+				if(soundOn){
+					walk_sound.play();
+				}
 			}
 
 			if (this.world.keyboard.left && this.x > -600) {
 				this.moveLeft(this.walk);
 				this.otherDirection = true;
-        this.walk_sound.play();
+				if(soundOn){
+					walk_sound.play();
+				}
 			}
 
 			if(this.world.keyboard.up && !this.isInTheAir()){
-				this.actionAudio.play();
+				if(soundOn){
+					actionAudio.play();
+				}
 				this.jump();
 			}
 
@@ -128,8 +136,10 @@ class Character extends MovableObject {
 			if(this.isDead()){
 				this.y = 190;
 				this.stopintervalCharacter();
-				this.gameOverAudio.volume = 0.3;
-				this.gameOverAudio.play();
+				if(soundOn){
+					gameOverAudio.volume = 0.3;
+					gameOverAudio.play();
+				}
 				this.playAnimation(this.deadImgs);
 				this.cleanInterval(this.world.allIntervalGame);
 				this.world.keyboard = '';
@@ -150,8 +160,10 @@ class Character extends MovableObject {
 			}
 			this.loadInitialPositionImage('assets/img/characters/Samurai/idle/idle.png');
 			if(this.isHurt()){
-				this.hurtAudio.volume = 0.1; 
-				this.hurtAudio.play();
+				if(soundOn){
+					hurtAudio.play();
+					hurtAudio.volume = 0.1; 
+				}
 				this.playAnimation(this.hurtImgs);
 			}
 			//Falling when he is in the air
@@ -169,22 +181,30 @@ class Character extends MovableObject {
 
 	animationRun() {
 		this.intervalRunCharacter = setInterval(() => {
-			this.walk_sound.pause();
-			this.run_sound.pause();
+			if(soundOn){
+				walk_sound.pause();
+				run_sound.pause();
+			}
 			if (this.world.keyboard.right && this.world.keyboard.a && (this.x < this.world.level.level_end_x + 400)) {
 				this.runRight(this.run);
-				this.run_sound.play();
+				if(soundOn){
+					run_sound.play();
+				}
 			};
 
 			if (this.world.keyboard.left && this.world.keyboard.a && this.x > -600) {
 				this.runLeft(this.run);
-				this.run_sound.play();
+				if(soundOn){
+					run_sound.play();
+				}
 			}
 
 			if(this.world.keyboard.up && !this.isInTheAir()){
-				this.actionAudio.play();
+				if(soundOn){
+					actionAudio.play();
+					run_sound.play();
+				}
 				this.jump();
-				this.run_sound.play();
 			}
 
       if(this.isTheEndOfTheLevel()){
@@ -215,8 +235,10 @@ class Character extends MovableObject {
 				return
 			}
 			if(this.isHurt()){
-				this.hurtAudio.volume = 0.1; 
-				this.hurtAudio.play();
+				if(soundOn){
+					hurtAudio.play();
+					hurtAudio.volume = 0.1; 
+				}
 				this.playAnimation(this.hurtImgs);
 			}
 		

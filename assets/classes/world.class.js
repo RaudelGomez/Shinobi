@@ -14,7 +14,7 @@ class World {
 	spellEnemy = new SpellEnemy();
 	gameOver = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/game_over.jpg');
 	youWon = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/youWin.png');
-	objectTakedAudio = new Audio('assets/audio/getObject.mp3');
+	//objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
 	intervalEndBossAttack;
@@ -37,7 +37,6 @@ class World {
 		this.takeObject(this.level.spellObjects);
 		this.pushAllIntervalGame();
 		this.setWorld();
-		
 	}
 
 	showGameOver(){
@@ -199,8 +198,10 @@ class World {
 		if(this.character.isCollidingSpell(this.spellEnemy)){
 			this.character.life -= this.spellEnemy.damage;
 			this.healthbar.setPercentage(this.character.life);
-			this.character.hurtAudio.volume = 0.1; 
-			this.character.hurtAudio.play();
+			if(soundOn){
+				hurtAudio.play();
+				hurtAudio.volume = 0.1; 
+			}
 			this.character.playAnimation(this.character.hurtImgs);
 		}
 	}
@@ -208,7 +209,7 @@ class World {
 
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
-			this.character.actionAudio.play();
+			actionAudio.play();
 			let newObj;
 			let imgObjectThrow = 'assets/img/weapons/44.png';
 			if(this.character.otherDirection == false){
@@ -237,7 +238,7 @@ class World {
 
 	checkSpell(){
 		if(this.keyboard.d && this.character.spellObject > 0){
-			this.character.actionAudio.play();
+			actionAudio.play();
 			let spellImage = "assets/img/weapons/spell-attack/Magic_Attack6.png";
 			let newObj;
 			if(this.character.otherDirection == false){
@@ -265,9 +266,12 @@ class World {
 				const obj = objs[i];
 				const valueObj = obj.valueTreasure;
 				if(this.character.isColliding(obj)){
-					this.objectTakedAudio.pause();
-					this.objectTakedAudio.play();
-					this.objectTakedAudio.volume = 0.2;
+					if(soundOn){
+						objectTakedAudio.pause();
+						objectTakedAudio.play();
+						console.log(objectTakedAudio.volume);
+						//objectTakedAudio.volume = 0;
+					}
 					objs.splice(i, 1);
 					if(this.isLifeBottle(obj)){
 						this.collectBottle(valueObj);

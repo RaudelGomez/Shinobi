@@ -93,16 +93,29 @@ article figure{
   z-index: 50;
 }
 
-.music-panel-subContainer{
+.music-panel-container{
+  border: 1px solid red;
+  border-radius: 8px;
   position: relative;
+}
+
+.music-panel-subContainer{
   background-color: aqua;
   padding: 16px;
   display: flex;
   align-items: center;
   gap: 16px;
-  border-radius: 8px;
-  border: 1px solid red;
   position: relative;
+}
+
+.border-radius-up{
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.border-radius-down{
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
 .btn-close{
@@ -167,6 +180,16 @@ article figure{
   bottom: 0;
 }
 
+.hidden{
+  transform: translate(50px);
+  z-index: -1;
+}
+
+.show{
+  transform: translate(0);
+  transition: all 1s ease-out;
+}
+
 /*Smartphones*/
 @media only screen and (max-width: 720px){
   canvas{
@@ -228,6 +251,7 @@ article figure{
     height: 260px;
     background-image: url(../img/backgroundGame/back2.jpg);
     border-radius: 16px;
+    z-index: -1;
   }
 
 }

@@ -136,15 +136,4 @@ class MovableObject extends DrawableObject {
     this.playAnimation(this.throwObjectImages);
 	}
 
-  hurt(){
-
-  }
-
-  dead(){
-
-  }
-
-  shield(){
-
-  }
 }

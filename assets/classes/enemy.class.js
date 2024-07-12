@@ -4,8 +4,8 @@ class Enemy extends MovableObject{
   intervalAnimation;
   enemyLifeTaked = 0.5;
 
-  //Audio
-  enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
+  // //Audio
+  // enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
 
   animate(imgs){
     if(this.life > 0){
@@ -20,8 +20,10 @@ class Enemy extends MovableObject{
   }
 
   dead(imgs){
-    this.enemyKilledAudio.play();
-    this.enemyKilledAudio.volume = 0.1; 
+    if(soundOn){
+      enemyKilledAudio.play();
+      enemyKilledAudio.volume = 0.1; 
+    }
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);

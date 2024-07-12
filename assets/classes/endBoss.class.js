@@ -60,11 +60,24 @@ class Endboss extends Enemy{
   }
 
   dead(imgs){
-    this.enemyKilledAudio.play();
-    this.enemyKilledAudio.volume = 0.1; 
+    if(soundOn){
+      enemyKilledAudio.play();
+      enemyKilledAudio.volume = 0.1; 
+    }
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);
+    if(soundOn){
+    youWinAudio.play();
+    youWinAudio.volume = 0.2;
+    }
+    setTimeout(() => { 
+      if(soundOn){
+      youWinVoice.volume = 0.8;
+      youWinVoice.play();
+      }
+    }, 1000);
+    
    setTimeout(() => {
 			this.world.youWon.x = -this.world.camera_x + 160;
 			this.world.youWon.y = 80;
