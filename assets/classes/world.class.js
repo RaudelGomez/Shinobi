@@ -30,6 +30,7 @@ class World {
 		this.keyboard = keyboard;
 		this.draw();
 		this.checkCollisions();
+		this.checkOtherStatement();
 		this.takeObject(this.level.lifeBottles);
 		this.takeObject(this.level.throwableObjects);
 		this.takeObject(this.level.spellObjects);
@@ -46,9 +47,15 @@ class World {
 
 	pushAllIntervalGame(){
 		this.pushAllInterval(this.allIntervalGame, this.character.allIntervalCharacter);
-		this.level.clouds.forEach((c)=>{
-			this.allIntervalGame.push(c.intervalClouds);
-		})
+		this.collectIntervalClouds();
+		this.collectIntervalEnemies();
+		this.allIntervalGame.push(this.intervalCollisions);
+		this.allIntervalGame.push(this.intervalCollisionChecked);
+		this.allIntervalGame.push(this.intervalOtherStatement);
+		this.allIntervalGame.push(this.intervalObjectTaked);
+	}
+
+	collectIntervalEnemies(){
 		this.level.enemies.forEach(e=>{
 			this.allIntervalGame.push(e.intervalAnimation);
 			if(e.intervalMove){
@@ -61,8 +68,12 @@ class World {
 				this.allIntervalGame.push(e.intervalEndBossAttack);
 			}
 		})
-		this.allIntervalGame.push(this.intervalCollisions);
-		this.allIntervalGame.push(this.intervalCollisionChecked);
+	}
+
+	collectIntervalClouds(){
+		this.level.clouds.forEach((c)=>{
+			this.allIntervalGame.push(c.intervalClouds);
+		})
 	}
 
   /**
@@ -94,15 +105,19 @@ class World {
 			this.checkSpell();
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
-			this.checkCharacterDamageSpell();
-			this.jumpingOnEnemy();
-			this.isGameOver();
 		}, 1000 / 60);
-
 		// Interval collision with enemy hit and attacked
 		this.intervalCollisionChecked = setInterval(() => {
 			this.collisionChecked();
 		}, 200);
+	}
+
+	checkOtherStatement(){
+		this.intervalOtherStatement = setInterval(() => {
+			this.checkCharacterDamageSpell();
+			this.jumpingOnEnemy();
+			this.isGameOver();
+		}, 1000 / 60);
 	}
 
 	collisionChecked(){
@@ -116,12 +131,6 @@ class World {
 				this.character.hit();
 				this.healthbar.setPercentage(this.character.life);
 			}
-			// if(enemy.life <= 0 && !(enemy instanceof Endboss)){
-			// 	//clearInterval(enemy.intervalAnimation);
-			// 	setTimeout(() => {
-			// 		this.level.enemies.splice(index, 1);
-			// 	}, 1000);
-			// }
 		});
 	}
 
@@ -132,11 +141,7 @@ class World {
 				clearInterval(enemy.intervalMove);
 				enemy.playAnimation(enemy.deadImgs);
 				clearInterval(enemy.intervalAnimation);
-				let index = this.level.enemies.indexOf(enemy);
-				console.log(index);
-				setTimeout(() => {
-					this.level.enemies.splice(index, 1)
-				}, 5000);
+				this.deletingEnemyDestroyed(enemy, 5000);
 			}
 		});
 	}
@@ -151,67 +156,42 @@ class World {
 		if(enemy instanceof Endboss){
 			return;
 		}
+		this.deletingEnemyDestroyed(enemy, 800);
+	}
+
+	deletingEnemyDestroyed(enemy, timeToDesapear){
 		setTimeout(() => {
 			let index = this.level.enemies.indexOf(enemy);
 			if (index > -1) {
 					this.level.enemies.splice(index, 1);
 			}
-		}, 800);
+		}, timeToDesapear);
 	}
-
-
-	// EndBossSequenceAttack(enemy){
-	// 	this.intervalEndBossAttack = clearInterval(enemy.intervalAnimation);
-	// 		enemy.animate(enemy.attackImgs);
-	// 		setTimeout(() => {
-	// 			if(enemy.life > 0){
-	// 				//console.log(enemy.life);
-	// 				if(this.character.x <  enemy.x){
-	// 					clearInterval(enemy.intervalAnimation);
-	// 					enemy.animate(enemy.walkingImgs);
-	// 					this.spellEnemy = new SpellEnemy(enemy.x + 190 , 90);
-	// 					//this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
-	// 					this.spellEnemy.moveLeftSpell();
-	// 					setTimeout(() => {		
-	// 						clearInterval(this.spellEnemy.intervalSpellBoss);
-	// 					}, 20000);
-	// 					setTimeout(() => {
-	// 						this.spellEnemy = new SpellEnemy();;
-	// 				}, 20000); // 200 segundos son 200,000 milisegundos
-	// 				}
-	// 			}
-	// 		}, 850);
-	// }
 
 	collisionEnemySpell(throwed){
 		for (let i = 0; i < throwed.length; i++) {
 			const spell = throwed[i];
 			for (let j = 0; j < this.level.enemies.length; j++) {
 				const enemy = this.level.enemies[j];
-				if(spell.isColliding(enemy) && enemy.life >= 0 && spell.y < 320 ){	
-					//console.log(enemy.life);	
+				if(this.isEnemyCollision_isAlive(enemy, spell)){		
 					enemy.life -= enemy.enemyLifeTaked;
-					if(enemy instanceof Endboss){
-						if(enemy.life <= 90 && enemy.life >1){
-							enemy.endBossSequenceAttackLevel1();						
-							//clearInterval(this.intervalEndBossAttack);
-						}
-					}
+					this.isTheCollisionWithAEndBoss(enemy);
 					if(enemy.life <= 0){
 						this.enemyIsNotAlive(enemy);
-						
-						// clearInterval(enemy.intervalMove);
-						// clearInterval(enemy.intervalAnimation);
-						// enemy.dead(enemy.deadImgs);
-						// setTimeout(() => {
-						// 	clearInterval(enemy.intervalAnimation);
-						// }, 1550);
-						// setTimeout(() => {
-						// 	this.level.enemies.splice(j, 1);
-						// }, 5000);
 					}
-					
 				}
+			}
+		}
+	}
+
+	isEnemyCollision_isAlive(enemy, spell){
+		return spell.isColliding(enemy) && enemy.life >= 0 && spell.y < 320;
+	}
+
+	isTheCollisionWithAEndBoss(enemy){
+		if(enemy instanceof Endboss){
+			if(enemy.life <= 90 && enemy.life >1){
+				enemy.endBossSequenceAttackLevel1();						
 			}
 		}
 	}
@@ -220,92 +200,119 @@ class World {
 		if(this.character.isCollidingSpell(this.spellEnemy) && this.level.enemies[this.level.enemies.length-1].life > 0){
 			this.character.life -= this.spellEnemy.damage;
 			this.healthbar.setPercentage(this.character.life);
-			if(soundOn){
-				hurtAudio.play();
-				hurtAudio.volume = 0.1; 
-			}
+			this.character.audioVolumeCharacterHurt();
 			this.character.playAnimation(this.character.hurtImgs);
 		}
 	}
 
-
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
 			actionAudio.play();
-			let newObj;
-			let imgObjectThrow = 'assets/img/weapons/44.png';
-			if(this.character.otherDirection == false){
-				newObj = new ThrowableObject(this.character.x + 100, this.character.y, imgObjectThrow);
-				newObj.throwRight();
-							
-			}else{
-				newObj = new ThrowableObject(this.character.x , this.character.y, imgObjectThrow);
-				newObj.throwLeft();
-			}
+			let newObj = this.throwingObject();
 			this.throwedObject.push(newObj);
 			this.character.throwableObj -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.objetbar.setPercentage(this.character.throwableObj);
-			//console.log(this.throwedObject);
-
-			//Deleting the object throwed afet 5s
-			setTimeout(() => {
-				let index = this.throwedObject.indexOf(newObj);
-				if (index > -1) {
-						this.throwedObject.splice(index, 1);
-				}
-			}, 5000);
+			this.deletingObjectThrowed(newObj, 5000);
 		}
+	}
+
+	throwingObject(){
+		let newObj;
+		let imgObjectThrow = 'assets/img/weapons/44.png';
+		if(this.isThePositionRightOrLeft()){
+			newObj = new ThrowableObject(this.character.x + 100, this.character.y, imgObjectThrow);
+			newObj.throwRight();
+						
+		}else{
+			newObj = new ThrowableObject(this.character.x , this.character.y, imgObjectThrow);
+			newObj.throwLeft();
+		}
+		return newObj;
+	}
+
+	isThePositionRightOrLeft(){
+		return this.character.otherDirection == false;
+	}
+
+	deletingObjectThrowed(newObj, timeToDesapear){
+		//Deleting the object throwed afet 5s
+		setTimeout(() => {
+			let index = this.throwedObject.indexOf(newObj);
+			if (index > -1) {
+					this.throwedObject.splice(index, 1);
+			}
+		}, timeToDesapear);
+	}
+
+	throwingSpell(){
+		let newObj;
+		let spellImage = "assets/img/weapons/spell-attack/Magic_Attack6.png";
+		if(this.isThePositionRightOrLeft()){
+			newObj = new SpellObject(this.character.x + 100, this.character.y + 50, spellImage);
+			newObj.throwSpellRight();
+		}else{
+			newObj = new SpellObject(this.character.x - 100, this.character.y + 50, spellImage);
+			newObj.throwSpellLeft();
+		}
+		return newObj;
 	}
 
 	checkSpell(){
 		if(this.keyboard.d && this.character.spellObject > 0){
 			actionAudio.play();
-			let spellImage = "assets/img/weapons/spell-attack/Magic_Attack6.png";
-			let newObj;
-			if(this.character.otherDirection == false){
-				newObj = new SpellObject(this.character.x + 100, this.character.y + 50, spellImage);
-				newObj.throwSpellRight();
-			}else{
-				newObj = new SpellObject(this.character.x - 100, this.character.y + 50, spellImage);
-				newObj.throwSpellLeft();
-			}
+			let newObj = this.throwingSpell();
 			this.throwedSpell.push(newObj);
 			this.character.spellObject -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.spellbar.setPercentage(this.character.spellObject);
 			//deleting spell sent
-			setTimeout(() => {
-				this.throwedSpell.pop();
-			}, 500);
+			this.deletingSpellThrowed(newObj, 500);
 		}
 	}
 
+	deletingSpellThrowed(newObj, timeToDesapear){
+		//Deleting the spell throwed afet 5s
+		setTimeout(() => {
+			let index = this.throwedSpell.indexOf(newObj);
+			if (index > -1) {
+					this.throwedSpell.splice(index, 1);
+			}
+		}, timeToDesapear);
+	}
 
 	takeObject(objs){
-		setInterval(() => {
+		this.intervalObjectTaked = setInterval(() => {
 			for (let i = 0; i < objs.length; i++) {
 				const obj = objs[i];
 				const valueObj = obj.valueTreasure;
 				if(this.character.isColliding(obj)){
-					if(soundOn){
-						objectTakedAudio.pause();
-						objectTakedAudio.play();
-						objectTakedAudio.volume = 0.2;
-					}
+					this.soundTakingIbject();
 					objs.splice(i, 1);
-					if(this.isLifeBottle(obj)){
-						this.collectBottle(valueObj);
-					}
-					if(this.isSomethingThrow(obj)){
-						this.collectObjet(valueObj);
-					}
-					if(this.isSpellObject(obj)){
-						this.collectSpell(valueObj);
-					}				
+					this.is_Life_Spell_Object(obj, valueObj);		
 				}
 			}
 		}, 1000 / 60);
+	}
+
+	is_Life_Spell_Object(obj, valueObj){
+		if(this.isLifeBottle(obj)){
+			this.collectBottle(valueObj);
+		}
+		if(this.isSomethingThrow(obj)){
+			this.collectObjet(valueObj);
+		}
+		if(this.isSpellObject(obj)){
+			this.collectSpell(valueObj);
+		}	
+	}
+
+	soundTakingIbject(){
+		if(soundOn){
+			objectTakedAudio.pause();
+			objectTakedAudio.play();
+			objectTakedAudio.volume = 0.2;
+		}
 	}
 
 	isLifeBottle(obj){

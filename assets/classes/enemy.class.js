@@ -21,7 +21,7 @@ class Enemy extends MovableObject{
     }, 1000 / 60);
   }
 
-  animationEnemy(){
+  animationEnemy(imgs){
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);

@@ -27,8 +27,8 @@ class Endboss extends Enemy{
     this.walkingImgs = walkingImgs;
     this.attackImgs = attackImgs;
     this.deadImgs = deadImgs;
-    this.x = 400 ;
-    //this.x = (this.countStage * 720 + 150) ;
+    //this.x = 400 ;
+    this.x = (this.countStage * 720 + 150) ;
     this.loadingAllImgs();
     this.isCloseCharacter();
   }

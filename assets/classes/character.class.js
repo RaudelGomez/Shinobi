@@ -162,11 +162,15 @@ class Character extends MovableObject {
 
 	itsGettingHurt(){
 		if (this.isHurt()) {
-			if (soundOn) {
-				hurtAudio.play();
-				hurtAudio.volume = 0.1;
-			}
+			this.audioVolumeCharacterHurt();
 			this.playAnimation(this.hurtImgs);
+		}
+	}
+
+	audioVolumeCharacterHurt(){
+		if (soundOn) {
+			hurtAudio.play();
+			hurtAudio.volume = 0.1;
 		}
 	}
 
@@ -285,5 +289,4 @@ class Character extends MovableObject {
 			clearInterval(id);
 		});
 	}
-
 }
