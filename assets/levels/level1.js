@@ -4,7 +4,6 @@ let object_x = 200 + Math.random() * 500 * drawObject.countStage;
 let object_y = 100 + Math.random() * 80 * drawObject.countStage;
 
 function initLevel(){
-let audio = 'assets/audio/gameMusic.mp3';
 level1 = new Level(
   [],
   [],
@@ -12,7 +11,6 @@ level1 = new Level(
   [],
   [],
   [],
-  audio
 );
 
 function setEnemies() {
@@ -36,7 +34,7 @@ function pushThrowableObjects() {
   for (let i = 0; i < 5; i++) {
     let drawObject = new DrawableObject();
     let object_x = 200 + Math.random() * 500 * drawObject.countStage;
-    let object_y = 100 + Math.random() * 80 * drawObject.countStage;
+    let object_y = 200 + Math.random() * 80;
     let objImage = 'assets/img/weapons/5.png';
     level1.throwableObjects.push(new ThrowableObject(object_x, object_y, objImage));
   }
@@ -47,7 +45,7 @@ function pushSpellObject() {
   for (let i = 0; i < 5; i++) {
     let drawObject = new DrawableObject();
     let object_x = 200 + Math.random() * 500 * drawObject.countStage;
-    let object_y = 100 + Math.random() * 20 * drawObject.countStage;
+    let object_y = 100 + Math.random() * 20;
     let spellImage = 'assets/img/weapons/14.png';
     level1.spellObjects.push(new SpellObject(object_x, object_y, spellImage));
   }

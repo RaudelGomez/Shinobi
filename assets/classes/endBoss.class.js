@@ -29,6 +29,7 @@ class Endboss extends Enemy{
     'assets/img/enemies/dragon/Death5.png',
   ];
   intervalMove;
+  intervalCloseCharacter;
   world;
   
   //spellBoss;
@@ -51,6 +52,7 @@ class Endboss extends Enemy{
     this.animate(this.walkingImgs);
     //this.spellBoss = new SpellEnemy(this.x - 10000 , this.y, this.throwingSomethingImgs[0]);
     //this.throwingSpellBoss();
+    this.closeCharacter();
   }
 
   animate(imgs){
@@ -59,10 +61,32 @@ class Endboss extends Enemy{
     }, 200);
   }
 
+  closeCharacter(){
+    this.intervalCloseCharacter = setInterval(() => {
+      if(this.world.character.x >= this.x - 720){
+        if(isMusicOn){
+          musicGame.pause();
+          musicEndBoss.play()
+        }
+      };
+     
+      // }
+      // if(this.world.character.x >= this.x - 720){
+      //   this.x -= 1;
+      // }else if(this.world.character.x + 100 >= this.x ){
+      //   this.x += 1;
+      // }
+      // console.log('boss', this.world.character.x);
+      // console.log('chara',this.x);
+    }, 1000 / 60);
+  }
+
   dead(imgs){
     clearAllIntervals();
+    if(isMusicOn){
+      musicEndBoss.pause();
+    }
     if(soundOn){
-      musicGame.pause();
       enemyKilledAudio.play();
       enemyKilledAudio.volume = 0.1; 
     }
@@ -71,6 +95,8 @@ class Endboss extends Enemy{
     }, 200);
     if(soundOn){
     youWinAudio.play();
+    }
+    if(isMusicOn){
     youWinAudio.volume = 0.2;
     }
     setTimeout(() => { 
@@ -85,7 +111,9 @@ class Endboss extends Enemy{
 			this.world.youWon.y = 80;
 			this.world.youWon.width = 420;
 			this.world.youWon.height = 180;
-      musicGame.play();
+      if(isMusicOn){
+        musicGame.play();
+      }
 		}, 2000);
   }
 }

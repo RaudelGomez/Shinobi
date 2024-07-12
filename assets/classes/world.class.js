@@ -56,6 +56,9 @@ class World {
 			if(e.intervalMove){
 				this.allIntervalGame.push(e.intervalMove);
 			}
+			if(e.intervalCloseCharacter){
+				this.allIntervalGame.push(e.intervalCloseCharacter);
+			}
 		})
 		this.allIntervalGame.push(this.intervalCollisions);
 		this.allIntervalGame.push(this.intervalCollisionChecked);
@@ -133,8 +136,6 @@ class World {
 				setTimeout(() => {
 					this.level.enemies.splice(index, 1)
 				}, 5000);
-
-			
 			}
 		});
 	}
