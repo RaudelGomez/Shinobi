@@ -3,7 +3,6 @@ class Screen extends MovableObject{
   height = 480;
   x;
   y;
-  gameOverImg = 'assets/img/backgroundGame/game_over.jpg';
   constructor(x, y, img){
     super();
     this.x = x

@@ -8,8 +8,10 @@ let isMusicOn = false;
 let screenGame = document.getElementById('screen-game');
 let figureFullScreen = document.getElementById('figure-fullScreen');
 let figureCloseFullScreen = document.getElementById('figure-close-fullScreen');
+let soundOn = true;
 	
 function init() {
+  
   setInterval(() => {
     musicGame.volume = turnVolumeMusic();
   }, 100);
