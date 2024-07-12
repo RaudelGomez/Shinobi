@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
  
   //Life
   lastHit = 0;
-  life = 10;
+  life = 100;
   //Treasures
   throwableObj = 0;
   spellObject = 0;
@@ -64,7 +64,7 @@ class MovableObject extends DrawableObject {
     let x = this.x;
     this.spellInterval = setInterval(() => {
       this.x += this.speedSpell;
-      //If the x nof the spell is bigger than the initial postion of x + 1200 than stop
+      //If the x of the spell is bigger than the initial postion of x + 1200 than stop
       if(this.x  >= x + 400){
         this.cleanInterval(this.spellInterval);
       }
@@ -92,16 +92,19 @@ class MovableObject extends DrawableObject {
         this.y -= this.speedY;
         this.speedY -= this.acceleration;
       }
-      if(this instanceof ThrowableObject){
-        setInterval(() => {
-          if(this.y >= 320){
-            this.y = 320;
-            this.cleanInterval(this.intervalInTheAir)
-          }
-        }, 1000 / 60);
-        
-      }
+      this.isGravityOfAnObject();
     }, 1000 / 25);
+  }
+
+  isGravityOfAnObject(){
+    if(this instanceof ThrowableObject){
+      setInterval(() => {
+        if(this.y >= 320){
+          this.y = 320;
+          this.cleanInterval(this.intervalInTheAir)
+        }
+      }, 1000 / 60); 
+    }
   }
 
   isInTheAir(){
@@ -114,7 +117,6 @@ class MovableObject extends DrawableObject {
 
   hit(){
     this.life -= 2;
-    //console.log(this.life);
     if(this.life < 0){
       this.life = 0;
     }else{
@@ -135,5 +137,4 @@ class MovableObject extends DrawableObject {
   animateThrowObject(){
     this.playAnimation(this.throwObjectImages);
 	}
-
 }

@@ -6,9 +6,7 @@ class ThrowableObject extends Treasure{
     left: -15
   } 
   intervalInTheAir;
-  //imgWeapon = ['assets/img/weapons/5.png', 'assets/img/weapons/44.png'];
   imgWeaponThrowed;
-
 
   constructor(x, y, img){
     super();

@@ -17,7 +17,6 @@ class Demon extends Enemy{
     'assets/img/enemies/demon/Attack3.png',
     'assets/img/enemies/demon/Attack4.png',
   ];
-
   deadImgs = [
     'assets/img/enemies/demon/Death1.png',
     'assets/img/enemies/demon/Death2.png',
@@ -26,7 +25,6 @@ class Demon extends Enemy{
     'assets/img/enemies/demon/Death5.png',
     'assets/img/enemies/demon/Death6.png',
   ];
-
   offset = {
     top: 230,
     right: 280,

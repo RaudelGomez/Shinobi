@@ -8,7 +8,6 @@ class Level extends DrawableObject{
   spellObjects;
   world;
 
-
   constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects){
     super();
     this.clouds = clouds;

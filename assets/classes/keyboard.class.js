@@ -28,7 +28,6 @@ class Keyboard {
   }
 
   keyDownBtn(e){
-    //console.log(e);
 			if (e.keyCode == 39) {
 				this.right = true;
 			}
