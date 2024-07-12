@@ -5,40 +5,11 @@ class Endboss extends Enemy{
   width;
   speed = 1;
   intervalEndBossAttack;
-  // walkingImgs = [
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk1.png',
-  //   'assets/img/enemies/dragon/Walk2.png',
-  //   'assets/img/enemies/dragon/Walk3.png',
-  //   'assets/img/enemies/dragon/Walk4.png',
-  //   'assets/img/enemies/dragon/Walk5.png',
-  // ];
-  // attackImgs = [
-  //   'assets/img/enemies/dragon/Attack1.png',
-  //   'assets/img/enemies/dragon/Attack2.png',
-  //   'assets/img/enemies/dragon/Attack3.png',
-  //   'assets/img/enemies/dragon/Attack4.png',
-  // ]
-  // deadImgs = [
-  //   'assets/img/enemies/dragon/Death1.png',
-  //   'assets/img/enemies/dragon/Death2.png',
-  //   'assets/img/enemies/dragon/Death3.png',
-  //   'assets/img/enemies/dragon/Death4.png',
-  //   'assets/img/enemies/dragon/Death5.png',
-  // ];
   walkingImgs = [];
   attackImgs = [];
   deadImgs = [];
   intervalMove;
   intervalCloseCharacter;
-
-  
-  //spellBoss;
-
   //Frame 
   offset = {
     top:390,
@@ -56,17 +27,10 @@ class Endboss extends Enemy{
     this.walkingImgs = walkingImgs;
     this.attackImgs = attackImgs;
     this.deadImgs = deadImgs;
-    this.loadInitialPositionImage(this.walkingImgs[0]);
     this.x = 400 ;
     //this.x = (this.countStage * 720 + 150) ;
-    this.loadImages(this.walkingImgs);
-    this.loadImages(this.attackImgs);
-    this.loadImages(this.deadImgs);
-    //this.loadImages(this.throwingSomethingImgs);
-    this.animate(this.walkingImgs);
-    //this.spellBoss = new SpellEnemy(this.x - 10000 , this.y, this.throwingSomethingImgs[0]);
-    //this.throwingSpellBoss();
-    this.closeCharacter();
+    this.loadingAllImgs();
+    this.isCloseCharacter();
   }
 
   animate(imgs){
@@ -75,7 +39,7 @@ class Endboss extends Enemy{
     }, 200);
   }
 
-  closeCharacter(){
+  isCloseCharacter(){
     this.intervalCloseCharacter = setInterval(() => {
       if(this.world.character.x >= this.x - 720){
         // if(isMusicOn){
@@ -101,49 +65,46 @@ class Endboss extends Enemy{
 			setTimeout(() => {
 				if(this.life > 0){
 					//console.log(enemy.life);
-					if(this.world.character.x <  this.x){
-						clearInterval(this.intervalAnimation);
-						this.animate(this.walkingImgs);
-						this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
-						//this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
-						this.world.spellEnemy.moveLeftSpell();
-						setTimeout(() => {		
-							clearInterval(this.world.spellEnemy.intervalSpellBoss);
-						}, 20000);
-						setTimeout(() => {
-							this.world.spellEnemy = new SpellEnemy();;
-					}, 20000); // 200 segundos son 200,000 milisegundos
+					if(this.isTheCharacterTouchingTheEndBoss()){
+						this.animationAttackEndBossLevel1(); 
 					}
 				}
 			}, 850);
 	};
 
+  isTheCharacterTouchingTheEndBoss(){
+    return this.world.character.x <  this.x;
+  }
+
+  animationAttackEndBossLevel1(){
+    clearInterval(this.intervalAnimation);
+    this.animate(this.walkingImgs);
+    this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
+    //this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
+    this.world.spellEnemy.moveLeftSpell();
+    setTimeout(() => {		
+      clearInterval(this.world.spellEnemy.intervalSpellBoss);
+    }, 20000);
+    setTimeout(() => {
+      this.world.spellEnemy = new SpellEnemy();;
+    }, 20000); 
+  }
+
   dead(imgs){
     //clearAllIntervals();
-    if(isMusicOn){
-      musicGame.pause();
-    }
-    if(soundOn){
-      enemyKilledAudio.play();
-      enemyKilledAudio.volume = 0.1; 
-    }
+    this.sequenceMusicEndBossDeath();
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);
-    if(soundOn){
-    youWinAudio.play();
-    }
-    if(isMusicOn){
-    youWinAudio.volume = 0.2;
-    }
-    setTimeout(() => { 
-      if(soundOn){
-      youWinVoice.volume = 0.8;
-      youWinVoice.play();
-      }
-    }, 1000);
-    
-   setTimeout(() => {
+    this.sequenceMusicYouWin();
+    this.setPicYouWin();
+    setTimeout(() => {
+      clearAllIntervals();
+    }, 5000);
+  }
+
+  setPicYouWin(){
+    setTimeout(() => {
 			this.world.youWon.x = -this.world.camera_x + 160;
 			this.world.youWon.y = 80;
 			this.world.youWon.width = 420;
@@ -152,8 +113,38 @@ class Endboss extends Enemy{
         musicGame.play();
       }
 		}, 2000);
-    setTimeout(() => {
-      clearAllIntervals();
-    }, 5000);
+  }
+
+  sequenceMusicEndBossDeath(){
+    if(isMusicOn){
+      musicGame.pause();
+    }
+    if(soundOn){
+      enemyKilledAudio.play();
+      enemyKilledAudio.volume = 0.1; 
+    }
+  }
+
+  sequenceMusicYouWin(){
+    if(soundOn){
+      youWinAudio.play();
+      }
+      if(isMusicOn){
+      youWinAudio.volume = 0.2;
+      }
+      setTimeout(() => { 
+        if(soundOn){
+        youWinVoice.volume = 0.8;
+        youWinVoice.play();
+        }
+      }, 1000);
+  }
+  
+  loadingAllImgs(){
+    this.loadInitialPositionImage(this.walkingImgs[0]);
+    this.loadImages(this.walkingImgs);
+    this.loadImages(this.attackImgs);
+    this.loadImages(this.deadImgs);
+    this.animate(this.walkingImgs);
   }
 }
