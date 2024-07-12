@@ -94,7 +94,6 @@ class Character extends MovableObject {
 	}
 	
 	animate() {
-		console.log(this.life);
 		//Condition inside if to move
 		this.intervalMoveCharacter = setInterval(() => {
 			if(soundOn){

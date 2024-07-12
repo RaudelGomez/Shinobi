@@ -1,36 +1,40 @@
 class Endboss extends Enemy{
-  y = -250;
-  height = 800;
-  width = 800;
+  x;
+  y;
+  height;
+  width;
   speed = 1;
-  walkingImgs = [
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk1.png',
-    'assets/img/enemies/dragon/Walk2.png',
-    'assets/img/enemies/dragon/Walk3.png',
-    'assets/img/enemies/dragon/Walk4.png',
-    'assets/img/enemies/dragon/Walk5.png',
-  ];
-  attackImgs = [
-    'assets/img/enemies/dragon/Death1.png',
-    'assets/img/enemies/dragon/Attack2.png',
-    'assets/img/enemies/dragon/Attack3.png',
-    'assets/img/enemies/dragon/Attack4.png',
-  ]
-  deadImgs = [
-    'assets/img/enemies/dragon/Death1.png',
-    'assets/img/enemies/dragon/Death2.png',
-    'assets/img/enemies/dragon/Death3.png',
-    'assets/img/enemies/dragon/Death4.png',
-    'assets/img/enemies/dragon/Death5.png',
-  ];
+  // walkingImgs = [
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk1.png',
+  //   'assets/img/enemies/dragon/Walk2.png',
+  //   'assets/img/enemies/dragon/Walk3.png',
+  //   'assets/img/enemies/dragon/Walk4.png',
+  //   'assets/img/enemies/dragon/Walk5.png',
+  // ];
+  // attackImgs = [
+  //   'assets/img/enemies/dragon/Attack1.png',
+  //   'assets/img/enemies/dragon/Attack2.png',
+  //   'assets/img/enemies/dragon/Attack3.png',
+  //   'assets/img/enemies/dragon/Attack4.png',
+  // ]
+  // deadImgs = [
+  //   'assets/img/enemies/dragon/Death1.png',
+  //   'assets/img/enemies/dragon/Death2.png',
+  //   'assets/img/enemies/dragon/Death3.png',
+  //   'assets/img/enemies/dragon/Death4.png',
+  //   'assets/img/enemies/dragon/Death5.png',
+  // ];
+  walkingImgs = [];
+  attackImgs = [];
+  deadImgs = [];
   intervalMove;
   intervalCloseCharacter;
-  world;
+
   
   //spellBoss;
 
@@ -42,9 +46,18 @@ class Endboss extends Enemy{
     left: 190
   } 
 
-  constructor(){
-    super().loadInitialPositionImage(this.walkingImgs[0]);
-    this.x = (this.countStage * 720 + 150) ;
+  constructor(walkingImgs, attackImgs, deadImgs, height, width, y, x){
+    super();
+    this.x = x;
+    this.y = y
+    this.height = height;
+    this.width = width
+    this.walkingImgs = walkingImgs;
+    this.attackImgs = attackImgs;
+    this.deadImgs = deadImgs;
+    this.loadInitialPositionImage(this.walkingImgs[0]);
+    this.x = 400 ;
+    //this.x = (this.countStage * 720 + 150) ;
     this.loadImages(this.walkingImgs);
     this.loadImages(this.attackImgs);
     this.loadImages(this.deadImgs);
@@ -64,10 +77,9 @@ class Endboss extends Enemy{
   closeCharacter(){
     this.intervalCloseCharacter = setInterval(() => {
       if(this.world.character.x >= this.x - 720){
-        if(isMusicOn){
-          musicGame.pause();
-          musicEndBoss.play()
-        }
+        // if(isMusicOn){
+        //   musicEndBoss.play()
+        // }
       };
      
       // }
@@ -82,9 +94,9 @@ class Endboss extends Enemy{
   }
 
   dead(imgs){
-    clearAllIntervals();
+    //clearAllIntervals();
     if(isMusicOn){
-      musicEndBoss.pause();
+      musicGame.pause();
     }
     if(soundOn){
       enemyKilledAudio.play();
@@ -115,5 +127,8 @@ class Endboss extends Enemy{
         musicGame.play();
       }
 		}, 2000);
+    setTimeout(() => {
+      clearAllIntervals();
+    }, 5000);
   }
 }

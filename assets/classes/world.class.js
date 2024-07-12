@@ -14,7 +14,6 @@ class World {
 	spellEnemy = new SpellEnemy();
 	gameOver = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/game_over.jpg');
 	youWon = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/youWin.png');
-	//objectTakedAudio = new Audio('assets/audio/getObject.mp3');
 	throwedObject = [];
 	throwedSpell = [];
 	intervalEndBossAttack;
@@ -168,15 +167,18 @@ class World {
 					if(this.character.x <  enemy.x){
 						clearInterval(enemy.intervalAnimation);
 						enemy.animate(enemy.walkingImgs);
-						this.spellEnemy = new SpellEnemy(enemy.x +190 , 80);
+						this.spellEnemy = new SpellEnemy(enemy.x + 190 , 90);
 						//this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
 						this.spellEnemy.moveLeftSpell();
 						setTimeout(() => {		
 							clearInterval(this.spellEnemy.intervalSpellBoss);
 						}, 20000);
+						setTimeout(() => {
+							this.spellEnemy = new SpellEnemy();;
+					}, 20000); // 200 segundos son 200,000 milisegundos
 					}
 				}
-			}, 1900);
+			}, 850);
 	}
 
 	collisionEnemySpell(throwed){
@@ -188,7 +190,6 @@ class World {
 					//console.log(enemy.life);	
 					enemy.life -= enemy.enemyLifeTaked;
 					if(enemy instanceof Endboss){
-						console.log(enemy.life);
 						if(enemy.life <= 90 && enemy.life >1){
 							this.EndBossSequenceAttack(enemy);						
 							//clearInterval(this.intervalEndBossAttack);
@@ -214,7 +215,7 @@ class World {
 	}
 
 	checkCharacterDamageSpell(){
-		if(this.character.isCollidingSpell(this.spellEnemy)){
+		if(this.character.isCollidingSpell(this.spellEnemy) && this.level.enemies[this.level.enemies.length-1].life > 0){
 			this.character.life -= this.spellEnemy.damage;
 			this.healthbar.setPercentage(this.character.life);
 			if(soundOn){
