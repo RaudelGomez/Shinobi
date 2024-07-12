@@ -207,7 +207,7 @@ class World {
 
 	checkThrow(){
 		if(this.keyboard.s && this.character.throwableObj > 0){
-			actionAudio.play();
+			if(soundOn){actionAudio.play()};
 			let newObj = this.throwingObject();
 			this.throwedObject.push(newObj);
 			this.character.throwableObj -= 1;
@@ -260,7 +260,7 @@ class World {
 
 	checkSpell(){
 		if(this.keyboard.d && this.character.spellObject > 0){
-			actionAudio.play();
+			if(soundOn){actionAudio.play()};
 			let newObj = this.throwingSpell();
 			this.throwedSpell.push(newObj);
 			this.character.spellObject -= 1;

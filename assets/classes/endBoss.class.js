@@ -10,6 +10,7 @@ class Endboss extends Enemy{
   deadImgs = [];
   intervalMove;
   intervalCloseCharacter;
+  enemyLifeTaked = 0.2;
   //Frame 
   offset = {
     top:390,
