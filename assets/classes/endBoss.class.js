@@ -4,6 +4,7 @@ class Endboss extends Enemy{
   height;
   width;
   speed = 1;
+  intervalEndBossAttack;
   // walkingImgs = [
   //   'assets/img/enemies/dragon/Walk1.png',
   //   'assets/img/enemies/dragon/Walk1.png',
@@ -92,6 +93,30 @@ class Endboss extends Enemy{
       // console.log('chara',this.x);
     }, 1000 / 60);
   }
+
+  endBossSequenceAttackLevel1(){
+    //clean interval in world
+		this.intervalEndBossAttack = clearInterval(this.intervalAnimation);
+			this.animate(this.attackImgs);
+			setTimeout(() => {
+				if(this.life > 0){
+					//console.log(enemy.life);
+					if(this.world.character.x <  this.x){
+						clearInterval(this.intervalAnimation);
+						this.animate(this.walkingImgs);
+						this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
+						//this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
+						this.world.spellEnemy.moveLeftSpell();
+						setTimeout(() => {		
+							clearInterval(this.world.spellEnemy.intervalSpellBoss);
+						}, 20000);
+						setTimeout(() => {
+							this.world.spellEnemy = new SpellEnemy();;
+					}, 20000); // 200 segundos son 200,000 milisegundos
+					}
+				}
+			}, 850);
+	};
 
   dead(imgs){
     //clearAllIntervals();
