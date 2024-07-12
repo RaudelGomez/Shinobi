@@ -21,6 +21,7 @@ let soundOn = false;
 //   }, 100);
 // };
 
+
 function initGame(){
   clearAllIntervals();
   delete world;

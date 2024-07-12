@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
  
   //Life
   lastHit = 0;
-  life = 100;
+  life = 10;
   //Treasures
   throwableObj = 0;
   spellObject = 0;
