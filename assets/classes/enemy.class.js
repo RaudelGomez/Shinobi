@@ -3,6 +3,7 @@ class Enemy extends MovableObject{
   intervalMove;
   intervalAnimation;
   enemyLifeTaked = 0.5;
+  bigSize = true; 
 
   // //Audio
   // enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');

@@ -84,7 +84,6 @@ class World {
 		}
 	}
 
-
 	checkCollisions(){
 		this.intervalCollisions = setInterval(() => {
 			this.checkThrow();
@@ -92,6 +91,7 @@ class World {
 			this.collisionEnemySpell(this.throwedSpell);
 			this.collisionEnemySpell(this.throwedObject);
 			this.checkCharacterDamageSpell();
+			this.jumpingOnEnemy();
 			this.isGameOver();
 		}, 1000 / 60);
 
@@ -102,7 +102,7 @@ class World {
 	}
 
 	collisionChecked(){
-		this.level.enemies.forEach((enemy, index)=>{
+		this.level.enemies.forEach((enemy)=>{
 			if(this.character.isColliding(enemy) && enemy.life > 0 && this.character.life > 0){
 				if(enemy instanceof Endboss){
 					this.EndBossSequenceAttack(enemy);
@@ -118,6 +118,24 @@ class World {
 			// 		this.level.enemies.splice(index, 1);
 			// 	}, 1000);
 			// }
+		});
+	}
+
+	jumpingOnEnemy(){
+		this.level.enemies.forEach((enemy)=>{
+			if(this.character.isColliding(enemy) && this.character.life > 0 && this.character.isInTheAir() && enemy.life > 0 && enemy.bigSize == false){
+				enemy.life = 0;
+				clearInterval(enemy.intervalMove);
+				enemy.playAnimation(enemy.deadImgs);
+				clearInterval(enemy.intervalAnimation);
+				let index = this.level.enemies.indexOf(enemy);
+				console.log(index);
+				setTimeout(() => {
+					this.level.enemies.splice(index, 1)
+				}, 5000);
+
+			
+			}
 		});
 	}
 

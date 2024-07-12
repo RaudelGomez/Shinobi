@@ -2,7 +2,8 @@ class Lizard extends Enemy{
   y = 90;
   height = 400;
   width = 400;
-  enemyLifeTaked = 3
+  enemyLifeTaked = 3;
+  bigSize = false;
   walkingImgs = [
     'assets/img/enemies/lizard/Walk1.png',
     'assets/img/enemies/lizard/Walk2.png',
