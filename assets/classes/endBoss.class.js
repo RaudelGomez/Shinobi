@@ -10,7 +10,7 @@ class Endboss extends Enemy{
   deadImgs = [];
   intervalMove;
   intervalCloseCharacter;
-  enemyLifeTaked = 0.2;
+  enemyLifeTaked = 1;
   //Frame 
   offset = {
     top:390,
@@ -80,16 +80,30 @@ class Endboss extends Enemy{
   animationAttackEndBossLevel1(){
     clearInterval(this.intervalAnimation);
     this.animate(this.walkingImgs);
-    this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
-    //this.spellEnemy = new SpellEnemy((this.character.countStage) * 720 + 400 , 80);
-    this.world.spellEnemy.moveLeftSpell();
+    let newSpellEnemy = new SpellEnemy(this.x + 190 , 90);
+    this.world.arraySpellEnemy.push(newSpellEnemy);
+    let index = this.world.arraySpellEnemy.indexOf(newSpellEnemy);
+    this.world.arraySpellEnemy[index].moveLeftSpell();
     setTimeout(() => {		
       clearInterval(this.world.spellEnemy.intervalSpellBoss);
     }, 20000);
     setTimeout(() => {
-      this.world.spellEnemy = new SpellEnemy();;
-    }, 20000); 
+      this.world.arraySpellEnemy.splice(index, 1);
+    }, 5000); 
   }
+
+  // animationAttackEndBossLevel1(){
+  //   clearInterval(this.intervalAnimation);
+  //   this.animate(this.walkingImgs);
+  //   this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
+  //   this.world.spellEnemy.moveLeftSpell();
+  //   setTimeout(() => {		
+  //     clearInterval(this.world.spellEnemy.intervalSpellBoss);
+  //   }, 20000);
+  //   setTimeout(() => {
+  //     this.world.spellEnemy = new SpellEnemy();
+  //   }, 2000); 
+  // }
 
   dead(imgs){
     //clearAllIntervals();

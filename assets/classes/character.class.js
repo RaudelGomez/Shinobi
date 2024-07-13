@@ -69,7 +69,8 @@ class Character extends MovableObject {
 	};
 	allIntervalCharacter = [];
 	throwableObj = 0;
-	spellObject = 0;
+	spellObject = 100;
+	//spellObject = 0;
 
 	constructor() {
 		super();

@@ -2,7 +2,7 @@ class Enemy extends MovableObject{
   otherDirection = true;
   intervalMove;
   intervalAnimation;
-  enemyLifeTaked = 0.5;
+  enemyLifeTaked = 50;
   bigSize = true; 
 
   // //Audio

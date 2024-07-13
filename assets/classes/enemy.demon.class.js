@@ -2,7 +2,7 @@ class Demon extends Enemy{
   y = -100;
   height = 600;
   width = 600;
-  enemyLifeTaked = 1;
+  enemyLifeTaked = 5;
   walkingImgs = [
     'assets/img/enemies/demon/Walk1.png',
     'assets/img/enemies/demon/Walk2.png',

@@ -16,6 +16,7 @@ class World {
 	youWon = new Screen(this.camera_x, 1000, 'assets/img/backgroundGame/youWin.png');
 	throwedObject = [];
 	throwedSpell = [];
+	arraySpellEnemy = [];
 	allIntervalGame = [];
 	
   /**
@@ -174,6 +175,14 @@ class World {
 			for (let j = 0; j < this.level.enemies.length; j++) {
 				const enemy = this.level.enemies[j];
 				if(this.isEnemyCollision_isAlive(enemy, spell)){		
+					if(enemy instanceof Endboss){
+						let index = throwed.indexOf(spell);
+						throwed.splice(index, 1);
+					}
+					setTimeout(() => {
+						let index = throwed.indexOf(spell);
+						throwed.splice(index, 1);
+					}, 250);
 					enemy.life -= enemy.enemyLifeTaked;
 					this.isTheCollisionWithAEndBoss(enemy);
 					if(enemy.life <= 0){
@@ -190,19 +199,31 @@ class World {
 
 	isTheCollisionWithAEndBoss(enemy){
 		if(enemy instanceof Endboss){
-			if(enemy.life <= 90 && enemy.life >1){
-				enemy.endBossSequenceAttackLevel1();						
+			if(enemy.life <= 100 && enemy.life >1){
+				//console.log(this.arraySpellEnemy);
+					enemy.endBossSequenceAttackLevel1();						
 			}
 		}
 	}
 
+	// checkCharacterDamageSpell(){
+	// 	if(this.character.isCollidingSpell(this.spellEnemy) && this.level.enemies[this.level.enemies.length-1].life > 0){
+	// 		this.character.life -= this.spellEnemy.damage;
+	// 		this.healthbar.setPercentage(this.character.life);
+	// 		this.character.audioVolumeCharacterHurt();
+	// 		this.character.playAnimation(this.character.hurtImgs);
+	// 	}
+	// }
+
 	checkCharacterDamageSpell(){
-		if(this.character.isCollidingSpell(this.spellEnemy) && this.level.enemies[this.level.enemies.length-1].life > 0){
-			this.character.life -= this.spellEnemy.damage;
-			this.healthbar.setPercentage(this.character.life);
-			this.character.audioVolumeCharacterHurt();
-			this.character.playAnimation(this.character.hurtImgs);
-		}
+		this.arraySpellEnemy.forEach(spell => {
+			if(spell.isCollidingSpell(this.character) && this.level.enemies[this.level.enemies.length-1].life > 0){
+				this.character.life -= this.spellEnemy.damage;
+				this.healthbar.setPercentage(this.character.life);
+				this.character.audioVolumeCharacterHurt();
+				this.character.playAnimation(this.character.hurtImgs);
+			}
+		});
 	}
 
 	checkThrow(){
@@ -266,7 +287,19 @@ class World {
 			this.character.spellObject -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.spellbar.setPercentage(this.character.spellObject);
+			
 			//deleting spell sent
+			// this.level.enemies.forEach(enemy => {
+			// 	if(newObj.isColliding(enemy) && enemy.life > 0 && this.character.life > 0){
+			// 		console.log(enemy);
+			// 		let index = this.throwedSpell.indexOf(newObj);
+			// 		console.log(index);
+			// 		if (index > -1) {
+			// 				this.throwedSpell.splice(index, 1);
+			// 		};
+			// 		return
+			// 	}
+			// });
 			this.deletingSpellThrowed(newObj, 500);
 		}
 	}
@@ -376,6 +409,7 @@ class World {
 		this.addObjectsToMap(this.throwedObject);
 		this.addObjectsToMap(this.level.spellObjects);
 		this.addObjectsToMap(this.throwedSpell);
+		this.addObjectsToMap(this.arraySpellEnemy);
 		this.addToMap(this?.spellEnemy);
 		this.addToMap(this.youWon);
 		this.addObjectsToMap(this.level.enemies);

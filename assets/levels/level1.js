@@ -64,22 +64,23 @@ function setEnemies() {
   //level1.enemies = [];
   //level1.enemies = [new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)];
   level1.enemies = [new Lizard(), 
-    new Lizard(), 
-    new Demon(), 
-    new Demon(), 
-    new Lizard(), 
-    new Lizard(), 
-    new Demon(), 
-    new Demon(), 
-    new Lizard(), 
-    new Lizard(), 
-    new Demon(), 
-    new Demon(), 
-    new Lizard(), 
-    new Lizard(), 
-    new Demon(), 
-    new Demon(), 
-    new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)];
+    // new Lizard(), 
+    // new Demon(), 
+    // new Demon(), 
+    // new Lizard(), 
+    // new Lizard(), 
+    // new Demon(), 
+    // new Demon(), 
+    // new Lizard(), 
+    // new Lizard(), 
+    // new Demon(), 
+    // new Demon(), 
+    // new Lizard(), 
+    // new Lizard(), 
+    // new Demon(), 
+    // new Demon(), 
+    // new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)
+  ];
 }
 
 function setClouds() {
