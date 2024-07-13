@@ -176,12 +176,10 @@ class World {
 				const enemy = this.level.enemies[j];
 				if(this.isEnemyCollision_isAlive(enemy, spell)){		
 					if(enemy instanceof Endboss){
-						let index = throwed.indexOf(spell);
-						throwed.splice(index, 1);
+						this.deleteSpellArrayThrowed(throwed, spell);
 					}
 					setTimeout(() => {
-						let index = throwed.indexOf(spell);
-						throwed.splice(index, 1);
+						this.deleteSpellArrayThrowed(throwed, spell);
 					}, 250);
 					enemy.life -= enemy.enemyLifeTaked;
 					this.isTheCollisionWithAEndBoss(enemy);
@@ -191,6 +189,11 @@ class World {
 				}
 			}
 		}
+	}
+
+	deleteSpellArrayThrowed(throwed, spell){
+		let index = throwed.indexOf(spell);
+		throwed.splice(index, 1);
 	}
 
 	isEnemyCollision_isAlive(enemy, spell){

@@ -79,7 +79,7 @@ function setEnemies() {
     // new Lizard(), 
     // new Demon(), 
     // new Demon(), 
-    // new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)
+    new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)
   ];
 }
 
