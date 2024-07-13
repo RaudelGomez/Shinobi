@@ -25,7 +25,6 @@ class World {
    * @param {class} keyboard - Class keyboard that has every movement of the player
    */
 	constructor(canvas, keyboard) {
-		//clearInterval(this.allIntervalGame);
 		this.context = canvas.getContext("2d");
 		this.canvas = canvas;
 		this.keyboard = keyboard;

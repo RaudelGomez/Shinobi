@@ -163,8 +163,7 @@ article figure{
   height: 480px;
   background-image: url(../img/backgroundGame/back2.jpg);
   background-size: cover;
-  border-radius: 16px;
-  border: 1px solid red;
+  border-radius: 8px;
   position: relative;
 }
 
@@ -178,6 +177,8 @@ article figure{
   left: 0;
   right: 0;
   bottom: 0;
+  border-radius: 8px;
+  border: 1px solid red;
 }
 
 .hidden{
