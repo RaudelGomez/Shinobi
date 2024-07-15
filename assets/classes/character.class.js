@@ -72,6 +72,9 @@ class Character extends MovableObject {
 	//spellObject = 100;
 	spellObject = 0;
 
+	/**
+	 * That is the function tha run every function when the instance is created.
+	 */
 	constructor() {
 		super();
 		this.loadAllImgs()
@@ -87,6 +90,9 @@ class Character extends MovableObject {
 		]);
 	}
 
+	/**
+	 * This function load every images of the character
+	 */
 	loadAllImgs(){
 		this.loadInitialPositionImage(this.idleImg);
 		this.loadImages(this.walkingImgs);
@@ -97,6 +103,9 @@ class Character extends MovableObject {
 		this.loadImages(this.throwObjectImages);
 	}
 
+	/**
+	 * This function animate the character when he is walking
+	 */
 	animate() {
 		this.movementWalking();
 		this.intervalPlayCharacter = setInterval(() => {
@@ -110,6 +119,9 @@ class Character extends MovableObject {
 		}, 90);
 	}
 
+	/**
+	 * This function animate the character when he is running
+	 */
 	animationRun() {
 		this.movementRunning();
 		this.intervalPlayRunCharacter = setInterval(() => {
@@ -121,6 +133,9 @@ class Character extends MovableObject {
 		}, 1000 / 60);
 	}
 
+	/**
+	 * This function animate the character when he is jumping
+	 */
 	animationRuningJumping(){
 		if (
 			(this.world.keyboard.right && this.world.keyboard.a) ||
@@ -131,6 +146,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function animate the character when he is walking
+	 */
 	movementRunning(){
 		this.intervalRunCharacter = setInterval(() => {
 			this.stopMusicRunWalk();
@@ -143,6 +161,9 @@ class Character extends MovableObject {
 		}, 1000 / 60);
 	}
 
+	/**
+	 * This function move the character when he is running
+	 */
 	isRunningToRight(){
 		if (this.world.keyboard.a && this.isMovingRight_notEndScreenYet()) {
 			this.runRight(this.run);
@@ -152,6 +173,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function move to left the character when he is jumping
+	 */
 	isJumpingAndMoveToLeft(){
 		if ( this.world.keyboard.a && this.isMovingLeft_notEndScreenYet()) {
 			this.runLeft(this.run);
@@ -161,6 +185,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function play audio and animation when the character get hurt
+	 */
 	itsGettingHurt(){
 		if (this.isHurt()) {
 			this.audioVolumeCharacterHurt();
@@ -168,6 +195,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function play the audio character when he is getting hurt
+	 */
 	audioVolumeCharacterHurt(){
 		if (soundOn) {
 			hurtAudio.play();
@@ -175,6 +205,9 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function animate the character when he is walking or running and he is on the air
+	 */
 	isInTheAir_notRunning(){
 		if (this.isInTheAir()) {
 			this.playAnimation(this.jumpImgs);
@@ -185,7 +218,9 @@ class Character extends MovableObject {
 			}
 		}
 	}
-
+	/**
+	 * This function is the animation and audio when the character is dead
+	 */
 	isDeadAnimation(){
 		this.y = 190;
 		this.stopintervalCharacter();
@@ -199,6 +234,10 @@ class Character extends MovableObject {
 		this.world.keyboard = "";
 	}
 
+	/**
+	 * This function is the animation of he character when he moves, and dont allow the character go 
+	 * to the left when the way is over
+	 */
 	movementWalking(){
 		this.intervalMoveCharacter = setInterval(() => {
 			this.stopMusicRunWalk();
@@ -212,14 +251,25 @@ class Character extends MovableObject {
 		}, 100);
 	}
 
+	/**
+	 * This function is to know if the character is at the end of the screen of the right place in th screen
+	 * @returns @params {Boolean}
+	 */
 	isMovingRight_notEndScreenYet(){
 		return this.world.keyboard.right && this.x < this.world.level.level_end_x + 400;
 	}
 
+	/**
+	 * This function is to know if the character is at the end of the screen of the left place in th screen
+	 * @returns @params {Boolean}
+	 */
 	isMovingLeft_notEndScreenYet(){
 		return this.world.keyboard.left && this.x > -600;
 	}
 
+	/**
+	 * That stop sound run and play walking of the character
+	 */
 	stopMusicRunWalk(){
 		if (soundOn) {
 			run_sound.pause();
@@ -227,6 +277,10 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * That function move the characte to the right if he is not
+	 * at the end of the screen und play the sound of walking
+	 */
 	walkingToRight(){
 		if (this.isMovingRight_notEndScreenYet()) {
 			this.moveRight();
@@ -236,6 +290,10 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * That function move the characte to the left if he is not
+	 * at the end of the screen und play the sound of walking
+	 */
 	walkingToLeft(){
 		if (this.isMovingLeft_notEndScreenYet()) {
 			this.moveLeft(this.walk);
@@ -246,10 +304,17 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * This function is to know if the character is jumping
+	 * @returns @params {Boolean}
+	 */
 	isJumping(){
 		return this.world.keyboard.up && !this.isInTheAir();
 	}
 
+	/**
+	 * That function makes te character jump and play the audio of jump
+	 */
 	jumping(){
 		if (this.isJumping()) {
 			if (soundOn) {
@@ -259,10 +324,17 @@ class Character extends MovableObject {
 		}
 	}
 
+	/**
+	 * That function move the camera when the character moves
+	 */
 	cameraMoveLeft() {
 		this.world.camera_x = -this.x + 100;
 	}
 
+		/**
+	 * This function is to know if the character is at the end of the Level
+	 * @returns @params {Boolean}
+	 */
 	isTheEndOfTheLevel() {
 		return (
 			this.x >= this.world.level.level_end_x &&
@@ -270,21 +342,36 @@ class Character extends MovableObject {
 		);
 	}
 
+	/**
+	 * That function move the character to right
+	 * @param {Number} run - That is the number how many pixels the character moves when he is running
+	 */
 	runRight(run) {
 		this.x += run;
 		this.otherDirection = false;
 	}
 
+	/**
+	 * That function move the character to left
+	 * @param {Number} run - That is the number how many pixels the character moves when he is running
+	 */
 	runLeft(run) {
 		this.x -= run;
 		this.otherDirection = true;
 	}
 
+	/**
+	 * That function move the character up.  
+	 * That is the number how many pixels the character moves when he is jumping
+	 */
 	jump() {
 		this.speedY = 30;
 		this.y = this.yAfterJump;
 	}
 
+	/**
+	 * That function stop all intervals of the character
+	 */
 	stopintervalCharacter() {
 		this.allIntervalCharacter.forEach((id) => {
 			clearInterval(id);

@@ -10,7 +10,6 @@ let btnStartGame = document.getElementById('btn-start');
 let isMusicOn = false;
 let soundOn = false;
 
-	
 function initGame(){
   clearAllIntervals();
   delete world;

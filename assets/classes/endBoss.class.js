@@ -115,7 +115,7 @@ class Endboss extends Enemy{
     this.setPicYouWin();
     setTimeout(() => {
       clearAllIntervals();
-    }, 10000);
+    }, 2000);
   }
 
   setPicYouWin(){
