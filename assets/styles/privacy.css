@@ -1,0 +1,59 @@
+@font-face {
+  font-family: "GoblinOne-Regular";
+  src: url("../fonts/GoblinOne-Regular.ttf") format("opentype"),
+}
+
+html{
+  --main-color: red;
+  --second-color: gold;
+}
+
+body{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 90vh;
+  background-image: url('../img/backgroundGame/back1.jpg');
+  background-size: cover;
+  background-position: center;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "GoblinOne-Regular", 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  margin: 24px;
+}
+
+h1{
+  font-size: 64px;
+  -webkit-text-stroke: 2px black; /* width and color */
+  font-family: GoblinOne-Regular; color: var(--second-color);
+  margin: 8px;
+  text-shadow: 4px 10px 8px rgba(0, 0, 0, 0.7);
+}
+
+article{
+  background-color: white;
+  width: 90%;
+  border-radius: 8px;
+  padding: 16px;
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.7);
+  word-break: break-all;
+  display: flex;
+  flex-direction: column;
+}
+
+a{
+  text-decoration: none;
+  color: var(--main-color);
+  margin-left: auto;
+}
+
+@media (max-width: 480px){
+  h1{
+    font-size: 32px;
+  }
+  article{
+    font-size: 14px;
+  }
+}
