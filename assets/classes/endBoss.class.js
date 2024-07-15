@@ -11,14 +11,22 @@ class Endboss extends Enemy{
   intervalMove;
   intervalCloseCharacter;
   enemyLifeTaked = 5;
-  //Frame 
   offset = {
     top:390,
     right:160,
     bottom: 200,
     left: 190
   } 
-
+  /**
+   * 
+   * @param {[string]} walkingImgs - path of the imgs walking
+   * @param {[string]} attackImgs - path of the imgs attacking
+   * @param {[string]} deadImgs - path of the imgs dying
+   * @param {Number} height - height of the img 
+   * @param {Number} width - width of the img 
+   * @param {Number} y - y coordinate of the img
+   * @param {Number} x - x coordinate of the img
+   */
   constructor(walkingImgs, attackImgs, deadImgs, height, width, y, x){
     super();
     this.x = x;
@@ -33,13 +41,20 @@ class Endboss extends Enemy{
     this.loadingAllImgs();
     this.isCloseCharacter();
   }
-
+  
+  /**
+   * Play every img of the array and make animation
+   * @param {[string]} imgs - path of every imgs that will be loaded
+   */
   animate(imgs){
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
     }, 200);
   }
 
+  /**
+   * That function says if the character is close of the endboss
+   */
   isCloseCharacter(){
     this.intervalCloseCharacter = setInterval(() => {
       if(this.world.character.x >= this.x - 720){
@@ -59,13 +74,14 @@ class Endboss extends Enemy{
     }, 1000 / 60);
   }
 
+  /**
+   * Animation of the attack endboss level 1
+   */
   endBossSequenceAttackLevel1(){
-    //clean interval in world
 		this.intervalEndBossAttack = clearInterval(this.intervalAnimation);
 			this.animate(this.attackImgs);
 			setTimeout(() => {
 				if(this.life > 0){
-					//console.log(enemy.life);
 					if(this.isTheCharacterTouchingTheEndBoss()){
 						this.animationAttackEndBossLevel1(); 
 					}
@@ -73,10 +89,16 @@ class Endboss extends Enemy{
 			}, 850);
 	};
 
+  /**
+   * That function says if the endboss is collinding the character
+   * @returns boolean
+   */
   isTheCharacterTouchingTheEndBoss(){
     return this.world.character.x <  this.x;
   }
-
+  /**
+   * Sequence of animation of the attack from endboss level 1
+   */
   animationAttackEndBossLevel1(){
     clearInterval(this.intervalAnimation);
     this.animate(this.walkingImgs);
@@ -92,21 +114,11 @@ class Endboss extends Enemy{
     }, 5000); 
   }
 
-  // animationAttackEndBossLevel1(){
-  //   clearInterval(this.intervalAnimation);
-  //   this.animate(this.walkingImgs);
-  //   this.world.spellEnemy = new SpellEnemy(this.x + 190 , 90);
-  //   this.world.spellEnemy.moveLeftSpell();
-  //   setTimeout(() => {		
-  //     clearInterval(this.world.spellEnemy.intervalSpellBoss);
-  //   }, 20000);
-  //   setTimeout(() => {
-  //     this.world.spellEnemy = new SpellEnemy();
-  //   }, 2000); 
-  // }
-
+  /**
+   * Anmation dead EndBoss
+   * @param {[string]} imgs  - path of every imgs that will be loaded
+   */
   dead(imgs){
-    //clearAllIntervals();
     this.sequenceMusicEndBossDeath();
     this.intervalAnimation = setInterval(() => {
       this.playAnimation(imgs);
@@ -118,6 +130,9 @@ class Endboss extends Enemy{
     }, 2000);
   }
 
+  /**
+   * That function set the pic you win, when the endboss is dead
+   */
   setPicYouWin(){
     setTimeout(() => {
 			this.world.youWon.x = -this.world.camera_x + 160;
@@ -129,7 +144,10 @@ class Endboss extends Enemy{
       }
 		}, 2000);
   }
-
+  
+  /**
+   * Endboss music sequence
+   */
   sequenceMusicEndBossDeath(){
     if(isMusicOn){
       musicGame.pause();
@@ -140,6 +158,9 @@ class Endboss extends Enemy{
     }
   }
 
+  /**
+   * Music sequence qhen the endBoss is dead
+   */
   sequenceMusicYouWin(){
     if(soundOn){
       youWinAudio.play();
@@ -155,6 +176,9 @@ class Endboss extends Enemy{
       }, 1000);
   }
   
+  /**
+   * Load every images
+   */
   loadingAllImgs(){
     this.loadInitialPositionImage(this.walkingImgs[0]);
     this.loadImages(this.walkingImgs);

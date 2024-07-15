@@ -1,9 +1,14 @@
+/**
+ * That create an instance of Lizard
+ */
 class Lizard extends Enemy{
-  y = 90;
-  height = 400;
-  width = 400;
-  enemyLifeTaked = 50;
-  bigSize = false;
+  y = 90; // Initial vertical position of the lizard
+  height = 400; // Height of the lizard
+  width = 400; // Width of the lizard
+  enemyLifeTaked = 50; // Amount of life the lizard takes from the player
+  bigSize = false; // Indicates if the enemy is of a big size
+
+  // Array of images for the lizard's walking animation
   walkingImgs = [
     'assets/img/enemies/lizard/Walk1.png',
     'assets/img/enemies/lizard/Walk2.png',
@@ -12,6 +17,8 @@ class Lizard extends Enemy{
     'assets/img/enemies/lizard/Walk5.png',
     'assets/img/enemies/lizard/Walk6.png',
   ];
+
+  // Array of images for the lizard's attack animation
   attackImgs = [
     'assets/img/enemies/lizard/Attack1.png',
     'assets/img/enemies/lizard/Attack2.png',
@@ -20,6 +27,7 @@ class Lizard extends Enemy{
     'assets/img/enemies/lizard/Attack5.png',
   ];
 
+  // Array of images for the lizard's death animation
   deadImgs = [
     'assets/img/enemies/lizard/Death1.png',
     'assets/img/enemies/lizard/Death2.png',
@@ -29,6 +37,7 @@ class Lizard extends Enemy{
     'assets/img/enemies/lizard/Death6.png',
   ];
 
+  // Offset values for collision detection
   offset = {
     top:160,
     right:140,
@@ -36,6 +45,9 @@ class Lizard extends Enemy{
     left: 135
   } 
 
+  /**
+   * Constructs a new Lizard instance.
+   */
   constructor(){
     super().loadInitialPositionImage(this.walkingImgs[0]);
     this.x = 500 + Math.random() * 500 * this.countStage;

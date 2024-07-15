@@ -8,6 +8,9 @@ class Level extends DrawableObject{
   spellObjects;
   world;
 
+  /**
+   * Constructs a new Level instance and initializes key and button event listeners.
+   */
   constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects){
     super();
     this.clouds = clouds;

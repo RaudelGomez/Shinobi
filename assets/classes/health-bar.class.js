@@ -1,3 +1,6 @@
+/**
+ * That create an instance of Healthbar
+ */
 class HealthBar extends StatusBar{
   arrayImages = [
     'assets/img/health-bar/0.png',
@@ -8,6 +11,9 @@ class HealthBar extends StatusBar{
     'assets/img/health-bar/100.png'
   ];
 
+  /**
+   * Constructs a new HealtBar instance.
+   */
   constructor(){
     super();
     this.loadImages(this.arrayImages);
