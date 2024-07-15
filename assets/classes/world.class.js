@@ -9,6 +9,7 @@ class World {
   keyboard;
   camera_x = 0;
   healthbar = new HealthBar();
+  healthbarEndboss = new HealthBarEndBoss();
   objetbar = new ObjectBar();
   spellbar = new SpellBar();
   spellEnemy = new SpellEnemy();
@@ -223,6 +224,7 @@ class World {
             this.deleteSpellArrayThrowed(throwed, spell);
           }, 250);
           enemy.life -= enemy.enemyLifeTaked;
+          this.healthbarEndboss.setPercentage(enemy.life);
           this.isTheCollisionWithAEndBoss(enemy);
           if (enemy.life <= 0) {
             this.enemyIsNotAlive(enemy);
@@ -497,6 +499,7 @@ class World {
     this.addObjectsToMap(this.level.clouds);
     this.context.translate(-this.camera_x, 0);
     this.addToMap(this.healthbar);
+    this.addToMap(this.healthbarEndboss);
     this.addToMap(this.spellbar);
     this.addToMap(this.objetbar);
     this.context.translate(this.camera_x, 0);

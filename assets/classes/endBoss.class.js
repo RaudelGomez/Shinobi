@@ -58,9 +58,9 @@ class Endboss extends Enemy{
   isCloseCharacter(){
     this.intervalCloseCharacter = setInterval(() => {
       if(this.world.character.x >= this.x - 720){
-        // if(isMusicOn){
-        //   musicEndBoss.play()
-        // }
+        this.world.healthbarEndboss.x = 500;
+      }else{
+        this.world.healthbarEndboss.x = 800;
       };
      
       // }
