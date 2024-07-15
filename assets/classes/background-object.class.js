@@ -2,8 +2,9 @@
  * This class is the model of the background of the level
  */
 class BackgroundObject extends MovableObject{
-  /**
-   * That is the width of the screen where the game will played
+   /**
+   * The variables, that dont have comment, its because it was explained in 
+   * the super class (Drawable-objects or Movableobjects)
    */
   width = 720;
   otherDirection;

@@ -1,20 +1,54 @@
+/**
+ * That is the super class for every object that can move
+ */
 class MovableObject extends DrawableObject {
+  /**
+	 * That is variable, to move the character to the postion in y after jump
+	 */
   yAfterJump = 150;
+  /**
+   * That is the direction of that element. false: right, true, left
+   */
   otherDirection = false;
+  /**
+   * That is the speed of how fast moves an element.
+   */
   speed = 0.15;
-  //Gravity
+  /**
+   * That is the speed of how fast fall an element.
+   */
   speedY = 0;
+  /**
+   * That is the acceleration of the element that is falling
+   */
   acceleration = 2.5; 
  
-  //Life
+  /**
+   * That is a number that save when was the character hitted
+   */
   lastHit = 0;
+  /**
+   * That is the life of enemies and character subclasss
+   */
   life = 100;
-  //Treasures
+ 
+ /**
+	 * How many objects and spell has the character to throw
+	 */
   throwableObj = 0;
   spellObject = 0;
+  /**
+   * That is the array of every imgs that will be created to represent every Object that 
+   * the character hat to throw
+   */
   throwObjectImages = [];
-
+  /**
+   * That is the speed of the throwed spell
+   */
   speedSpell = 10;
+  /**
+   * That is that interval of spell
+   */
   spellInterval;
   
    /**
@@ -28,12 +62,22 @@ class MovableObject extends DrawableObject {
     this.currentImage++;
   }
 
+  /**
+   * That function svave every intrval in an Array
+   * @param {[Number]} allInterval - All intervl that will be save in the array
+   * @param {[Number]} arrayInteval - Array of interval where every Interval will be saved
+   */
   pushAllInterval(allInterval, arrayInteval){
 		arrayInteval.forEach(iv => {
       allInterval.push(iv);
     });
 	}
 
+  /**
+   * That function says if an enemy and the character are colliding
+   * @param {object} mo 
+   * @returns Boolean
+   */
   isColliding(mo){
     return this.x + this.width - this.offset.right > mo.x + mo.offset.left && 
           this.y + this.height - this.offset.bottom > mo.y +mo.offset.top && 
@@ -41,6 +85,11 @@ class MovableObject extends DrawableObject {
           this.y + this.offset.top < mo.y + mo.height -mo.offset.bottom;
   }
 
+  /**
+   * That function says if an enemy and  spells are colliding with a character or enemies
+   * @param {object} mo 
+   * @returns Boolean
+   */
   isCollidingSpell(mo){
     return this.x + this.width - this.offset.right > mo.x + mo.offset.left && 
           this.y + this.height - this.offset.bottom > mo.y +mo.offset.top && 
@@ -49,28 +98,36 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * Move to the right of the images
+   * Move to the right 
    */
   moveLeft(speed){
       this.x -= speed;
   }
 
+  /**
+   * Move to the left 
+   */
   moveRight(){
     this.x += this.walk;
     this.otherDirection = false;
   }
 
+  /**
+   * Movement ofte spell to the right
+   */
   throwSpellRight(){
     let x = this.x;
     this.spellInterval = setInterval(() => {
       this.x += this.speedSpell;
-      //If the x of the spell is bigger than the initial postion of x + 1200 than stop
       if(this.x  >= x + 400){
         this.cleanInterval(this.spellInterval);
       }
     }, 1000 / 60);
   }
 
+  /**
+   * Movement ofte spell to the left
+   */
   throwSpellLeft(){
     let x = this.x;
     this.spellInterval = setInterval(() => {
@@ -82,10 +139,18 @@ class MovableObject extends DrawableObject {
     }, 1000 / 60);
   }
 
+  /**
+   * That function clean a interval
+   * @param {Number} id 
+   * @returns Boolean
+   */
   cleanInterval(id){
     return clearInterval(id);
   };
 
+  /**
+   * Tahat function pretends to simulate the gravity effect of the real life 
+   */
   applyGravity(){
     this.intervalInTheAir = setInterval(() => {
       if(this.isInTheAir() || this.speedY > 0){
@@ -96,6 +161,10 @@ class MovableObject extends DrawableObject {
     }, 1000 / 25);
   }
 
+  /**
+   * That function calculates and represent how behave an object, 
+   * pretending to simulate the gravity effect of the real life 
+   */
   isGravityOfAnObject(){
     if(this instanceof ThrowableObject){
       setInterval(() => {
@@ -107,6 +176,11 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * 
+   * @returns That function says if a character is on the air
+   * @returns Boolean
+   */
   isInTheAir(){
     if(this instanceof ThrowableObject){
       return true;
@@ -115,6 +189,9 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * That function rest life of the character when he get hitting
+   */
   hit(){
     this.life -= 2;
     if(this.life < 0){
@@ -124,16 +201,29 @@ class MovableObject extends DrawableObject {
     }
   }
 
+  /**
+   * 
+   * @returns That function says of the character of enemy is dead
+   * @returns Boolean
+   */
   isDead(){
     return this.life == 0;
   }
 
+  /**
+   * That function says if the character was hitted
+   * @returns Number - Tha is the number that says how much time passed
+   * since the character was hitted.
+   */
   isHurt(){
     let timePassed = new Date().getTime() - this.lastHit;//Difference in ms
     timePassed = timePassed / 1000; //Difference in s
     return timePassed < 1;
   }
 
+  /**
+   * Animation of a object that was throwed
+   */
   animateThrowObject(){
     this.playAnimation(this.throwObjectImages);
 	}

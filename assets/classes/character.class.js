@@ -1,4 +1,7 @@
 class Character extends MovableObject {
+	/**
+	 * imgs of every movement of the character
+	 */
 	idleImg = "assets/img/characters/Samurai/idle/idle.png";
 	walkingImgs = [
 		"assets/img/characters/Samurai/walk/walk-1.png",
@@ -52,14 +55,27 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/attack1/attack-5.png",
 		"assets/img/characters/Samurai/attack1/attack-6.png",
 	];
+	 /**
+   * The variables, that dont have comment, its because it was explained in 
+   * the super class (Drawable-objects or Movableobjects)
+   */
 	x = 100;
 	y = 190;
 	yAfterJump = 190;
 	height = 150;
 	width = 90;
 	world;
+	/**
+	 * How may pixels moves the character when he walk
+	 */
 	walk = 10;
+	/**
+	 * How may pixels moves the character when he run
+	 */
 	run = 15;
+	/**
+	 * That is the current image when the character is running
+	 */
 	currentImageRun = 0;
 	offset = {
 		top: 0,
@@ -67,9 +83,11 @@ class Character extends MovableObject {
 		bottom: 0,
 		left: 40,
 	};
+	/**
+	 * All intervlas of the character
+	 */
 	allIntervalCharacter = [];
 	throwableObj = 0;
-	//spellObject = 100;
 	spellObject = 0;
 
 	/**

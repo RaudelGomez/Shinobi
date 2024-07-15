@@ -1,13 +1,39 @@
+/**
+ * That is the super class of all object in the game
+ */
 class DrawableObject {
+  /**
+   * That Variable set how many screen the character has to move to get the end
+   */
   countStage = 10;
+  /**
+   * Position of the img in the x coordinate
+   */
   x = 100;
+   /**
+   * Position of the img in the y coordinate
+   */
   y = 150;
+  /**
+   * That is the width of the screen where the game will played
+   */
   height = 200;
+  /**
+   * That is the height of the screen where the game will played
+   */
   width = 100;
+  /**
+   * path of the img
+   */
   img;
   currentImage = 0;
+  /**
+   * That is Variable, where every subclass save the Photos, that they need to be showed in the screen
+   */
   imageCache = {};
-   //Frame Objects
+   /**
+    * That is for makes a frame in the Photo to know when the objects are colliding with another
+    */
    offset = {
     top:0,
     right:0,
@@ -51,7 +77,7 @@ class DrawableObject {
 
   /**
    * This function draw the frame of every images
-   * @param {*} context - context of Canvas
+   * @param {context} context - context of Canvas
    */
   drawFrame(context){
     //Drawing only instance of Character or Enemy
