@@ -83,7 +83,6 @@
 							</figure>
 							<figcaption>throw spell - d</figcaption>
 						</div>
-						
 					</div>
 				</div>
 				<div class="color-over-div"></div>
@@ -107,11 +106,10 @@
 				<figure id="btn-start" class="start-game-btn cursor-pointer" onclick="initGame()">
 					start
 				</figure>
-				<figure id="figure-fullScreen">
+				<figure id="figure-fullScreen" onclick="showCloseFullScrenIcon(); viewFullScreen()">
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						id="fullscreen-view"
-						onclick="viewFullScreen(); showCloseFullScrenIcon()"
 						class="img-button cursor-pointer"
 						viewBox="0 0 448 512"
 					>
@@ -125,12 +123,11 @@
 				<figure
 					id="figure-close-fullScreen"
 					class="d-none"
-					onclick="showFullScreenIcon()"
+					onclick="showFullScreenIcon(); closeFullscreen()"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						class="img-button cursor-pointer"
-						onclick="closeFullscreen()"
 						viewBox="0 0 448 512"
 					>
 						<!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->

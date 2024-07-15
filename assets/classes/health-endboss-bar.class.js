@@ -1,5 +1,5 @@
 /**
- * That create an instance of Healthbar
+ * That create an instance of HealthbarEndBoss
  */
 class HealthBarEndBoss extends StatusBar{
   arrayImages = [
