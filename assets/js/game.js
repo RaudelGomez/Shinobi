@@ -27,6 +27,17 @@ function initGame(){
 function startingGame() {
   document.getElementById('presentation').classList.add('d-none');
   document.getElementById('canvas').classList.remove('d-none');
+  showBtnGuide();
+}
+
+function showingControlGuide(){
+  document.getElementById('presentation').classList.toggle('d-none');
+  document.getElementById('canvas').classList.toggle('d-none');
+}
+
+function showBtnGuide() {
+  document.getElementById('guide-control').classList.remove('hidden-btn-guide');
+  document.getElementById('guide-control').classList.add('show-btn-guide');
 }
 
 function settingTextRestart() {

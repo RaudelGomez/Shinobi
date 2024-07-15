@@ -202,20 +202,10 @@ class World {
 	isTheCollisionWithAEndBoss(enemy){
 		if(enemy instanceof Endboss){
 			if(enemy.life <= 100 && enemy.life >1){
-				//console.log(this.arraySpellEnemy);
-					enemy.endBossSequenceAttackLevel1();						
+				enemy.endBossSequenceAttackLevel1();						
 			}
 		}
 	}
-
-	// checkCharacterDamageSpell(){
-	// 	if(this.character.isCollidingSpell(this.spellEnemy) && this.level.enemies[this.level.enemies.length-1].life > 0){
-	// 		this.character.life -= this.spellEnemy.damage;
-	// 		this.healthbar.setPercentage(this.character.life);
-	// 		this.character.audioVolumeCharacterHurt();
-	// 		this.character.playAnimation(this.character.hurtImgs);
-	// 	}
-	// }
 
 	checkCharacterDamageSpell(){
 		this.arraySpellEnemy.forEach(spell => {
@@ -289,19 +279,6 @@ class World {
 			this.character.spellObject -= 1;
 			this.character.playAnimation(this.character.throwObjectImages);
 			this.spellbar.setPercentage(this.character.spellObject);
-			
-			//deleting spell sent
-			// this.level.enemies.forEach(enemy => {
-			// 	if(newObj.isColliding(enemy) && enemy.life > 0 && this.character.life > 0){
-			// 		console.log(enemy);
-			// 		let index = this.throwedSpell.indexOf(newObj);
-			// 		console.log(index);
-			// 		if (index > -1) {
-			// 				this.throwedSpell.splice(index, 1);
-			// 		};
-			// 		return
-			// 	}
-			// });
 			this.deletingSpellThrowed(newObj, 500);
 		}
 	}
@@ -392,20 +369,16 @@ class World {
 	draw() {
 		//Clear canvas
 		this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
     //moving the context(camera) where the elements in canvas are painted to left, when the canvas is painted
     this.context.translate(this.camera_x, 0);
-
 		this.addObjectsToMap(this.level.backgroundObjects);
 		this.addObjectsToMap(this.level.clouds);
-
 		this.context.translate(-this.camera_x, 0); //Camara back
 		//----space for fixing object-------------
 		this.addToMap(this.healthbar);
 		this.addToMap(this.spellbar);
 		this.addToMap(this.objetbar);
 		this.context.translate(this.camera_x, 0); //Camara foward
-
 		this.addObjectsToMap(this.level.lifeBottles);
 		this.addObjectsToMap(this.level.throwableObjects);
 		this.addObjectsToMap(this.throwedObject);
@@ -417,10 +390,8 @@ class World {
 		this.addObjectsToMap(this.level.enemies);
 		this.addToMap(this.character);
 		this.addToMap(this.gameOver);
-	    
     //setting again the context(camera in the before position)
     this.context.translate(-this.camera_x, 0);
-
 		//Draw will be alwys loaded
     requestAnimationFrame(()=> this.draw());
 	}
