@@ -58,4 +58,16 @@ class Enemy extends MovableObject {
       enemyKilledAudio.volume = 0.1; 
     }
   }
+
+  /**
+   * Enemy sound when attack
+   */
+  soundEnemyAttack() {
+    if (soundOn) {
+      monsterAttack.play();
+      monsterAttack.volume = 0.1; 
+    }
+  }
+
+
 }

@@ -290,8 +290,8 @@ class Character extends MovableObject {
 	 */
 	stopMusicRunWalk(){
 		if (soundOn) {
-			run_sound.pause();
-			walk_sound.pause();
+			run_sound.pause() && run_sound.play();
+			walk_sound.pause() && walk_sound.play();
 		}
 	}
 

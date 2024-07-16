@@ -154,6 +154,7 @@ class World {
           enemy.endBossSequenceAttackLevel1();
         } else {
           enemy.animate(enemy.attackImgs);
+          enemy.soundEnemyAttack();
         }
         this.character.hit();
         this.healthbar.setPercentage(this.character.life);
@@ -420,7 +421,7 @@ class World {
    */
   soundTakingIbject() {
     if (soundOn) {
-      objectTakedAudio.pause();
+      objectTakedAudio.pause() && objectTakedAudio.play();
       objectTakedAudio.play();
       objectTakedAudio.volume = 0.2;
     }

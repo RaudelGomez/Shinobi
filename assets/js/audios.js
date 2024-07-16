@@ -24,6 +24,7 @@ let objectTakedAudio = new Audio('assets/audio/getObject.mp3');
  * Enemies Audios
  */
 let enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
+let monsterAttack = new Audio('assets/audio/monsterAttack.mp3');
 
 /**
  * EndBoss level1
