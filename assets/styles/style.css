@@ -336,7 +336,7 @@ article figure{
   }
   .main-panel{
     top: 8px;
-    right: 10px;
+    right: 180px;
     position: absolute;
   }
 
@@ -360,12 +360,26 @@ article figure{
    font-size: 8px;
   }
 
+  .privacy-mobile{
+    display: none;
+  }
+
   #figure-fullScreen{
     display: none;
   }
 
-  .privacy-mobile{
-    display: none;
+  .portrait-format{
+    width: 70%;
+    height: 80vh;
+  }
+
+  .portrait-format p{
+    font-size: 14px;
+  }
+
+  .portrait-forma-img{
+    width: 60%;
+    height: 60%;
   }
 }
 
@@ -378,8 +392,8 @@ article figure{
   }
 
   .main-panel{
-    top: 8px;
-    right: 10px;
+    top: 14px;
+    right: 220px;
     position: absolute;
   }
 
@@ -399,9 +413,27 @@ article figure{
     z-index: -1;
   }
 
-   .img-idle-presentation{
-        display: none;
-    }
+  .img-idle-presentation{
+      display: none;
+  }
+
+  .privacy-mobile{
+    display: none;
+  }
+
+  #figure-fullScreen{
+    display: none;
+  }
+
+  .portrait-format{
+    width: 50%;
+    height: 60vh;
+  }
+
+  .portrait-forma-img{
+    width: 50%;
+    height: 50%;
+  }
 }
 
 @media only screen and (max-width: 320px){
@@ -411,5 +443,14 @@ article figure{
 
   .presentation{
     width: 100vw !important;
+  }
+
+  .portrait-format{
+    width: 50%;
+    height: 70vh;
+  }
+
+  .portrait-format p{
+    font-size: 10px;
   }
 }
