@@ -35,8 +35,8 @@ class SpellEnemy extends MovableObject{
   ];
 
   /**
-   * /**
    * Constructs a new SpellEnemy instance.
+   * Load img of the spell throwed for zhe enemy
    * @param {Number} x - position x in the screen
    * @param {Number} y - position y in the screen
    */

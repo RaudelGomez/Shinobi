@@ -2,10 +2,14 @@
  * That create an instance of LifeBottle
  */
 class LifeBottle extends Treasure{
-  valueTreasure = 5; // Value of the Treasures taked
+  /**
+   * Value of the Treasures taked
+   */
+  valueTreasure = 5; 
 
   /**
    * Constructs a new LifeBottle instance.
+   * Load the imgs and set them in the game in a random way
    */
   constructor(){
     super();

@@ -10,6 +10,7 @@ class Level extends DrawableObject{
 
   /**
    * Constructs a new Level instance and initializes key and button event listeners.
+   * Set clouds, enemies, backgrounds imgs, objects 
    */
   constructor(clouds, enemies, backgroundObjects, lifeBottles, throwableObjects, spellObjects){
     super();
@@ -36,7 +37,6 @@ class Level extends DrawableObject{
       this.backgroundObjects.push(bridge);
       this.backgroundObjects.push(sea);
       this.backgroundObjects.push(bamboo);
-      //Seting the landscape of the box level
       if(this.countStage -1){
         this.setBoxLevel(i, resultMirrowEffect);
       }

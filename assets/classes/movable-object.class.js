@@ -22,7 +22,6 @@ class MovableObject extends DrawableObject {
    * That is the acceleration of the element that is falling
    */
   acceleration = 2.5; 
- 
   /**
    * That is a number that save when was the character hitted
    */
@@ -46,9 +45,6 @@ class MovableObject extends DrawableObject {
    * That is the speed of the throwed spell
    */
   speedSpell = 10;
-  /**
-   * That is that interval of spell
-   */
   spellInterval;
   
    /**
@@ -177,8 +173,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * 
-   * @returns That function says if a character is on the air
+   * That function says if a character is on the air
    * @returns Boolean
    */
   isInTheAir(){
@@ -202,8 +197,7 @@ class MovableObject extends DrawableObject {
   }
 
   /**
-   * 
-   * @returns That function says of the character of enemy is dead
+   * That function says of the character of enemy is dead
    * @returns Boolean
    */
   isDead(){

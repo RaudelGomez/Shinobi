@@ -2,10 +2,16 @@
  * That class instance an enemy
  */
 class Enemy extends MovableObject {
-  otherDirection = true; // Indicates the enemy's initial direction (facing left)
-  intervalMove; // Stores the interval ID for the enemy's movement
-  intervalAnimation; // Stores the interval ID for the enemy's animation
-  enemyLifeTaked = 50; // Amount of life the enemy takes from the player
+  /**
+   * Indicates the enemy's initial direction (facing left)
+   */
+  otherDirection = true; 
+  intervalMove; 
+  intervalAnimation; 
+  /**
+   * Amount of life the enemy takes from the player
+   */
+  enemyLifeTaked = 50; 
   bigSize = true; // Indicates if the enemy is of a big size
 
   /**

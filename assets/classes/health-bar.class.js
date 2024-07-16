@@ -13,6 +13,7 @@ class HealthBar extends StatusBar{
 
   /**
    * Constructs a new HealtBar instance.
+   * Load the bar and set the actual number of health
    */
   constructor(){
     super();

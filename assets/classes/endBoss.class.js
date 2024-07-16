@@ -18,7 +18,8 @@ class Endboss extends Enemy{
     left: 190
   } 
   /**
-   * 
+   * That function load every imgs of the endBoss and set him at the end of the level.
+   * Also detect if the character is close to the endBoss
    * @param {[string]} walkingImgs - path of the imgs walking
    * @param {[string]} attackImgs - path of the imgs attacking
    * @param {[string]} deadImgs - path of the imgs dying
@@ -99,6 +100,7 @@ class Endboss extends Enemy{
   isTheCharacterTouchingTheEndBoss(){
     return this.world.character.x <  this.x;
   }
+
   /**
    * Sequence of animation of the attack from endboss level 1
    */
@@ -118,7 +120,7 @@ class Endboss extends Enemy{
   }
 
   /**
-   * Anmation dead EndBoss
+   * Animation dead EndBoss
    * @param {[string]} imgs  - path of every imgs that will be loaded
    */
   dead(imgs){

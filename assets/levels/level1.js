@@ -1,31 +1,7 @@
-/**
- * The current level of the game.
- * @type {Level}
- */
 let level1;
-
-/**
- * A drawable object used for setting initial positions.
- * @type {DrawableObject}
- */
 let drawObject = new DrawableObject();
-
-/**
- * The x-coordinate for an object.
- * @type {number}
- */
 let object_x = 200 + Math.random() * 500 * drawObject.countStage;
-
-/**
- * The y-coordinate for an object.
- * @type {number}
- */
 let object_y = 100 + Math.random() * 80 * drawObject.countStage;
-
-/**
- * Images for walking animations.
- * @type {string[]}
- */
 walkingImgs = [
   'assets/img/enemies/dragon/Walk1.png',
   'assets/img/enemies/dragon/Walk1.png',
@@ -38,22 +14,12 @@ walkingImgs = [
   'assets/img/enemies/dragon/Walk4.png',
   'assets/img/enemies/dragon/Walk5.png',
 ];
-
-/**
- * Images for attack animations.
- * @type {string[]}
- */
 attackImgs = [
   'assets/img/enemies/dragon/Attack1.png',
   'assets/img/enemies/dragon/Attack2.png',
   'assets/img/enemies/dragon/Attack3.png',
   'assets/img/enemies/dragon/Attack4.png',
 ];
-
-/**
- * Images for dead animations.
- * @type {string[]}
- */
 deadImgs = [
   'assets/img/enemies/dragon/Death1.png',
   'assets/img/enemies/dragon/Death2.png',
@@ -80,20 +46,20 @@ function initLevel() {
    */
   function setEnemies() {
     level1.enemies = [
-      // new Lizard(), 
-      // new Lizard(), 
+      new Lizard(), 
+      new Lizard(), 
       new Demon(), 
       new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
+      new Lizard(), 
+      new Lizard(), 
       new Demon(), 
       new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
+      new Lizard(), 
+      new Lizard(), 
       new Demon(), 
       new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
+      new Lizard(), 
+      new Lizard(), 
       new Demon(), 
       new Demon(), 
       new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)

@@ -13,6 +13,7 @@ class HealthBarEndBoss extends StatusBar{
 
   /**
    * Constructs a new HealtBarEndBoss instance.
+   * Load the bar and set how much health in realtime
    */
   constructor(){
     super();

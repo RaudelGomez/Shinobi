@@ -6,25 +6,10 @@ class DrawableObject {
    * That Variable set how many screen the character has to move to get the end
    */
   countStage = 10;
-  /**
-   * Position of the img in the x coordinate
-   */
   x = 100;
-   /**
-   * Position of the img in the y coordinate
-   */
   y = 150;
-  /**
-   * That is the width of the screen where the game will played
-   */
   height = 200;
-  /**
-   * That is the height of the screen where the game will played
-   */
   width = 100;
-  /**
-   * path of the img
-   */
   img;
   currentImage = 0;
   /**
@@ -80,14 +65,13 @@ class DrawableObject {
    * @param {context} context - context of Canvas
    */
   drawFrame(context){
-    //Drawing only instance of Character or Enemy
     if(this instanceof Character || this instanceof Enemy || this instanceof Treasure || this instanceof SpellEnemy ){
       context.beginPath();
       context.lineWidth = "4";
       context.strokeStyle = "transparent";
       context.rect(this.x, this.y, this.width, this.height);
       context.stroke();
-      //offset
+
       context.beginPath();
       context.lineWidth = "1";
       context.strokeStyle = "transparent";

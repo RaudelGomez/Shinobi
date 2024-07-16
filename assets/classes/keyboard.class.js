@@ -2,21 +2,22 @@
  * Thta create an instance of keyboard
  */
 class Keyboard {
-  left = false; // Indicates if the left arrow key is pressed
-  right = false; // Indicates if the right arrow key is pressed
-  up = false; // Indicates if the up arrow key is pressed
-  down = false; // Indicates if the down arrow key is pressed
-  space = false; // Indicates if the space key is pressed
-  a = false; // Indicates if the 'A' key is pressed
-  s = false; // Indicates if the 'S' key is pressed
-  d = false; // Indicates if the 'D' key is pressed
+  left = false; 
+  right = false; 
+  up = false; 
+  down = false; 
+  space = false; 
+  a = false; 
+  s = false; 
+  d = false; 
 
   /**
    * Constructs a new Keyboard instance.
+   * Set the events for pressing a key or when that game is playing in a mobile
    */
   constructor() {
-    this.pressKeyEvents(); // Initializes keyboard event listeners
-    this.pressBtnMobile(); // Initializes mobile button event listeners
+    this.pressKeyEvents(); 
+    this.pressBtnMobile(); 
   }
 
   /**
@@ -24,10 +25,10 @@ class Keyboard {
    */
   pressKeyEvents() {
     window.addEventListener("keydown", (e) => {
-      this.keyDownBtn(e); // Handles keydown event
+      this.keyDownBtn(e); 
     });
     window.addEventListener("keyup", (e) => {
-      this.keyUpBtn(e); // Handles keyup event
+      this.keyUpBtn(e); 
     });
   }
 
@@ -35,8 +36,8 @@ class Keyboard {
    * Adds event listeners for touchstart and touchend events to handle mobile button input.
    */
   pressBtnMobile() {
-    this.btnMobilePress(); // Initializes touchstart event listeners
-    this.btnMobileNoPress(); // Initializes touchend event listeners
+    this.btnMobilePress(); 
+    this.btnMobileNoPress(); 
   }
 
   /**
@@ -44,22 +45,22 @@ class Keyboard {
    * @param {KeyboardEvent} e - The keydown event.
    */
   keyDownBtn(e) {
-    if (e.keyCode == 39) { // Right arrow key
+    if (e.keyCode == 39) { 
       this.right = true;
     }
-    if (e.keyCode == 37) { // Left arrow key
+    if (e.keyCode == 37) { 
       this.left = true;
     }
-    if (e.keyCode == 38) { // Up arrow key
+    if (e.keyCode == 38) { 
       this.up = true;
     }
-    if (e.keyCode == 40) { // Down arrow key
+    if (e.keyCode == 40) { 
       this.down = true;
     }
-    if (e.keyCode == 32) { // Space key
+    if (e.keyCode == 32) { 
       this.space = true;
     }
-    if (e.keyCode == 65) { // 'A' key
+    if (e.keyCode == 65) { 
       this.a = true;
     }
   }
@@ -69,35 +70,35 @@ class Keyboard {
    * @param {KeyboardEvent} e - The keyup event.
    */
   keyUpBtn(e) {
-    if (e.keyCode == 39) { // Right arrow key
+    if (e.keyCode == 39) { 
       this.right = false;
     }
-    if (e.keyCode == 37) { // Left arrow key
+    if (e.keyCode == 37) { 
       this.left = false;
     }
-    if (e.keyCode == 38) { // Up arrow key
+    if (e.keyCode == 38) { 
       this.up = false;
     }
-    if (e.keyCode == 40) { // Down arrow key
+    if (e.keyCode == 40) { 
       this.down = false;
     }
-    if (e.keyCode == 32) { // Space key
+    if (e.keyCode == 32) { 
       this.space = false;
     }
-    if (e.keyCode == 65) { // 'A' key
+    if (e.keyCode == 65) { 
       this.a = false;
     }
-    if (e.keyCode == 83) { // 'S' key
+    if (e.keyCode == 83) { 
       this.s = true;
       setTimeout(() => {
         this.s = false;
-      }, 10); // Resets 'S' key state after 10ms
+      }, 10); 
     }
-    if (e.keyCode == 68) { // 'D' key
+    if (e.keyCode == 68) { 
       this.d = true;
       setTimeout(() => {
         this.d = false;
-      }, 10); // Resets 'D' key state after 10ms
+      }, 10); 
     }
   }
 

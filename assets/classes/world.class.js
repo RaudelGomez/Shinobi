@@ -22,6 +22,7 @@ class World {
   
   /**
    * Constructor that initializes all elements from game.js
+   * That load the keyboard to be used to move. Draw every imgs in the world and check when chaacter, enemies and objects make a collision
    * @param {HTMLCanvasElement} canvas - Canvas element where every image will be painted
    * @param {Object} keyboard - Class keyboard that has every movement of the player
    */
@@ -173,11 +174,6 @@ class World {
       if (this.character.isColliding(enemy) && this.character.life > 0 && this.character.isInTheAir() && enemy.life > 0 && enemy.bigSize == false) {
         enemy.life = 0;
         this.enemyIsNotAlive(enemy);
-        // clearInterval(enemy.intervalMove);
-        // //clearInterval(enemy.intervalAnimation);
-        // enemy.playAnimation(enemy.deadImgs);
-        // clearInterval(enemy.intervalAnimation);
-        // this.deletingEnemyDestroyed(enemy, 500);
       }
     });
   }
@@ -189,11 +185,7 @@ class World {
   enemyIsNotAlive(enemy) {
     clearInterval(enemy.intervalMove);
     clearInterval(enemy.intervalAnimation);
-    //clearInterval(enemy.intervalAnimation);
-    enemy.dead(enemy.deadImgs);
-    // setTimeout(() => {
-      //clearInterval(enemy.intervalAnimation);
-    // }, 500);
+    enemy.dead(enemy.deadImgs);;
     if (enemy instanceof Endboss) {
       return;
     }

@@ -1,61 +1,14 @@
-/**
- * @type {HTMLCanvasElement}
- */
 let canvas;
-
-/**
- * @type {Object}
- */
 let world;
-
-/**
- * @type {Keyboard}
- */
 let keyboard = new Keyboard();
-
-/**
- * @type {HTMLElement}
- */
 let btnPlayPauseMusic = document.getElementById('btn-play-pause-music');
-
-/**
- * @type {HTMLElement}
- */
 let btnPlayPauseSound = document.getElementById('btn-play-pause-sound');
-
-/**
- * @type {HTMLElement}
- */
 let screenGame = document.getElementById('screen-game');
-
-/**
- * @type {HTMLElement}
- */
 let figureFullScreen = document.getElementById('figure-fullScreen');
-
-/**
- * @type {HTMLElement}
- */
 let figureCloseFullScreen = document.getElementById('figure-close-fullScreen');
-
-/**
- * @type {HTMLElement}
- */
 let btnStartGame = document.getElementById('btn-start');
-
-/**
- * @type {boolean}
- */
 let isMusicOn = false;
-
-/**
- * @type {boolean}
- */
 let soundOn = false;
-
-/**
- * @type {Element}
- */
 let elem = document.fullscreenElement;
 
 /**

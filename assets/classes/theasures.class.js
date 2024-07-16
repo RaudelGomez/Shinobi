@@ -4,5 +4,8 @@
 class Treasure extends MovableObject{
   width = 60;
   height = 60;
+  /**
+   * Value of the Treasures taked
+   */
   valueTreasure = 20;
 }

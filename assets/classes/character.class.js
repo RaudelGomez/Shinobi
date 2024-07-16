@@ -55,10 +55,6 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/attack1/attack-5.png",
 		"assets/img/characters/Samurai/attack1/attack-6.png",
 	];
-	 /**
-   * The variables, that dont have comment, its because it was explained in 
-   * the super class (Drawable-objects or Movableobjects)
-   */
 	x = 100;
 	y = 190;
 	yAfterJump = 190;
@@ -77,21 +73,26 @@ class Character extends MovableObject {
 	 * That is the current image when the character is running
 	 */
 	currentImageRun = 0;
+	  /**
+    * That is for makes a frame in the Photo to know when the objects are colliding with another
+    */
 	offset = {
 		top: 0,
 		right: 10,
 		bottom: 0,
 		left: 40,
 	};
-	/**
-	 * All intervlas of the character
-	 */
 	allIntervalCharacter = [];
+	/**
+	 * How many Objects and spell has the character
+	 */
 	throwableObj = 0;
 	spellObject = 0;
 
 	/**
 	 * That is the function tha run every function when the instance is created.
+	 * All imgs will be loaded and the garavity will be applied, to know when
+	 * the character and objects are on the air. Also all interval of the character will be collected
 	 */
 	constructor() {
 		super();
@@ -349,7 +350,7 @@ class Character extends MovableObject {
 		this.world.camera_x = -this.x + 100;
 	}
 
-		/**
+	/**
 	 * This function is to know if the character is at the end of the Level
 	 * @returns @params {Boolean}
 	 */

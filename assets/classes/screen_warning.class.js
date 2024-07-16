@@ -2,9 +2,6 @@
  * That create an instance of Screen when the game is over
  */
 class Screen extends MovableObject{
-  /**
-   * That is the height, width and position x and y of the screen showed
-   */
   width = 720;
   height = 480;
   x;
@@ -12,6 +9,7 @@ class Screen extends MovableObject{
 
   /**
    * Constructs a new Screen instance.
+   * Load imgs when the character win or lose
    */
   constructor(x, y, img){
     super();

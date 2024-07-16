@@ -1,10 +1,13 @@
 class StatusBar extends DrawableObject {
-  percentage = 100; // Initial percentage value for the status bar
-  x = 30; // X-coordinate position of the status bar
-  y = 0; // Y-coordinate position of the status bar
-  width = 200; // Width of the status bar
-  height = 60; // Height of the status bar
-  arrayImages = []; // Array to store image paths for different status bar states
+  /**
+   * Initial percentage value for the status bar
+   */
+  percentage = 100; 
+  x = 30; 
+  y = 0; 
+  width = 200; 
+  height = 60; 
+  arrayImages = []; 
 
   /**
    * Sets the percentage of the status bar and updates the displayed image.
