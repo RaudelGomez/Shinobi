@@ -83,11 +83,24 @@ class Endboss extends Enemy{
 			setTimeout(() => {
 				if(this.life > 0){
 					if(this.isTheCharacterTouchingTheEndBoss()){
+            this.soundAttackEndBossLevel1();
 						this.animationAttackEndBossLevel1(); 
 					}
 				}
 			}, 850);
 	};
+
+  /**
+   * Sound of the EndBoss level1 when attack with fire
+   */
+  soundAttackEndBossLevel1(){
+    if(soundOn){
+      endBossMad.play();
+      endBossMad.volume = 0.1;
+      endBossFire.play();
+      endBossFire.volume = 0.1;
+    }
+  }
 
   /**
    * That function says if the endboss is collinding the character

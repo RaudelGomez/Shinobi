@@ -25,3 +25,9 @@ let objectTakedAudio = new Audio('assets/audio/getObject.mp3');
  */
 let enemyKilledAudio = new Audio('assets/audio/enemy_killed.mp3');
 
+/**
+ * EndBoss level1
+ */
+let endBossMad = new Audio('assets/audio/endBoss-mad.mp3');
+let endBossFire = new Audio('assets/audio/endBoss-throw-fire.mp3');
+
