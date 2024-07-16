@@ -82,6 +82,7 @@ function initGame() {
 function startingGame() {
   document.getElementById('presentation').classList.add('d-none');
   document.getElementById('canvas').classList.remove('d-none');
+  document.getElementById('privacy-legal-data').classList.add('privacy-mobile');
   showBtnGuide();
 }
 
@@ -276,5 +277,8 @@ document.addEventListener("fullscreenchange", function() {
     showFullScreenIcon();
   }
 });
+
+
+
 
 
