@@ -29,11 +29,11 @@ class Lizard extends Enemy{
 
   // Array of images for the lizard's death animation
   deadImgs = [
-    'assets/img/enemies/lizard/Death1.png',
-    'assets/img/enemies/lizard/Death2.png',
-    'assets/img/enemies/lizard/Death3.png',
-    'assets/img/enemies/lizard/Death4.png',
-    'assets/img/enemies/lizard/Death5.png',
+    // 'assets/img/enemies/lizard/Death1.png',
+    // 'assets/img/enemies/lizard/Death2.png',
+    // 'assets/img/enemies/lizard/Death3.png',
+    // 'assets/img/enemies/lizard/Death4.png',
+    // 'assets/img/enemies/lizard/Death5.png',
     'assets/img/enemies/lizard/Death6.png',
   ];
 

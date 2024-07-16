@@ -80,20 +80,20 @@ function initLevel() {
    */
   function setEnemies() {
     level1.enemies = [
-      new Lizard(), 
-      new Lizard(), 
+      // new Lizard(), 
+      // new Lizard(), 
       new Demon(), 
       new Demon(), 
-      new Lizard(), 
-      new Lizard(), 
+      // new Lizard(), 
+      // new Lizard(), 
       new Demon(), 
       new Demon(), 
-      new Lizard(), 
-      new Lizard(), 
+      // new Lizard(), 
+      // new Lizard(), 
       new Demon(), 
       new Demon(), 
-      new Lizard(), 
-      new Lizard(), 
+      // new Lizard(), 
+      // new Lizard(), 
       new Demon(), 
       new Demon(), 
       new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)

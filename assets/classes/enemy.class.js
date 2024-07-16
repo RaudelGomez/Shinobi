@@ -44,9 +44,9 @@ class Enemy extends MovableObject {
    */
   dead(imgs) {
     this.soundEnemyKilled();
-    this.intervalAnimation = setInterval(() => {
+    this.intervalAnimationDeath = setInterval(() => {
       this.playAnimation(imgs);
-    }, 200);
+    }, 1000 / 60);
   }
 
   /**

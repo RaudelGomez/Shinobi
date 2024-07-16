@@ -71,6 +71,9 @@ class World {
       if (e.intervalMove) {
         this.allIntervalGame.push(e.intervalMove);
       }
+      if (e.intervalAnimationDeath) {
+        this.allIntervalGame.push(e.intervalAnimationDeath);
+      }
       if (e.intervalCloseCharacter) {
         this.allIntervalGame.push(e.intervalCloseCharacter);
       }
@@ -169,10 +172,12 @@ class World {
     this.level.enemies.forEach((enemy) => {
       if (this.character.isColliding(enemy) && this.character.life > 0 && this.character.isInTheAir() && enemy.life > 0 && enemy.bigSize == false) {
         enemy.life = 0;
-        clearInterval(enemy.intervalMove);
-        enemy.playAnimation(enemy.deadImgs);
-        clearInterval(enemy.intervalAnimation);
-        this.deletingEnemyDestroyed(enemy, 5000);
+        this.enemyIsNotAlive(enemy);
+        // clearInterval(enemy.intervalMove);
+        // //clearInterval(enemy.intervalAnimation);
+        // enemy.playAnimation(enemy.deadImgs);
+        // clearInterval(enemy.intervalAnimation);
+        // this.deletingEnemyDestroyed(enemy, 500);
       }
     });
   }
@@ -184,14 +189,15 @@ class World {
   enemyIsNotAlive(enemy) {
     clearInterval(enemy.intervalMove);
     clearInterval(enemy.intervalAnimation);
+    //clearInterval(enemy.intervalAnimation);
     enemy.dead(enemy.deadImgs);
-    setTimeout(() => {
-      clearInterval(enemy.intervalAnimation);
-    }, 1550);
+    // setTimeout(() => {
+      //clearInterval(enemy.intervalAnimation);
+    // }, 500);
     if (enemy instanceof Endboss) {
       return;
     }
-    this.deletingEnemyDestroyed(enemy, 800);
+    this.deletingEnemyDestroyed(enemy, 400);
   }
 
   /**
@@ -228,6 +234,7 @@ class World {
           this.healthbarEndboss.setPercentage(enemy.life);
           this.isTheCollisionWithAEndBoss(enemy);
           if (enemy.life <= 0) {
+            clearInterval(enemy.intervalAnimateEnemy)
             this.enemyIsNotAlive(enemy);
           }
         }

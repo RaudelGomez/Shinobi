@@ -27,11 +27,6 @@ class Demon extends Enemy {
 
   // Array of images for the demon's death animation
   deadImgs = [
-    'assets/img/enemies/demon/Death1.png',
-    'assets/img/enemies/demon/Death2.png',
-    'assets/img/enemies/demon/Death3.png',
-    'assets/img/enemies/demon/Death4.png',
-    'assets/img/enemies/demon/Death5.png',
     'assets/img/enemies/demon/Death6.png',
   ];
 
