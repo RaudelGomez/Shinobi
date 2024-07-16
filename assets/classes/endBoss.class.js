@@ -36,7 +36,6 @@ class Endboss extends Enemy{
     this.walkingImgs = walkingImgs;
     this.attackImgs = attackImgs;
     this.deadImgs = deadImgs;
-    //this.x = 400 ;
     this.x = (this.countStage * 720 + 150) ;
     this.loadingAllImgs();
     this.isCloseCharacter();
@@ -62,15 +61,6 @@ class Endboss extends Enemy{
       }else{
         this.world.healthbarEndboss.x = 800;
       };
-     
-      // }
-      // if(this.world.character.x >= this.x - 720){
-      //   this.x -= 1;
-      // }else if(this.world.character.x + 100 >= this.x ){
-      //   this.x += 1;
-      // }
-      // console.log('boss', this.world.character.x);
-      // console.log('chara',this.x);
     }, 1000 / 60);
   }
 

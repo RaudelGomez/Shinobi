@@ -90,7 +90,7 @@ class DrawableObject {
       //offset
       context.beginPath();
       context.lineWidth = "1";
-      context.strokeStyle = "red";
+      context.strokeStyle = "transparent";
       context.rect(this.x + this.offset.left, this.y + this.offset.top, this.width - this.offset.right- this.offset.left, this.height - this.offset.bottom - this.offset.top);
       context.stroke();
     }

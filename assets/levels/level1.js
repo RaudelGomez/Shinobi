@@ -1,7 +1,31 @@
+/**
+ * The current level of the game.
+ * @type {Level}
+ */
 let level1;
+
+/**
+ * A drawable object used for setting initial positions.
+ * @type {DrawableObject}
+ */
 let drawObject = new DrawableObject();
+
+/**
+ * The x-coordinate for an object.
+ * @type {number}
+ */
 let object_x = 200 + Math.random() * 500 * drawObject.countStage;
+
+/**
+ * The y-coordinate for an object.
+ * @type {number}
+ */
 let object_y = 100 + Math.random() * 80 * drawObject.countStage;
+
+/**
+ * Images for walking animations.
+ * @type {string[]}
+ */
 walkingImgs = [
   'assets/img/enemies/dragon/Walk1.png',
   'assets/img/enemies/dragon/Walk1.png',
@@ -14,12 +38,22 @@ walkingImgs = [
   'assets/img/enemies/dragon/Walk4.png',
   'assets/img/enemies/dragon/Walk5.png',
 ];
+
+/**
+ * Images for attack animations.
+ * @type {string[]}
+ */
 attackImgs = [
   'assets/img/enemies/dragon/Attack1.png',
   'assets/img/enemies/dragon/Attack2.png',
   'assets/img/enemies/dragon/Attack3.png',
   'assets/img/enemies/dragon/Attack4.png',
-]
+];
+
+/**
+ * Images for dead animations.
+ * @type {string[]}
+ */
 deadImgs = [
   'assets/img/enemies/dragon/Death1.png',
   'assets/img/enemies/dragon/Death2.png',
@@ -28,71 +62,61 @@ deadImgs = [
   'assets/img/enemies/dragon/Death5.png',
 ];
 
-// walkingImgs = [
-//   'assets/img/enemies/jinn_animation/Flight1.png',
-//   'assets/img/enemies/jinn_animation/Flight2.png',
-//   'assets/img/enemies/jinn_animation/Flight3.png',
-//   'assets/img/enemies/jinn_animation/Flight4.png',
-// ];
-
-// attackImgs = [
-//   'assets/img/enemies/jinn_animation/Attack1.png',
-//   'assets/img/enemies/jinn_animation/Attack2.png',
-//   'assets/img/enemies/jinn_animation/Attack3.png',
-//   'assets/img/enemies/jinn_animation/Attack4.png',
-// ];
-// deadImgs = [
-//   'assets/img/enemies/jinn_animation/Death1.png',
-//   'assets/img/enemies/jinn_animation/Death2.png',
-//   'assets/img/enemies/jinn_animation/Death3.png',
-//   'assets/img/enemies/jinn_animation/Death4.png',
-//   'assets/img/enemies/jinn_animation/Death5.png',
-//   'assets/img/enemies/jinn_animation/Death6.png',
-// ]
-
-function initLevel(){
+/**
+ * Initializes the level by setting enemies, clouds, life bottles, throwable objects, and spell objects.
+ */
+function initLevel() {
   level1 = new Level(
     [],
     [],
     [],
     [],
     [],
-    [],
+    []
   );
 
+  /**
+   * Sets the enemies for the level.
+   */
   function setEnemies() {
-    //level1.enemies = [];
-    //level1.enemies = [new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)];
-    level1.enemies = [new Lizard(), 
-      // new Lizard(), 
-      // new Demon(), 
-      // new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
-      // new Demon(), 
-      // new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
-      // new Demon(), 
-      // new Demon(), 
-      // new Lizard(), 
-      // new Lizard(), 
-      // new Demon(), 
-      // new Demon(), 
+    level1.enemies = [
+      new Lizard(), 
+      new Lizard(), 
+      new Demon(), 
+      new Demon(), 
+      new Lizard(), 
+      new Lizard(), 
+      new Demon(), 
+      new Demon(), 
+      new Lizard(), 
+      new Lizard(), 
+      new Demon(), 
+      new Demon(), 
+      new Lizard(), 
+      new Lizard(), 
+      new Demon(), 
+      new Demon(), 
       new Endboss(walkingImgs, attackImgs, deadImgs, 800, 800, -250)
     ];
   }
 
+  /**
+   * Sets the clouds for the level.
+   */
   function setClouds() {
-    level1.clouds = [];
     level1.clouds = [new Cloud(), new Cloud(), new Cloud()];
   }
 
+  /**
+   * Sets the life bottles for the level.
+   */
   function setLifeBottles() {
-    //level1.lifeBottles = [];
     level1.lifeBottles = [new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle(), new LifeBottle()];
   }
 
+  /**
+   * Pushes throwable objects into the level.
+   */
   function pushThrowableObjects() {
     level1.throwableObjects = [];
     for (let i = 0; i < 5; i++) {
@@ -104,6 +128,9 @@ function initLevel(){
     }
   }
 
+  /**
+   * Pushes spell objects into the level.
+   */
   function pushSpellObject() {
     level1.spellObjects = [];
     for (let i = 0; i < 5; i++) {
@@ -115,11 +142,10 @@ function initLevel(){
     }
   }
 
-    pushThrowableObjects();
-    pushSpellObject();
-    setClouds();
-    setEnemies();
-    setLifeBottles();
-
+  pushThrowableObjects();
+  pushSpellObject();
+  setClouds();
+  setEnemies();
+  setLifeBottles();
 }
 
