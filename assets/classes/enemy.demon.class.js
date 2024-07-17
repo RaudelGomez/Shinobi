@@ -40,11 +40,11 @@ class Demon extends Enemy {
    */
   constructor() {
     super().loadInitialPositionImage(this.walkingImgs[0]);
-    this.x = 600 + Math.random() * 500 * this.countStage; // Sets initial horizontal position randomly
-    this.loadImages(this.walkingImgs); // Loads walking images
-    this.loadImages(this.attackImgs); // Loads attack images
-    this.loadImages(this.deadImgs); // Loads death images
-    this.speed = 0.20 + Math.random() * 0.5; // Sets speed randomly
-    this.animate(this.walkingImgs); // Starts animation with walking images
+    this.x = 600 + Math.random() * 500 * this.countStage; 
+    this.loadImages(this.walkingImgs); 
+    this.loadImages(this.attackImgs); 
+    this.loadImages(this.deadImgs); 
+    this.speed = 0.20 + Math.random() * 0.5; 
+    this.animate(this.walkingImgs); 
   }
 }

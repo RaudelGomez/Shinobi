@@ -128,7 +128,6 @@ class MovableObject extends DrawableObject {
     let x = this.x;
     this.spellInterval = setInterval(() => {
       this.x -= this.speedSpell;
-      //If the x nof the spell is bigger than the initial postion of x + 1200 than stop
       if(this.x  <= x - 400){
         this.cleanInterval(this.spellInterval);
       }
@@ -210,8 +209,8 @@ class MovableObject extends DrawableObject {
    * since the character was hitted.
    */
   isHurt(){
-    let timePassed = new Date().getTime() - this.lastHit;//Difference in ms
-    timePassed = timePassed / 1000; //Difference in s
+    let timePassed = new Date().getTime() - this.lastHit;
+    timePassed = timePassed / 1000; 
     return timePassed < 1;
   }
 

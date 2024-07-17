@@ -38,8 +38,6 @@ class Character extends MovableObject {
 		"assets/img/characters/Samurai/jump/jump-12.png",
 	];
 	deadImgs = [
-		// "assets/img/characters/Samurai/dead/dead-1.png",
-		// "assets/img/characters/Samurai/dead/dead-2.png",
 		"assets/img/characters/Samurai/dead/dead-3.png",
 	];
 	hurtImgs = [
@@ -160,7 +158,6 @@ class Character extends MovableObject {
 			(this.world.keyboard.right && this.world.keyboard.a) ||
 			(this.world.keyboard.left && this.world.keyboard.a)
 		) {
-			//run animation
 			this.playAnimation(this.runImgs);
 		}
 	}
@@ -232,7 +229,6 @@ class Character extends MovableObject {
 			this.playAnimation(this.jumpImgs);
 		} else {
 			if (this.world.keyboard.right || this.world.keyboard.left) {
-				//Walk animation
 				this.playAnimation(this.walkingImgs);
 			}
 		}

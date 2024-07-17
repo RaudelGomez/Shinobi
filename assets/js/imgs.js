@@ -40,8 +40,6 @@ let samurai = [
 	],
 
 	[
-		// "assets/img/characters/Samurai/dead/dead-1.png",
-		// "assets/img/characters/Samurai/dead/dead-2.png",
 		"assets/img/characters/Samurai/dead/dead-3.png",
 	],
 

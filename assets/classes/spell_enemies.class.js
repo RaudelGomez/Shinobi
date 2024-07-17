@@ -9,7 +9,9 @@ class SpellEnemy extends MovableObject{
   height = 100;
   otherDirection = true;
   img;
-  // Offset values for collision detection
+  /**
+   * Offset values for collision detection
+   */
   offset = {
     top: 20,
     right:20,

@@ -2,8 +2,11 @@
  * That create an instance of SpellObject
  */
 class SpellObject extends Treasure{
-  valueTreasure = 20; // Value of the Treasures taked
-  spellImage; //Image
+  /**
+   * Value of the Treasures taked
+   */
+  valueTreasure = 20; 
+  spellImage; 
 
   /**
    * Load the imgs and set them in the game in a random way

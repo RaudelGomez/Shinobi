@@ -12,7 +12,10 @@ class Enemy extends MovableObject {
    * Amount of life the enemy takes from the player
    */
   enemyLifeTaked = 50; 
-  bigSize = true; // Indicates if the enemy is of a big size
+  /**
+   * Indicates if the enemy is of a big size
+   */
+  bigSize = true;
 
   /**
    * Animates the enemy if it is alive.

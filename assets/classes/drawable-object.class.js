@@ -26,13 +26,12 @@ class DrawableObject {
     left: 0
   } 
 
-   
   /**
    * This function load one images
    * @param {string} path - path of the image to load 
    */
   loadInitialPositionImage(path){
-    this.img = new Image(); //this.img = document.getElementById('image') <img id="image" src="">
+    this.img = new Image(); 
     this.img.src = path;
   }
 
