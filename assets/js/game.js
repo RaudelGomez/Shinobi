@@ -233,5 +233,3 @@ document.addEventListener("fullscreenchange", function() {
 
 
 
-
-
